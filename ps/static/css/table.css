@@ -1,85 +1,125 @@
-#center>div{
+#center>div {
     width: 1000px;
-    margin:0 auto;
+    margin: 0 auto;
 }
+
 /* TOP */
-#top{
+#top {
     height: 80px;
     text-align: center;
     line-height: 80px;
 }
-#top h1{
+
+#top h1 {
     line-height: 80px;
     float: left;
     width: 100px;
 }
 
-#top #curTime{
+#top #curTime {
     float: left;
     width: 200px;
 }
 
-#top h2{
+#top h2 {
     float: left;
     width: 450px;
 }
-#top #workManage{
+
+#top #workManage {
     margin: 0 10px;
     float: right;
     width: 100px;
 }
-#top #exit{
+
+#top #exit {
     margin: 0 10px;
     float: right;
     width: 100px;
 }
+
 /* TABLE */
-#table{
+#table {
     height: 400px;
     text-align: center;
 }
 
-#table .seat{
-    display: inline-block;    
+#table .seat {
+    display: inline-block;
     margin: 10px;
 }
-#table .seat>a>div{
-    background-color: burlywood;
+
+#table .seat>a>div {
     height: 20px;
     width: 160px;
 }
 
 /* BOTTOM */
-#bottom{
+#bottom {
     height: 100px;
     text-align: center;
+    margin-top: 30px!important;
 }
-#bottom>div{
+
+#bottom>div {
     float: left;
 }
-#bottom #btnListSm{
+
+#bottom #btnListSm {
     width: 500px;
-    height: 100px;
+    height: 90px;
+    margin-left: 40px;
 }
-#bottom #btnListSm li{
+
+#bottom #btnListSm li {
     float: left;
-    width: 100px;
-    line-height: 50px;
-    height: 50px;
+    width: 75px;
+    line-height: 45px;
+    height: 45px;
 }
-#bottom #btnListSm li a{
+
+#bottom #btnListSm li a {
     display: block;
 }
-#bottom #btnListLg{
+
+#bottom #btnListLg {
     float: right;
-    width: 200px;
+    width: 220px;
 }
-#bottom #btnListLg li{
+
+#bottom #btnListLg li {
     float: left;
-    width: 100px;
-    height: 100px;
-    line-height: 100px;
+    width: 80px;
+    height: 80px;
+    line-height: 80px;
 }
-#bottom #btnListLg li a{
+
+#bottom #btnListLg li a {
     display: block;
+}
+
+/* TABLE */
+.seat{
+    border: 2.5px solid skyblue;
+    background-color: rgba(0, 0, 0, 0);
+    color: skyblue;
+    border-radius: 5px;
+}
+.seat:hover {
+    color: white;
+    background-color: skyblue;
+}
+/* BUTTON */
+.button {
+    margin: 5px;
+    padding: 5px;/*패딩사용시 width,height증가함. 그러므로 줄여줘야함*/
+    border: 1px solid skyblue;
+    background-color: rgba(0, 0, 0, 0);
+    color: skyblue;
+    border-radius: 5px;
+}
+
+.button:hover {
+    color: white;
+    background-color: skyblue;
 }
