@@ -1,0 +1,85 @@
+#center>div{
+    width: 1000px;
+    margin:0 auto;
+}
+/* TOP */
+#top{
+    height: 80px;
+    text-align: center;
+    line-height: 80px;
+}
+#top h1{
+    line-height: 80px;
+    float: left;
+    width: 100px;
+}
+
+#top #curTime{
+    float: left;
+    width: 200px;
+}
+
+#top h2{
+    float: left;
+    width: 450px;
+}
+#top #workManage{
+    margin: 0 10px;
+    float: right;
+    width: 100px;
+}
+#top #exit{
+    margin: 0 10px;
+    float: right;
+    width: 100px;
+}
+/* TABLE */
+#table{
+    height: 400px;
+    text-align: center;
+}
+
+#table .seat{
+    display: inline-block;    
+    margin: 10px;
+}
+#table .seat>a>div{
+    background-color: burlywood;
+    height: 20px;
+    width: 160px;
+}
+
+/* BOTTOM */
+#bottom{
+    height: 100px;
+    text-align: center;
+}
+#bottom>div{
+    float: left;
+}
+#bottom #btnListSm{
+    width: 500px;
+    height: 100px;
+}
+#bottom #btnListSm li{
+    float: left;
+    width: 100px;
+    line-height: 50px;
+    height: 50px;
+}
+#bottom #btnListSm li a{
+    display: block;
+}
+#bottom #btnListLg{
+    float: right;
+    width: 200px;
+}
+#bottom #btnListLg li{
+    float: left;
+    width: 100px;
+    height: 100px;
+    line-height: 100px;
+}
+#bottom #btnListLg li a{
+    display: block;
+}
