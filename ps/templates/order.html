@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/reset.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/common.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/order.css') }}">
+</head>
+
+<body>
+    <div id="center">
+        <div id="orderTop">
+            <div id="tableNo">111</div>
+            <ul>
+                <li id="p1"><a href="#a" class="button">메뉴1번</a></li>
+                <li id="p2"><a href="#a" class="button">메뉴2번</a></li>
+                <li id="p3"><a href="#a" class="button">메뉴3번</a></li>
+                <li id="p4"><a href="#a" class="button">메뉴4번</a></li>
+                <li id="p5"><a href="#a" class="button">메뉴5번</a></li>
+                <li id="orderClose"><a href="#a" class="button">닫기</a></li>
+            </ul>
+        </div>
+        <div id="orderMid">
+            <div></div>
+            <div>
+                <div></div>
+                <div></div>
+            </div>
+            <!-- <ul>
+                <li class="seat">
+                    <a href="#a">
+                        <div>1</div>
+                        <div></div>
+                        <div></div>
+                    </a>
+                </li>
+                <li class="seat">
+                    <a href="#a">
+                        <div>2</div>
+                        <div></div>
+                        <div></div>
+                    </a>
+                </li>
+            </ul> -->
+        </div>
+        <div id="orderBottom">
+            <div>
+                <div></div>
+                <div></div>
+            </div>
+            <div>
+                <div></div>
+                <div></div>
+            </div>
+            <div></div>
+
+
+            <div id="orderItems">
+                <div><textarea name="" id="itemList" cols="30" rows="6" disabled></textarea></div>
+                <div><textarea name="" id="itemTotal" cols="30" rows="1" disabled></textarea></div>
+            </div>
+            <div id="btnListSm">
+                <ul>
+                    <li class="button"><a href="#a">취소</a></li>
+                    <li class="button"><a href="#a">합석</a></li>
+                    <li class="button"><a href="#a">계산서</a></li>
+                    <li class="button"><a href="#a">돈통</a></li>
+                    <li class="button"><a href="#a"><img src="{{ url_for('static', filename='img/arrow_up.png') }}"
+                                alt="nextButton" width="50px" height="50px"></a></li>
+                    <li class="button"><a href="#a">1층홈</a></li>
+                    <li class="button"><a href="#a">2층홈</a></li>
+                    <li class="button"><a href="#a">3층홈</a></li>
+                    <li class="button"><a href="#a">결제변경</a></li>
+                    <li class="button"><a href="#a"><img src="{{ url_for('static', filename='img/arrow_down.png') }}"
+                                alt="beforeButton" width="50px" height="50px"></a></li>
+                </ul>
+            </div>
+            <div id="btnListLg">
+                <ul>
+                    <li class="button"><a href="#a">주문</a></li>
+                    <li class="button"><a href="#a">계산</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

@@ -1,0 +1,55 @@
+#center>div {
+    width: 1000px;
+    margin: 0 auto;
+}
+
+/* TOP */
+#orderTop {
+    height: 60px;
+}
+#orderTop> #tableNo{
+    float: left;
+    width: 300px;
+    height: 50px;
+    border: 1px solid skyblue;
+    border-radius: 5px;
+    margin:10px;
+    text-align: center;
+    line-height: 50px;
+}
+
+#orderTop> ul{
+    float: left;
+    width: 678px;
+    
+}
+
+#orderTop> ul>li{
+    float: left;
+    width: 100px;
+    /* display: inline-block; */
+}
+
+/* TABLE */
+#orderMid {
+    clear: both;
+    height: 430px;
+    text-align: center;
+    background-color: #eee;
+    border-radius: 2%;
+}
+
+
+/* BOTTOM */
+#orderBottom {
+    height: 100px;
+    text-align: center;
+    margin-top: 30px!important;
+}
+
+#bottom>div {
+    float: left;
+}
+
+
+

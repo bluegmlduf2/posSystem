@@ -14,10 +14,10 @@
         <div id="top">
             <h1><img src="{{ url_for('static', filename='img/logo.png') }}" alt="logo" width="50px" height="50px"></h1>
             <div id="curTime">현재시간</div>
-            <h2>메뉴등록판</h2>
+                <h2>메뉴등록판</h2>
             <ul>
-                <li id="exit"><a href="#a" class="button">종료</a></li>
-                <li id="workManage"><a href="#a" class="button">근태관리</a></li>
+                <li id="exit" class="button"><a href="#a">종료</a></li>
+                <li id="workManage" class="button"><a href="#a" >근태관리</a></li>
             </ul>
         </div>
         <div id="table">
@@ -201,8 +201,8 @@
         </div>
         <div id="bottom">
             <div id="orderItems">
-                <div><textarea name="" id="" cols="30" rows="1"></textarea></div>
-                <div><textarea name="" id="" cols="30" rows="4"></textarea></div>
+                <div><textarea name="" id="itemList" cols="30" rows="6" disabled></textarea></div>
+                <div><textarea name="" id="itemTotal" cols="30" rows="1" disabled></textarea></div>
             </div>
             <div id="btnListSm">
                 <ul>
