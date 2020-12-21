@@ -42,7 +42,7 @@
     background-color: #eee;
     border-radius: 2%;
     position: relative; /*relative(부모)->absolute(자식)*/
-    /*absolute(문서전체)*/
+    /*relative(기준점)-absolute(문서전체,상위relative찾아감)*/
 }
 
 #orderMid #orderitemList{
