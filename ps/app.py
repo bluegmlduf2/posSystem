@@ -15,8 +15,8 @@ def daumMethod():
 def index():
     '''테이블페이지'''
     try:
-        return render_template('table.html')
-        # return render_template('order.html')
+        #return render_template('table.html')
+        return render_template('order.html')
     except Exception: 
         #sys.exc_info()
         print(traceback.print_exc())
