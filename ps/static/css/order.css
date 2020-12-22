@@ -50,7 +50,8 @@
     top: 10px;
     left: 10px;
     background-color: #ffffff98;
-
+    width: 300px;
+    height: 400px;
 }
 
 #orderMid #menuList{
@@ -83,14 +84,53 @@
 
 /* BOTTOM */
 #orderBottom {
+    clear: both;
     height: 100px;
     text-align: center;
-    margin-top: 30px!important;
+    margin-top: 20px!important;
 }
 
-#bottom>div {
+#orderBottom >div {
     float: left;
 }
+
+#orderBottom #orderBottomTotal{
+    float: left;
+    width: 280px;
+    height: 45px;
+    border: 1px solid skyblue;
+    border-radius: 5px;
+    text-indent: 10px;
+    text-align: left;
+    line-height: 45px;
+}
+
+#orderBottom #orderBottomLeft>ul>li{
+    float: left;
+    width: 50px;
+    height: 50px;
+    line-height: 20px;
+}
+#orderBottom #orderBottomMid{
+    float: left;
+    width: 500px;
+    margin-left: 35px;
+}
+#orderBottom #orderBottomMid>ul>li{
+    float: left;
+    width: 70px;
+    height: 40px;
+    text-align: center;
+    line-height: 40px;
+}
+#orderBottom #orderBottomRight>ul>li{
+    float: left;
+    width: 150px;
+    height: 80px;
+    text-align: center;
+    line-height: 80px;
+}
+
 
 
 

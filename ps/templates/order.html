@@ -24,7 +24,7 @@
             </ul>
         </div>
         <div id="orderMid">
-            <div><textarea name="" id="orderitemList" cols="38" rows="28" disabled></textarea></div>
+            <div><textarea name="" id="orderitemList" disabled></textarea></div>
             <div id="menuList">
                 <div id="orderMidMidMenu">
                     <ul>
@@ -35,7 +35,7 @@
                         <li id="m5" class="button"><a href="#a">음료</a></li>
                     </ul>
                 </div>
-                <hr class="orderHr" >
+                <hr class="orderHr">
                 <div id="orderSmallMenu">
                     <ul>
                         <li id="s1" class="button"><a href="#a"></a></li>
@@ -58,62 +58,43 @@
                         <li id="s3" class="button"><a href="#a"></a></li>
                         <li id="s4" class="button"><a href="#a"></a></li>
                         <li id="s5" class="button"><a href="#a"></a></li>
-                    </ul>                    
+                    </ul>
                 </div>
             </div>
-            <!-- <ul>
-                <li class="seat">
-                    <a href="#a">
-                        <div>1</div>
-                        <div></div>
-                        <div></div>
-                    </a>
-                </li>
-                <li class="seat">
-                    <a href="#a">
-                        <div>2</div>
-                        <div></div>
-                        <div></div>
-                    </a>
-                </li>
-            </ul> -->
         </div>
         <div id="orderBottom">
             <div>
-                <div></div>
-                <div></div>
+                <div id="orderBottomTotal">합계</div>
+                <div id="orderBottomLeft">
+                    <ul>
+                        <li id="ob1" class="button">주문<br>합계<a href="#a"></a></li>
+                        <li id="ob2" class="button">주방<br>메모<a href="#a"></a></li>
+                        <li id="ob3" class="button"><a href="#a"><img
+                                    src="{{ url_for('static', filename='img/arrow_up.png') }}" alt="nextButton"
+                                    width="50px" height="50px"></a></li>
+                        <li id="ob4" class="button"><a href="#a"><img
+                                    src="{{ url_for('static', filename='img/arrow_down.png') }}" alt="nextButton"
+                                    width="50px" height="50px"></a></li>
+                    </ul>
+                </div>
             </div>
-            <div>
-                <div></div>
-                <div></div>
-            </div>
-            <div></div>
-
-
-            <div id="orderItems">
-                <div><textarea name="" id="itemList" cols="30" rows="6" disabled></textarea></div>
-                <div><textarea name="" id="itemTotal" cols="30" rows="1" disabled></textarea></div>
-            </div>
-            <div id="btnListSm">
+            <div id="orderBottomMid">
                 <ul>
-                    <li class="button"><a href="#a">취소</a></li>
-                    <li class="button"><a href="#a">합석</a></li>
-                    <li class="button"><a href="#a">계산서</a></li>
-                    <li class="button"><a href="#a">돈통</a></li>
-                    <li class="button"><a href="#a"><img src="{{ url_for('static', filename='img/arrow_up.png') }}"
-                                alt="nextButton" width="50px" height="50px"></a></li>
-                    <li class="button"><a href="#a">1층홈</a></li>
-                    <li class="button"><a href="#a">2층홈</a></li>
-                    <li class="button"><a href="#a">3층홈</a></li>
-                    <li class="button"><a href="#a">결제변경</a></li>
-                    <li class="button"><a href="#a"><img src="{{ url_for('static', filename='img/arrow_down.png') }}"
-                                alt="beforeButton" width="50px" height="50px"></a></li>
+                    <li class="button"><a href="#a">+</a></li>
+                    <li class="button"><a href="#a">-</a></li>
+                    <li class="button"><a href="#a">포장</a></li>
+                    <li class="button"><a href="#a">배달</a></li>
+                    <li class="button"><a href="#a">서비스</a></li>
+                    <li class="button"><a href="#a">이전취소</a></li>
+                    <li class="button"><a href="#a">전체취소</a></li>
+                    <li class="button"><a href="#a">저장취소</a></li>
+                    <li class="button"><a href="#a">수량입력</a></li>
+                    <li class="button"><a href="#a">선불</a></li>
                 </ul>
             </div>
-            <div id="btnListLg">
+            <div id="orderBottomRight">
                 <ul>
-                    <li class="button"><a href="#a">주문</a></li>
-                    <li class="button"><a href="#a">계산</a></li>
+                    <li class="button"><a href="#a">취소</a></li>
                 </ul>
             </div>
         </div>
