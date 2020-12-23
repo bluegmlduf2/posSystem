@@ -66,20 +66,20 @@
 
 #orderMid #orderMidMidMenu>ul>li{
     float: left;
-    width: 100px;
+    width: 110px;
     height: 45px;
     line-height: 45px;
 }
 
 #orderMid #orderSmallMenu>ul>li{
     float: left;
-    width: 100px;
+    width: 110px;
     height: 50px;
     line-height: 50px;
 }
 
 .orderHr{
-    width: 610px;
+    width: 630px;
 }
 
 /* BOTTOM */
@@ -105,6 +105,10 @@
     line-height: 45px;
 }
 
+#orderBottom #orderBottomLeft{
+
+}
+
 #orderBottom #orderBottomLeft>ul>li{
     float: left;
     width: 50px;
@@ -124,7 +128,7 @@
     line-height: 40px;
 }
 #orderBottom #orderBottomRight>ul>li{
-    float: left;
+    float: right;
     width: 150px;
     height: 80px;
     text-align: center;

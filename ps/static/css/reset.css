@@ -112,10 +112,12 @@ input, select {
     vertical-align:middle;
 }
 
-.clear{
-    zoom:1;clear: both;
-}
-.clear:after{content:"";display: block;clear: both;}
+/*  float의 영향은 2가지가 있다
+1.float을 적용한 다음 요소에 float의 효과를 준다
+2.자식 요소가 전부 float을 사용하면 부모의 높이가 사라질수있다
+
+위의 1,2을 막기위해서 float요소 다음에 after로  가상의 요소를 만들어주고 clear;both를 적용해서 float영향을 해제를 한다 */
+.clear:after{clear: both; content:"";display: block;}
 
 /* 사용자 추가 */
 A:link {text-decoration:none; color:#646464;}
