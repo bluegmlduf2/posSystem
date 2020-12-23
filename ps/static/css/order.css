@@ -6,31 +6,36 @@
 /* TOP */
 #orderTop {
     height: 60px;
-    margin-bottom: 50px;
+    margin: 10px auto 5px!important;
 }
-#orderTop> #tableNo{
+#orderTop #orderTop1{
     float: left;
-    width: 300px;
-    height: 45px;
+    width: 315px;
+    height: 50px;
     border: 1px solid skyblue;
     border-radius: 5px;
-    margin:5px 10px 0 10px;
     text-align: center;
-    line-height: 45px;
+    line-height: 50px;
+    margin-right: 12px;
+}
+#orderTop #orderTop2{
+    float: left;
+    width: 670px;
 }
 
-#orderTop> ul>li{
+#orderTop #orderTop2 ul>li{
     float: left;
-    height: 35px;
+    height: 40px;
     width: 80px;
-    line-height: 35px;
+    line-height: 40px;
     text-align: center;
+    margin-top: 0px;
 }
-#orderTop> ul>li:last-child{
+#orderTop #orderTop2 ul>li:last-child{
     float: right;
-    height: 35px;
+    height: 40px;
     width: 80px;
-    line-height: 35px;
+    line-height: 40px;
     text-align: center;
 }
 
@@ -67,19 +72,23 @@
 #orderMid #orderMidMidMenu>ul>li{
     float: left;
     width: 110px;
-    height: 45px;
-    line-height: 45px;
+    height: 50px;
+    line-height: 50px;
 }
 
 #orderMid #orderSmallMenu>ul>li{
     float: left;
     width: 110px;
-    height: 50px;
-    line-height: 50px;
+    height: 55px;
+    line-height: 55px;
 }
 
 .orderHr{
-    width: 630px;
+    position: relative;
+    top: 5px;
+    left:5px;
+    width: 650px;
+
 }
 
 /* BOTTOM */
@@ -87,52 +96,55 @@
     clear: both;
     height: 100px;
     text-align: center;
-    margin-top: 20px!important;
+    margin-top: 10px!important;
 }
 
-#orderBottom >div {
+#orderBottom #orderBottomTop{
     float: left;
+    width: 330px;
 }
 
-#orderBottom #orderBottomTotal{
-    float: left;
-    width: 280px;
+#orderBottom #orderBottomTop #orderBottomTop1{
+    width: 310px;
     height: 45px;
     border: 1px solid skyblue;
     border-radius: 5px;
     text-indent: 10px;
     text-align: left;
     line-height: 45px;
+    margin: 5px 0 0 5px;
 }
 
-#orderBottom #orderBottomLeft{
-
-}
-
-#orderBottom #orderBottomLeft>ul>li{
+#orderBottom #orderBottomTop #orderBottomTop2>ul>li{
     float: left;
-    width: 50px;
-    height: 50px;
+    width: 58px;
+    height: 45px;
     line-height: 20px;
 }
+
 #orderBottom #orderBottomMid{
     float: left;
     width: 500px;
-    margin-left: 35px;
 }
+
 #orderBottom #orderBottomMid>ul>li{
     float: left;
-    width: 70px;
-    height: 40px;
+    width: 76px;
+    height: 37px;
     text-align: center;
-    line-height: 40px;
+    line-height: 37px;
+}
+
+#orderBottom #orderBottomRight{
+    float: left;
+    width: 170px;
 }
 #orderBottom #orderBottomRight>ul>li{
     float: right;
     width: 150px;
-    height: 80px;
+    height: 95px;
     text-align: center;
-    line-height: 80px;
+    line-height: 95px;
 }
 
 
