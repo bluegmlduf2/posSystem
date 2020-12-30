@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/reset.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/common.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/pay.css') }}">
+</head>
+
+<body>
+    <div id="center">
+        <div id="payTop">
+            <div id="payTabNum">테이블번호</div>
+            <div id="payTabTim">현재시간</div>
+        </div>
+        <div id="payMain">
+            <div id="datagrid">
+                <table>
+                    <thead>
+                        <tr>
+                            <th colspan="2">주문내역</th>
+                            <th>수량</th>
+                            <th>금액</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>된장찌게</td>
+                            <td>시간111</td>
+                            <td>2</td>
+                            <td>1000</td>
+                        </tr>
+                        <tr class="alt">
+                            <td>김치찌게</td>
+                            <td>시간2222</td>
+                            <td>4</td>
+                            <td>4000</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div id="payBottom">금액합계</div>
+        <div id="payBtn">
+            <ul class="clear">
+                <li class="button"><a href="#a"></a>카드결제</li>
+                <li class="button"><a href="#a"></a>현금결제</li>
+            </ul>
+        </div>
+    </div>
+</body>
+
+</html>
