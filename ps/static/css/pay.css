@@ -1,3 +1,11 @@
+#paycenter{
+    /* MODAL 창크기조절 */
+    height: 660px;
+    width: 450px;
+    padding-top: 10px;
+    border-radius: 5px;
+}
+
 #paycenter>div {
     width: 400px;
     margin: 0 auto;
@@ -46,9 +54,13 @@
 #payBtn>ul>li{
     float: left;
     height: 60px;
-    width: 178px;/*button class에 있는 padding,margin제외 */
+    width: 142px;/*button class에 있는 padding,margin제외 */
     line-height: 60px;
     text-align: center;
+}
+#payBtn>ul>li.paycloseBtn{
+    height: 60px;
+    width: 50px;/*button class에 있는 padding,margin제외 */
 }
 
 /* 데이터 테이블 그리드 */

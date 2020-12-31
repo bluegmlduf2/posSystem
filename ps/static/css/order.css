@@ -1,3 +1,10 @@
+#orderCenter{
+    /* MODAL 창크기조절 */
+    height: 650px;
+    padding-top: 10px;
+    border-radius: 5px;
+}
+
 #orderCenter>div {
     width: 1000px;
     margin: 0 auto;

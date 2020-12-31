@@ -1,8 +1,8 @@
-
 /* BUTTON */
 .button {
     margin: 5px;
-    padding: 5px;/*패딩사용시 width,height증가함. 그러므로 줄여줘야함*/
+    padding: 5px;
+    /*패딩사용시 width,height증가함. 그러므로 줄여줘야함*/
     border: 1px solid skyblue;
     background-color: rgba(0, 0, 0, 0);
     color: skyblue;
@@ -21,4 +21,26 @@ textarea {
     background-color: rgba(0, 0, 0, 0);
     min-height: 30px;
     border-radius: 5px;
+}
+
+/* MODAL */
+/* 모달 회색 배경 */
+.modal-overlay {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+/* 표시되는 모달 */
+.modal-content {
+    background-color: #f4f4f4;
+    margin: 1% auto;
+    width: 70%;
+    box-shadow: 0 5px 8px 0 rgba(0, 0, 0, 0.2), 0 7px 20px 0 rgba(0, 0, 0, 0.17);
 }
