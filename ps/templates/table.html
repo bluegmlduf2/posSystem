@@ -6,8 +6,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/reset.css') }}">
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/table.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/common.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/table.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/order.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/pay.css') }}">
 </head>
 
 <body>
@@ -227,6 +229,10 @@
             </div>
         </div>
     </div>
+    <br>
+    <br>
+    <br>
+    {% include 'order.html' %}
+    {% include 'pay.html' %}
 </body>
-
 </html>
