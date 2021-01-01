@@ -15,6 +15,9 @@ window.addEventListener('click', outsideClick);
 // Open modal
 function openModal() {
     modal_pay.style.display = 'block';
+    let liTag=this.children[0].children;
+
+    document.querySelector('#payTabNum').innerHTML=liTag[0].innerHTML
 }
 
 // Close modal

@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="icon" href="data:;base64,iVBORw0KGgo=">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/reset.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/common.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/table.css') }}">
@@ -16,7 +17,7 @@
     <div id="center">
         <div id="top">
             <h1><img src="{{ url_for('static', filename='img/logo.png') }}" alt="logo" width="50px" height="50px"></h1>
-            <div id="curTime">현재시간</div>
+            <div id="curTime"></div>
                 <h2>메뉴등록판</h2>
             <ul>
                 <li id="exit" class="button"><a href="#a">판매분석</a></li>
@@ -25,181 +26,15 @@
         </div>
         <div id="table">
             <ul>
-                <li class="ordBtn seat">
+                {% for i in range(25) %}
+                <li class="seat">
                     <a href="#a">
-                        <div>1</div>
-                        <div></div>
-                        <div></div>
+                        <div>{{loop.index}}</div>
+                        <div id="tabTime">시간/인원</div>
+                        <div id="tabTot">총금액</div>
                     </a>
                 </li>
-                <li class="ordBtn seat">
-                    <a href="#a">
-                        <div>2</div>
-                        <div></div>
-                        <div></div>
-                    </a>
-                </li>
-                <li class="ordBtn seat">
-                    <a href="#a">
-                        <div>3</div>
-                        <div></div>
-                        <div></div>
-                    </a>
-                </li>
-                <li class="ordBtn seat">
-                    <a href="#a">
-                        <div>4</div>
-                        <div></div>
-                        <div></div>
-                    </a>
-                </li>
-                <li class="ordBtn seat">
-                    <a href="#a">
-                        <div>5</div>
-                        <div></div>
-                        <div></div>
-                    </a>
-                </li>
-                <li class="ordBtn seat">
-                    <a href="#a">
-                        <div>6</div>
-                        <div></div>
-                        <div></div>
-                    </a>
-                </li>
-                <li class="ordBtn seat">
-                    <a href="#a">
-                        <div>7</div>
-                        <div></div>
-                        <div></div>
-                    </a>
-                </li>
-                <li class="ordBtn seat">
-                    <a href="#a">
-                        <div>8</div>
-                        <div></div>
-                        <div></div>
-                    </a>
-                </li>
-                <li class="ordBtn seat">
-                    <a href="#a">
-                        <div>9</div>
-                        <div></div>
-                        <div></div>
-                    </a>
-                </li>
-                <li class="ordBtn seat">
-                    <a href="#a">
-                        <div>10</div>
-                        <div></div>
-                        <div></div>
-                    </a>
-                </li>
-                <li class="ordBtn seat">
-                    <a href="#a">
-                        <div>11</div>
-                        <div></div>
-                        <div></div>
-                    </a>
-                </li>
-                <li class="ordBtn seat">
-                    <a href="#a">
-                        <div>12</div>
-                        <div></div>
-                        <div></div>
-                    </a>
-                </li>
-                <li class="ordBtn seat">
-                    <a href="#a">
-                        <div>13</div>
-                        <div></div>
-                        <div></div>
-                    </a>
-                </li>
-                <li class="ordBtn seat">
-                    <a href="#a">
-                        <div>14</div>
-                        <div></div>
-                        <div></div>
-                    </a>
-                </li>
-                <li class="ordBtn seat">
-                    <a href="#a">
-                        <div>15</div>
-                        <div></div>
-                        <div></div>
-                    </a>
-                </li>
-                <li class="ordBtn seat">
-                    <a href="#a">
-                        <div>16</div>
-                        <div></div>
-                        <div></div>
-                    </a>
-                </li>
-                <li class="ordBtn seat">
-                    <a href="#a">
-                        <div>17</div>
-                        <div></div>
-                        <div></div>
-                    </a>
-                </li>
-                <li class="ordBtn seat">
-                    <a href="#a">
-                        <div>18</div>
-                        <div></div>
-                        <div></div>
-                    </a>
-                </li>
-                <li class="ordBtn seat">
-                    <a href="#a">
-                        <div>19</div>
-                        <div></div>
-                        <div></div>
-                    </a>
-                </li>
-                <li class="ordBtn seat">
-                    <a href="#a">
-                        <div>20</div>
-                        <div></div>
-                        <div></div>
-                    </a>
-                </li>
-                <li class="ordBtn seat">
-                    <a href="#a">
-                        <div>21</div>
-                        <div></div>
-                        <div></div>
-                    </a>
-                </li>
-                <li class="ordBtn seat">
-                    <a href="#a">
-                        <div>22</div>
-                        <div></div>
-                        <div></div>
-                    </a>
-                </li>
-                <li class="ordBtn seat">
-                    <a href="#a">
-                        <div>23</div>
-                        <div></div>
-                        <div></div>
-                    </a>
-                </li>
-                <li class="ordBtn seat">
-                    <a href="#a">
-                        <div>24</div>
-                        <div></div>
-                        <div></div>
-                    </a>
-                </li>
-                <li class="ordBtn seat">
-                    <a href="#a">
-                        <div>25</div>
-                        <div></div>
-                        <div></div>
-                    </a>
-                </li>
+                {% endfor %}
             </ul>
         </div>
         <div id="bottom">

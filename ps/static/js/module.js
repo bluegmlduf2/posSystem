@@ -5,10 +5,19 @@ var module = function () {
      * (자동호출 구조가 아니므로 인스턴스화 가능) 
      * -------------------------------- 
      * */
+    // 
+    let today=new Date();
 
     //시간함수
-    function getCurTime(){
-        let today=new Date();
+    function getCurTime(){ 
+        let hour=today.getHours()
+        let min=today.getMinutes()
+        
+        return `${hour}시 ${min}분 `;
+    }
+
+    //시간+날짜함수
+    function getCurDate(){
         let days=new Array("일","월","화","수","목","금","토");
         
         let year=today.getFullYear()
@@ -23,7 +32,8 @@ var module = function () {
 
     // 공개될 멤버 (특권 메소드) 정의 
     return {
-        getCurTime:function(){ return getCurTime();}
+        getCurTime:function(){ return getCurTime();},
+        getCurDate:function(){ return getCurDate();}
     }
 };
 

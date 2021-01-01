@@ -67,9 +67,22 @@
     margin: 5px;
 }
 
-/* #table .seat>a>div {
-    height: 20px;
-} */
+#table .seat div:first-child{
+    padding-top: 3px;
+    font-weight: bold;
+}
+
+#table .seat div#tabTime{
+    position: absolute;
+    bottom: 25px;
+    left: 3px;
+}
+
+#table .seat div#tabTot{
+    position: absolute;
+    bottom: 3px;
+    left: 3px;
+}
 
 /* BOTTOM */
 #bottom {
@@ -122,11 +135,18 @@
     background-color: rgba(0, 0, 0, 0);
     color: skyblue;
     border-radius: 5px;
+    position: relative;
 }
 .seat:hover {
     color: white;
+    border: 2.5px solid #739aee;
+}
+
+.button.active{
+    color: white;
     background-color: skyblue;
 }
+
 /* BUTTON */
 .button {
     margin: 5px;
