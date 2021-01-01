@@ -23,30 +23,6 @@ def index():
     finally:
         print('프로그램 종료(Exits application)')
 
-@app.route('/order')
-def index1():
-    '''테이블페이지'''
-    try:
-        return render_template('order.html')
-    except Exception: 
-        #sys.exc_info()
-        print(traceback.print_exc())
-        #return render_template('error_404.html')
-    finally:
-        print('프로그램 종료(Exits application)')
-
-@app.route('/pay')
-def index2():
-    '''테이블페이지'''
-    try:
-        return render_template('pay.html')
-    except Exception: 
-        #sys.exc_info()
-        print(traceback.print_exc())
-        #return render_template('error_404.html')
-    finally:
-        print('프로그램 종료(Exits application)')
-
 @app.errorhandler(404)
 def page_not_found(error): 
     return "페이지가 없습니다. URL를 확인 하세요", 404

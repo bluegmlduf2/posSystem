@@ -24,7 +24,9 @@ function closeModal() {
 
 // Click outside and close
 function outsideClick(e) {
+    //e.target & modal_pay => payBg(background)
     if (e.target == modal_pay) {
         modal_pay.style.display = 'none';
     }
 }
+

@@ -17,6 +17,9 @@
 }
 
 #top #curTime {
+    margin-top: 10px;
+    line-height: 30px;
+    font-size: 18px;
     float: left;
     width: 200px;
 }

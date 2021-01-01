@@ -19,7 +19,7 @@
             <div id="curTime">현재시간</div>
                 <h2>메뉴등록판</h2>
             <ul>
-                <li id="exit" class="button"><a href="#a">종료</a></li>
+                <li id="exit" class="button"><a href="#a">판매분석</a></li>
                 <li id="workManage" class="button"><a href="#a" >근태관리</a></li>
             </ul>
         </div>
@@ -231,6 +231,8 @@
     </div>
     {% include 'order.html' %}
     {% include 'pay.html' %}
+    <script src="{{ url_for('static', filename='js/module.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/table.js') }}"></script>
     <script src="{{ url_for('static', filename='js/pay.js') }}"></script>
     <script src="{{ url_for('static', filename='js/order.js') }}"></script>
 </body>
