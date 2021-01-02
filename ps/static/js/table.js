@@ -1,4 +1,5 @@
-let realTimeFunc = setInterval(function () {
+// 시간 1초마다 갱신
+setInterval(function () {
     let moduleObj = module();
     let daytime = moduleObj.getCurDate();
     document.querySelector("#curTime").innerHTML = daytime;

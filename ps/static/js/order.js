@@ -14,6 +14,14 @@ window.addEventListener('click', outsideClick);
 
 // Open modal
 function openModal() {
+    if (!document.querySelector('.seat.active')) {
+        alert('좌석을 선택해주세요.')
+        return
+    }
+
+    let liTag=document.querySelector('.seat.active').children[0].children
+    
+    document.querySelector('#orderTop1').innerHTML=liTag[0].innerHTML
     modal_order.style.display = 'block'; /* none -> display */ 
 }
 

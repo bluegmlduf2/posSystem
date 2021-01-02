@@ -14,10 +14,15 @@ window.addEventListener('click', outsideClick);
 
 // Open modal
 function openModal() {
-    modal_pay.style.display = 'block';
-    let liTag=this.children[0].children;
+    if (!document.querySelector('.seat.active')) {
+        alert('좌석을 선택해주세요.')
+        return
+    }
 
+    let liTag=document.querySelector('.seat.active').children[0].children
+    
     document.querySelector('#payTabNum').innerHTML=liTag[0].innerHTML
+    modal_pay.style.display = 'block'; /* none -> display */ 
 }
 
 // Close modal

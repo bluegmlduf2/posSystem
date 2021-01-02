@@ -5,11 +5,10 @@ var module = function () {
      * (자동호출 구조가 아니므로 인스턴스화 가능) 
      * -------------------------------- 
      * */
-    // 
-    let today=new Date();
-
+    
     //시간함수
     function getCurTime(){ 
+        let today=new Date();
         let hour=today.getHours()
         let min=today.getMinutes()
         
@@ -18,6 +17,7 @@ var module = function () {
 
     //시간+날짜함수
     function getCurDate(){
+        let today=new Date();
         let days=new Array("일","월","화","수","목","금","토");
         
         let year=today.getFullYear()
@@ -37,3 +37,21 @@ var module = function () {
     }
 };
 
+
+/**
+ * 좌측문자열채우기
+ * @params
+ *  - padLen : 최대 채우고자 하는 길이
+ *  - padStr : 채우고자하는 문자(char)
+ */
+String.prototype.lpad = function(padLen, padStr) {
+    var str = this;
+    if (padStr.length > padLen) {
+        console.log("오류 : 채우고자 하는 문자열이 요청 길이보다 큽니다");
+        return str + "";
+    }
+    while (str.length < padLen)
+        str = padStr + str;
+    str = str.length >= padLen ? str.substring(0, padLen) : str;
+    return str;
+};
