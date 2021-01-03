@@ -36,3 +36,20 @@ function outsideClick(e) {
         modal_order.style.display = 'none';
     }
 }
+
+// CLICK 시 STATE변경
+document.querySelectorAll(".button").forEach(btn => {
+    let m_ins=module();
+    let classChk=m_ins.hasClass(btn.classList,['b_btn','m_btn','s_btn']);
+    if(classChk[0]){
+        //클릭시 초기화 후 체크
+        btn.addEventListener('click', () => {
+            document.querySelectorAll("."+classChk[1]).forEach(ele=>{ele.classList.remove('active')}) 
+            btn.classList.toggle('active')
+        })
+        // 더블클릭시 체크 해제
+        btn.addEventListener('dblclick', () => {
+            btn.classList.toggle('active')
+        })
+    }
+});

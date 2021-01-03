@@ -142,10 +142,11 @@
     border: 2.5px solid #739aee;
 }
 
-.button.active{
+.seat.active{
     color: white;
     background-color: skyblue;
 }
+
 
 /* BUTTON */
 .button {

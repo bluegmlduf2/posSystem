@@ -2,6 +2,8 @@
     * -------------------------------- 
     * 모듈 패턴을 구현한 클로저 코드 
     * (자동호출 구조가 아니므로 인스턴스화 가능) 
+    * 클로저:변수에 해당 함수를 저장해서 반환하는 형식 , 메모리가 반환되어도 사용가능 , 보안(지역변수공개안함) , 호출할수없는 변수(지역변수)호출가능
+    * 
     * 객체 선언방식: 1. 객체리터럴 a={} //인스턴스화 불가
     * 객체 선언방식: 2.생성자함수 선언 function Person(name){this.name+name} , new Person('a') 로 선언하며 첫글자는 대문자가 관례 => 즉 new Person() 
     * 위의 객체 선언방식의 차이: 객체리터럴=재사용불가 ,생성자함수=재사용가능(인스턴스화)
@@ -29,16 +31,20 @@
       var b=function(args){name=args}
         new b('이')
         b {} //아무것도 표시되지 않음
+    *JS는 웹브라우저의 렌더링머신에따라서 다르지만 인터프리터라고 생각.
+    *타입스크립트는 JS를 컴파일하기때문에 사전에 에러를 알수있다
     * -------------------------------- 
 * */
 
 
 //이런 방식으로 선언하면 new module()로 사용하고 지역변수로 사용된 경우 함수호출후 메모리에서 반환
-var module = function () {    
+var module = function () {
+    //아래의 함수들이 전부 비공개됨(클로저)
+
     //시간함수
     function getCurTime(){ 
         let today=new Date();
-        let hour=today.getHours().toString().lpad(2,'0')
+        let hour=today.getHours().toString().lpad(2,'0') //자바스크립트는 인터프리터언어인데 lpad()를 module변수 아래에 
         let min=today.getMinutes().toString().lpad(2,'0')
         
         return `${hour}시 ${min}분 `;
@@ -53,16 +59,39 @@ var module = function () {
         let month=today.getMonth()+1
         let date=today.getDate()
         let day=days[today.getDay()]
-        let hour=today.getHours().toString().lpad(2,'0')
+        let hour=today.getHours().toString().lpad(2,'0') 
         let min=today.getMinutes().toString().lpad(2,'0')
         
         return `${year}년 ${month}월 ${date}일 ${day}요일 \n ${hour}시 ${min}분 `;
     }
 
+    /**
+     * 클래스 존재여부 체크
+     * @param {classList} classList 
+     * @param {Array} className 
+     */
+    function hasClass(classList, className) {
+        let chk=false
+        let eleNm=''
+
+        classList.forEach((k,v)=>{
+            let arrChk=className.indexOf(k)
+            if(arrChk>-1){
+                eleNm=className[arrChk]
+                chk=true
+            }
+        })
+
+        return [chk,eleNm];
+        //아래의 객체리터럴의 반환형으로 function(){}형태로 한번더 안 감싸서 보내었기 때문에 공개됨
+    }
+
     // 공개될 멤버 (특권 메소드) 정의 
+    // hasClass같은 경우는 function(){}으로 한번 더 안 감싼 상태기 때문에 공개됨 getCurTime,hasClass를 console.log()찍으면 나옴
     return {
-        getCurTime:function(){ return getCurTime();},
-        getCurDate:function(){ return getCurDate();}
+        getCurTime:function(){ return getCurTime();},//비공개
+        getCurDate:function(){ return getCurDate();},//비공개
+        hasClass:hasClass//공개
     }
 };
 

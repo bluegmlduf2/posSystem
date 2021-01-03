@@ -12,10 +12,6 @@
 .button:hover {
     border: 1px solid skyblue;
 }
-.seat.active{
-    color: white;
-    background-color: skyblue;
-}
 
 /* TEXTAREA */
 textarea {
