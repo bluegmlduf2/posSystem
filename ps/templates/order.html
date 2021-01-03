@@ -4,11 +4,9 @@
             <div id="orderTop1"></div>
             <div id="orderTop2">
                 <ul class="clear">
-                    <li id="b1" class="button"><a href="#a">메뉴1번</a></li>
-                    <li id="b2" class="button"><a href="#a">메뉴2번</a></li>
-                    <li id="b3" class="button"><a href="#a">메뉴3번</a></li>
-                    <li id="b4" class="button"><a href="#a">메뉴4번</a></li>
-                    <li id="b5" class="button"><a href="#a">메뉴5번</a></li>
+                    <li id="b1" class="button"><a href="#a">일반메뉴</a></li>
+                    <li id="b2" class="button"><a href="#a">여름메뉴</a></li>
+                    <li id="b3" class="button"><a href="#a">겨울메뉴</a></li>
                     <li id="orderClose" class="button ordcloseBtn"><a href="#a">닫기</a></li>
                 </ul>
             </div>
@@ -29,25 +27,9 @@
                 <div id="orderSmallMenu">
                     <ul class="clear">
                         <li id="s1" class="button"><a href="#a"></a></li>
-                        <li id="s2" class="button"><a href="#a"></a></li>
-                        <li id="s3" class="button"><a href="#a"></a></li>
-                        <li id="s4" class="button"><a href="#a"></a></li>
-                        <li id="s5" class="button"><a href="#a"></a></li>
-                        <li id="s1" class="button"><a href="#a"></a></li>
-                        <li id="s2" class="button"><a href="#a"></a></li>
-                        <li id="s3" class="button"><a href="#a"></a></li>
-                        <li id="s4" class="button"><a href="#a"></a></li>
-                        <li id="s5" class="button"><a href="#a"></a></li>
-                        <li id="s1" class="button"><a href="#a"></a></li>
-                        <li id="s2" class="button"><a href="#a"></a></li>
-                        <li id="s3" class="button"><a href="#a"></a></li>
-                        <li id="s4" class="button"><a href="#a"></a></li>
-                        <li id="s5" class="button"><a href="#a"></a></li>
-                        <li id="s1" class="button"><a href="#a"></a></li>
-                        <li id="s2" class="button"><a href="#a"></a></li>
-                        <li id="s3" class="button"><a href="#a"></a></li>
-                        <li id="s4" class="button"><a href="#a"></a></li>
-                        <li id="s5" class="button"><a href="#a"></a></li>
+                        {% for i in range(19) %}
+                        <li id="s{{loop.index}}" class="button"><a href="#a"></a></li>
+                        {% endfor %}
                     </ul>
                 </div>
             </div>
@@ -84,7 +66,7 @@
             </div>
             <div id="orderBottomRight">
                 <ul class="clear">
-                    <li class="button ordcloseBtn"><a href="#a">취소</a></li>
+                    <li class="button"><a href="#a">주문</a></li>
                 </ul>
             </div>
         </div>

@@ -1,16 +1,45 @@
-var module = function () {
-    /* * 
-     * -------------------------------- 
-     * 모듈 패턴을 구현한 클로저 코드 
-     * (자동호출 구조가 아니므로 인스턴스화 가능) 
-     * -------------------------------- 
-     * */
-    
+/* * 
+    * -------------------------------- 
+    * 모듈 패턴을 구현한 클로저 코드 
+    * (자동호출 구조가 아니므로 인스턴스화 가능) 
+    * 객체 선언방식: 1. 객체리터럴 a={} //인스턴스화 불가
+    * 객체 선언방식: 2.생성자함수 선언 function Person(name){this.name+name} , new Person('a') 로 선언하며 첫글자는 대문자가 관례 => 즉 new Person() 
+    * 위의 객체 선언방식의 차이: 객체리터럴=재사용불가 ,생성자함수=재사용가능(인스턴스화)
+    * 객체 리터럴 방식의 프로토타입 객체 : Object(Object.prototype) ->최상위
+    * 생성자 함수 방식의 프로토타입 객체: Person(Person.prototype) -> 해당 객체
+    * JS는 프로토타입언어이다. 객체의 __proto__를 타고 계속 상위객체로 올라감(상속같음)
+    * 프로토타입언어는 OOP객체지향의 한 종류. JS는 클래스를 상속하는것과 다름. 객체의 원형(프로토타입)을 복제하는 방식
+    * 생성한 객체의 __proto__를 계속 타고 올라가면 constructor: ƒ Object()가 존재하고 이 프로퍼티가 해당 객체를 생성한다.
+    * 가비지컬렉터:메모리에 할당된 것을 지움->레퍼런스카운팅이0인것 , 레퍼런스카운팅:할당되어 참조된 수 최초 첫사용시 1이됨, a=null로 하면 레퍼런스카운팅0이 되어 가비지컬렉션의 정리대상이됨
+    * 메모리누수방지: 전역변수=null , 이벤트언바인딩
+    * 레퍼런스:메모리상의 주소, 함수 내에서 지역변수가 할당되고 객체가 호출되면 종료 된 후 메모리에 반환한다 
+    * 객체명.property.변수명 사용이유 = 객체원형에 접근해서 영구적으로 추가 // property뜻:원형 //반복을 피해서 메모리절감
+    * function Person(name){this.name=name;}
+    //1.  객체명.prototype.프라퍼티명 은 객체의 원형에 접근하여 모든 인스턴스에서 공유함. 
+    Person.prototype.sum = function(){return 'prototype : '+(this.name);}
+    var kim = new Person('kim');
+    //2.  인스턴스명.프라퍼티명 으로 추가 할 경우 해당 인스턴스에서만 사용함
+    kim.sum = function(){return 'this : '+(this.name);}
+    * function a(){ b=function(){return '1';}} 이런식으로 내부에서 함수를 선언해 줄 경우 인스턴스화할때 마다 함수를 생성하기때문에 메모리가 낭비. 그러므로 prototype을 사용
+    * property===__propt__  
+    * 생성자에 this를 사용하는 이유: this를 사용하지않으면 인스턴스생성시 전달한 변수가 저장되지않음
+    * var a=function(name){this.name=name}
+        new a('김')
+        a {name: "김"}
+      var b=function(args){name=args}
+        new b('이')
+        b {} //아무것도 표시되지 않음
+    * -------------------------------- 
+* */
+
+
+//이런 방식으로 선언하면 new module()로 사용하고 지역변수로 사용된 경우 함수호출후 메모리에서 반환
+var module = function () {    
     //시간함수
     function getCurTime(){ 
         let today=new Date();
-        let hour=today.getHours()
-        let min=today.getMinutes()
+        let hour=today.getHours().toString().lpad(2,'0')
+        let min=today.getMinutes().toString().lpad(2,'0')
         
         return `${hour}시 ${min}분 `;
     }
@@ -24,8 +53,8 @@ var module = function () {
         let month=today.getMonth()+1
         let date=today.getDate()
         let day=days[today.getDay()]
-        let hour=today.getHours()
-        let min=today.getMinutes()
+        let hour=today.getHours().toString().lpad(2,'0')
+        let min=today.getMinutes().toString().lpad(2,'0')
         
         return `${year}년 ${month}월 ${date}일 ${day}요일 \n ${hour}시 ${min}분 `;
     }
@@ -38,12 +67,14 @@ var module = function () {
 };
 
 
+
 /**
  * 좌측문자열채우기
  * @params
  *  - padLen : 최대 채우고자 하는 길이
  *  - padStr : 채우고자하는 문자(char)
  */
+//String객체(원시객체).prototype.함수명으로 추가함 
 String.prototype.lpad = function(padLen, padStr) {
     var str = this;
     if (padStr.length > padLen) {
