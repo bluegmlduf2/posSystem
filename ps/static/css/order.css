@@ -155,8 +155,7 @@
 }
 
 .s_btn:hover {
-    color: white;
-    border: 2.5px solid #739aee;
+    border: 1px solid #739aee;
 }
 
 .s_btn.active{
@@ -165,7 +164,6 @@
 }
 
 .m_btn:hover {
-    color: white;
     border: 2.5px solid #739aee;
 }
 
@@ -175,7 +173,6 @@
 }
 
 .b_btn:hover {
-    color: white;
     border: 2.5px solid #739aee;
 }
 
