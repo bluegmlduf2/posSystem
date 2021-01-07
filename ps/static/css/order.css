@@ -1,183 +1,59 @@
-#orderCenter{
-    /* MODAL 창크기조절 */
-    height: 650px;
-    padding-top: 10px;
-    border-radius: 5px;
+#orderCenter {
+    display: flex;
+    flex-direction: column;
+    width: 100vh;
+    height: 100vh;
 }
-
-#orderCenter>div {
-    width: 1000px;
-    margin: 0 auto;
-}
-
 /* TOP */
-#orderTop {
-    height: 60px;
-    margin: 10px auto 5px!important;
+#orderCenter #orderTop{
+    display: flex;
+    height: 10%;
 }
-#orderTop #orderTop1{
-    float: left;
-    width: 315px;
-    height: 50px;
-    border: 1px solid skyblue;
-    border-radius: 5px;
-    text-align: center;
-    line-height: 50px;
-    margin-right: 12px;
+#orderCenter #orderTop #orderTop1{
+    width: 33%;
 }
-#orderTop #orderTop2{
-    float: left;
-    width: 670px;
+#orderCenter #orderTop #orderTop2{
+    width: 67%;
+}
+#orderCenter #orderTop #orderTop2>ul{
+    display: flex;
+}
+#orderCenter #orderTop #orderTop2>ul>li{
+    width: 25%;
 }
 
-#orderTop #orderTop2 ul>li{
-    float: left;
-    height: 40px;
-    width: 80px;
-    line-height: 40px;
-    text-align: center;
-    margin-top: 0px;
+/* MID */
+#orderCenter #orderMid{
+    display: flex;
+    height: 70%;
 }
-#orderTop #orderTop2 ul>li:last-child{
-    float: right;
-    height: 40px;
-    width: 80px;
-    line-height: 40px;
-    text-align: center;
+#orderCenter #orderMid #menuList{
+    width: 33%;
 }
-
-/* TABLE */
-#orderMid {
-    clear: both;
-    height: 430px;
-    text-align: center;
-    background-color: #eee;
-    border-radius: 2%;
-    position: relative; /*relative(부모)->absolute(자식)*/
-    /*relative(기준점)-absolute(문서전체,상위relative찾아감)*/
+#orderCenter #orderMid #menuList #orderitemList{
+    width: 90%;
+    height: 90%;
 }
-
-#orderMid #orderitemList{
-    position: absolute; 
-    top: 10px;
-    left: 10px;
-    background-color: #ffffff98;
-    width: 300px;
-    height: 400px;
+#orderCenter #orderMid #menuBtnList{
+    display: flex;
+    flex-direction: column;
+    width: 67%;
 }
-
-#orderMid #menuList{
-    position: absolute; 
-    top: 10px;
-    left: 330px;
+#orderCenter #orderMid #menuBtnList #orderMidMidMenu>ul{
+    display: flex;
 }
-
-#orderMid #orderMidMidMenu{
-    margin-bottom: 80px;
+#orderCenter #orderMid #menuBtnList #orderMidMidMenu>ul>li{
+    width: 25%;
 }
-
-#orderMid #orderMidMidMenu>ul>li{
-    float: left;
-    width: 105px;
-    height: 50px;
-    line-height: 50px;
+#orderCenter #orderMid #menuBtnList #orderSmallMenu>ul{
+    display: flex;
+    flex-direction: row;
 }
-
-#orderMid #orderSmallMenu>ul>li{
-    float: left;
-    width: 110px;
-    height: 55px;
-    line-height: 55px;
+#orderCenter #orderMid #menuBtnList #orderSmallMenu>ul>li{
+    width: 20%;
+    height: 20%;
 }
-
-.orderHr{
-    position: relative;
-    top: 5px;
-    left:5px;
-    width: 650px;
-
-}
-
 /* BOTTOM */
-#orderBottom {
-    clear: both;
-    height: 100px;
-    text-align: center;
-    margin-top: 10px!important;
+#orderCenter #orderBottom{
+    display: flex;
 }
-
-#orderBottom #orderBottomTop{
-    float: left;
-    width: 330px;
-}
-
-#orderBottom #orderBottomTop #orderBottomTop1{
-    width: 310px;
-    height: 45px;
-    border: 1px solid skyblue;
-    border-radius: 5px;
-    text-indent: 10px;
-    text-align: left;
-    line-height: 45px;
-    margin: 5px 0 0 5px;
-}
-
-#orderBottom #orderBottomTop #orderBottomTop2>ul>li{
-    float: left;
-    width: 58px;
-    height: 45px;
-    line-height: 20px;
-}
-
-#orderBottom #orderBottomMid{
-    float: left;
-    width: 500px;
-}
-
-#orderBottom #orderBottomMid>ul>li{
-    float: left;
-    width: 76px;
-    height: 37px;
-    text-align: center;
-    line-height: 37px;
-}
-
-#orderBottom #orderBottomRight{
-    float: left;
-    width: 170px;
-}
-#orderBottom #orderBottomRight>ul>li{
-    float: right;
-    width: 150px;
-    height: 95px;
-    text-align: center;
-    line-height: 95px;
-}
-
-.s_btn:hover {
-    border: 1px solid #739aee;
-}
-
-.s_btn.active{
-    color: white;
-    background-color: skyblue;
-}
-
-.m_btn:hover {
-    border: 2.5px solid #739aee;
-}
-
-.m_btn.active{
-    color: white;
-    background-color: skyblue;
-}
-
-.b_btn:hover {
-    border: 2.5px solid #739aee;
-}
-
-.b_btn.active{
-    color: white;
-    background-color: skyblue;
-}
-

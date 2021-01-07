@@ -1,9 +1,9 @@
 <div id="orderBg" class="modal-overlay">
     <div id="orderCenter" class="modal-content">
-        <div id="orderTop">
+        <div id="orderTop" class="clear">
             <div id="orderTop1"></div>
             <div id="orderTop2">
-                <ul>
+                <ul class="clear">
                     <li id="b1" class="button b_btn"><a href="#a">일반메뉴</a></li>
                     <li id="b2" class="button b_btn"><a href="#a">여름메뉴</a></li>
                     <li id="b3" class="button b_btn"><a href="#a">겨울메뉴</a></li>
@@ -12,8 +12,8 @@
             </div>
         </div>
         <div id="orderMid">
-            <div id="menuList"><textarea name="" id="orderitemList" disabled></textarea></div>
-            <div id="menuBtnList">
+            <div><textarea name="" id="orderitemList" disabled></textarea></div>
+            <div id="menuList">
                 <div id="orderMidMidMenu">
                     <ul>
                         <li id="m1" class="button m_btn"><a href="#a">한식류</a></li>
@@ -27,7 +27,7 @@
                 <div id="orderSmallMenu">
                     <ul >
                         {% for i in range(20) %}
-                        <li id="s{{loop.index}}" class="button s_btn"><a href="#a">{{loop.index}}</a></li>
+                        <li id="s{{loop.index}}" class="button s_btn"><a href="#a"></a></li>
                         {% endfor %}
                     </ul>
                 </div>
