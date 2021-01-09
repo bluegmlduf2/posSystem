@@ -25,46 +25,44 @@
                 </div>
                 <hr class="orderHr">
                 <div id="orderSmallMenu">
-                    <ul >
+                    <ul>
                         {% for i in range(20) %}
-                        <li id="s{{loop.index}}" class="button s_btn"><a href="#a">{{loop.index}}</a></li>
+                        <li id="s{{loop.index}}" class="button s_btn"><a href="#a"></a></li>
                         {% endfor %}
                     </ul>
                 </div>
             </div>
         </div>
-        <div id="orderBottom" class="clear">
-            <div id="orderBottomTop">
-                <div id="orderBottomTop1">합계</div>
-                <div id="orderBottomTop2">
-                    <ul class="clear">
+        <div id="orderBottom">
+            <div id="orderBottomLeft">
+                <div id="orderBottomLeft1">합계</div>
+                <div id="orderBottomLeft2">
+                    <ul>
                         <li id="ob1" class="button">주문<br>합계<a href="#a"></a></li>
                         <li id="ob2" class="button">주방<br>메모<a href="#a"></a></li>
                         <li id="ob3" class="button"><a href="#a"><img
-                                    src="{{ url_for('static', filename='img/arrow_up.png') }}" alt="nextButton"
-                                    width="45px" height="45px"></a></li>
+                                    src="{{ url_for('static', filename='img/arrow_up.png') }}" alt="nextButton"></a></li>
                         <li id="ob4" class="button"><a href="#a"><img
-                                    src="{{ url_for('static', filename='img/arrow_down.png') }}" alt="nextButton"
-                                    width="45px" height="45px"></a></li>
+                                    src="{{ url_for('static', filename='img/arrow_down.png') }}" alt="nextButton"></a></li>
                     </ul>
                 </div>
             </div>
             <div id="orderBottomMid">
-                <ul class="clear">
+                <ul>
                     <li class="button"><a href="#a">+</a></li>
                     <li class="button"><a href="#a">-</a></li>
                     <li class="button"><a href="#a">포장</a></li>
                     <li class="button"><a href="#a">배달</a></li>
                     <li class="button"><a href="#a">서비스</a></li>
-                    <li class="button"><a href="#a">이전취소</a></li>
-                    <li class="button"><a href="#a">전체취소</a></li>
-                    <li class="button"><a href="#a">저장취소</a></li>
-                    <li class="button"><a href="#a">수량입력</a></li>
+                    <li class="button"><a href="#a">이전</br>취소</a></li>
+                    <li class="button"><a href="#a">전체</br>취소</a></li>
+                    <li class="button"><a href="#a">저장</br>취소</a></li>
+                    <li class="button"><a href="#a">수량</br>입력</a></li>
                     <li class="button"><a href="#a">선불</a></li>
                 </ul>
             </div>
             <div id="orderBottomRight">
-                <ul class="clear">
+                <ul>
                     <li class="button"><a href="#a">주문</a></li>
                 </ul>
             </div>
