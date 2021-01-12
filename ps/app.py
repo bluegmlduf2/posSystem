@@ -4,10 +4,6 @@ import traceback
 
 app=Flask(__name__)
 
-@app.route('/daum') 
-def daumMethod(): 
-    return redirect("https://www.daum.net/") 
-
 # @app.route('/') 
 # def main(): 
 #     return redirect(url_for('daumMethod')) #url_for('함수명'),url_for('static')
@@ -20,6 +16,8 @@ def index():
         #sys.exc_info()
         print(traceback.print_exc())
         #return render_template('error_404.html')
+        #return redirect("https://www.daum.net/") 
+
     finally:
         print('프로그램 종료(Exits application)')
 
