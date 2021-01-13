@@ -4,9 +4,6 @@ import traceback
 
 app=Flask(__name__)
 
-# @app.route('/') 
-# def main(): 
-#     return redirect(url_for('daumMethod')) #url_for('함수명'),url_for('static')
 @app.route('/table')
 def index():
     '''테이블페이지'''
