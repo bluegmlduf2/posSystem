@@ -1,74 +1,128 @@
 <!DOCTYPE html>
 <html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Document</title>
+        <link rel="icon" href="data:;base64,iVBORw0KGgo=" />
+        <link
+            rel="stylesheet"
+            href="{{ url_for('static', filename='css/reset.css') }}"
+        />
+        <link
+            rel="stylesheet"
+            href="{{ url_for('static', filename='css/common.css') }}"
+        />
+        <link
+            rel="stylesheet"
+            href="{{ url_for('static', filename='css/table.css') }}"
+        />
+        <link
+            rel="stylesheet"
+            href="{{ url_for('static', filename='css/order.css') }}"
+        />
+        <link
+            rㄹel="stylesheet"
+            href="{{ url_for('static', filename='css/pay.css') }}"
+        />
+    </head>
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="icon" href="data:;base64,iVBORw0KGgo=">
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/reset.css') }}">
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/common.css') }}">
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/table.css') }}">
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/order.css') }}">
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/pay.css') }}">
-</head>
-
-<body>
-    <div id="center">
-        <div id="top">
-            <h1><img src="{{ url_for('static', filename='img/logo.png') }}" alt="logo" width="50px" height="50px"></h1>
-            <div id="curTime"></div>
+    <body>
+        <div id="center">
+            <div id="top">
+                <h1>
+                    <img
+                        src="{{ url_for('static', filename='img/logo.png') }}"
+                        alt="logo"
+                        width="50px"
+                        height="50px"
+                    />
+                </h1>
+                <div id="curTime"></div>
                 <h2>메뉴등록판</h2>
-            <ul>
-                <li id="exit" class="button"><a href="#a">판매분석</a></li>
-                <li id="workManage" class="button"><a href="#a" >근태관리</a></li>
-            </ul>
-        </div>
-        <div id="table">
-            <ul>
-                {% for i in range(25) %}
-                <li class="seat">
-                    <a href="#a">
-                        <div>{{loop.index}}</div>
-                        <div id="tabTime">시간/인원</div>
-                        <div id="tabTot">총금액</div>
-                    </a>
-                </li>
-                {% endfor %}
-            </ul>
-        </div>
-        <div id="bottom">
-            <div id="orderItems">
-                <div><textarea name="" id="itemList" cols="30" rows="6" disabled></textarea></div>
-                <div><textarea name="" id="itemTotal" cols="30" rows="1" disabled></textarea></div>
-            </div>
-            <div id="btnListSm">
                 <ul>
-                    <li class="button"><a href="#a">취소</a></li>
-                    <li class="button"><a href="#a">합석</a></li>
-                    <li class="button"><a href="#a">계산서</a></li>
-                    <li class="button"><a href="#a">돈통</a></li>
-                    <li class="button"><a href="#a"><img src="{{ url_for('static', filename='img/arrow_up.png') }}" alt="nextButton" width="50px" height="50px"></a></li>
-                    <li class="button"><a href="#a">1층홈</a></li>
-                    <li class="button"><a href="#a">2층홈</a></li>
-                    <li class="button"><a href="#a">3층홈</a></li>
-                    <li class="button"><a href="#a">결제변경</a></li>
-                    <li class="button"><a href="#a"><img src="{{ url_for('static', filename='img/arrow_down.png') }}" alt="beforeButton" width="50px" height="50px"></a></li>
+                    <li id="exit" class="button"><a href="#a">판매분석</a></li>
+                    <li id="workManage" class="button">
+                        <a href="#a">근태관리</a>
+                    </li>
                 </ul>
             </div>
-            <div id="btnListLg">
+            <div id="table">
                 <ul>
-                    <li class="button ordBtn"><a href="#a">주문</a></li>
-                    <li class="button payBtn"><a href="#a">계산</a></li>
+                    {% for i in range(25) %}
+                    <li class="seat">
+                        <a href="#a">
+                            <div>{{loop.index}}</div>
+                            <div id="tabTime">시간/인원</div>
+                            <div id="tabTot">총금액</div>
+                        </a>
+                    </li>
+                    {% endfor %}
                 </ul>
             </div>
+            <div id="bottom">
+                <div id="orderItems">
+                    <div>
+                        <textarea
+                            name=""
+                            id="itemList"
+                            cols="30"
+                            rows="6"
+                            disabled
+                        ></textarea>
+                    </div>
+                    <div>
+                        <textarea
+                            name=""
+                            id="itemTotal"
+                            cols="30"
+                            rows="1"
+                            disabled
+                        ></textarea>
+                    </div>
+                </div>
+                <div id="btnListSm">
+                    <ul>
+                        <li class="button"><a href="#a">취소</a></li>
+                        <li class="button"><a href="#a">합석</a></li>
+                        <li class="button"><a href="#a">계산서</a></li>
+                        <li class="button"><a href="#a">돈통</a></li>
+                        <li class="button">
+                            <a href="#a"
+                                ><img
+                                    src="{{ url_for('static', filename='img/arrow_up.png') }}"
+                                    alt="nextButton"
+                                    width="50px"
+                                    height="50px"
+                            /></a>
+                        </li>
+                        <li class="button"><a href="#a">1층홈</a></li>
+                        <li class="button"><a href="#a">2층홈</a></li>
+                        <li class="button"><a href="#a">3층홈</a></li>
+                        <li class="button"><a href="#a">결제변경</a></li>
+                        <li class="button">
+                            <a href="#a"
+                                ><img
+                                    src="{{ url_for('static', filename='img/arrow_down.png') }}"
+                                    alt="beforeButton"
+                                    width="50px"
+                                    height="50px"
+                            /></a>
+                        </li>
+                    </ul>
+                </div>
+                <div id="btnListLg">
+                    <ul>
+                        <li class="button ordBtn"><a href="#a">주문</a></li>
+                        <li class="button payBtn"><a href="#a">계산</a></li>
+                    </ul>
+                </div>
+            </div>
         </div>
-    </div>
-    {% include 'order.html' %}
-    {% include 'pay.html' %}
-    <script src="{{ url_for('static', filename='js/module.js') }}"></script>
-    <script src="{{ url_for('static', filename='js/table.js') }}"></script>
-    <script src="{{ url_for('static', filename='js/pay.js') }}"></script>
-    <script src="{{ url_for('static', filename='js/order.js') }}"></script>
-</body>
+        {% include 'order.html' %} {% include 'pay.html' %}
+        <script src="{{ url_for('static', filename='js/module.js') }}"></script>
+        <script src="{{ url_for('static', filename='js/table.js') }}"></script>
+        <script src="{{ url_for('static', filename='js/pay.js') }}"></script>
+        <script src="{{ url_for('static', filename='js/order.js') }}"></script>
+    </body>
 </html>

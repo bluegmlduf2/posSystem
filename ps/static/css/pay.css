@@ -1,4 +1,4 @@
-#paycenter{
+#paycenter {
     /* MODAL 창크기조절 */
     height: 660px;
     width: 450px;
@@ -6,7 +6,7 @@
     border-radius: 5px;
 }
 
-#paycenter>div {
+#paycenter > div {
     width: 400px;
     margin: 0 auto;
     margin-top: 10px;
@@ -18,14 +18,14 @@
     border-radius: 5px;
 }
 
-#payTop #payTabNum{
+#payTop #payTabNum {
     text-align: center;
     line-height: 40px;
     font-size: 25px;
     font-weight: bold;
 }
 
-#payTop #payTabTim{
+#payTop #payTabTim {
     text-align: left;
     text-indent: 10px;
     line-height: 30px;
@@ -33,7 +33,7 @@
 
 #payMain {
     height: 400px;
-    border: 1px solid #A3A3A3;
+    border: 1px solid #a3a3a3;
     border-radius: 5px;
     overflow: auto; /*해당 table의 상위 div에 스크롤을 걸어준다*/
 }
@@ -51,16 +51,16 @@
     height: 60px;
 }
 
-#payBtn>ul>li{
+#payBtn > ul > li {
     float: left;
     height: 60px;
-    width: 142px;/*button class에 있는 padding,margin제외 */
+    width: 142px; /*button class에 있는 padding,margin제외 */
     line-height: 60px;
     text-align: center;
 }
-#payBtn>ul>li.paycloseBtn{
+#payBtn > ul > li.paycloseBtn {
     height: 60px;
-    width: 50px;/*button class에 있는 padding,margin제외 */
+    width: 50px; /*button class에 있는 padding,margin제외 */
 }
 
 /* 데이터 테이블 그리드 */
@@ -70,29 +70,29 @@
 }
 
 #datagrid table {
-    border-collapse: collapse;/* border-collapse: collapse; table의 선이 겹치는 부분을 합친다 */
+    border-collapse: collapse; /* border-collapse: collapse; table의 선이 겹치는 부분을 합친다 */
     text-align: center;
     width: 100%;
 }
 
 #datagrid table thead th {
-    background-color: #8C8C8C;
-    color: #FFFFFF;
+    background-color: #8c8c8c;
+    color: #ffffff;
     font-size: 15px;
     font-weight: bold;
-    border: 1px solid #A3A3A3;
+    border: 1px solid #a3a3a3;
     height: 40px;
 }
 
 #datagrid table tbody td {
-    color: #7D7D7D;
-    border: 1px solid #DBDBDB;
+    color: #7d7d7d;
+    border: 1px solid #dbdbdb;
     font-size: 12px;
     font-weight: normal;
     height: 35px;
 }
 
 #datagrid table tbody .alt td {
-    background: #EBEBEB;
-    color: #7D7D7D;
+    background: #ebebeb;
+    color: #7d7d7d;
 }

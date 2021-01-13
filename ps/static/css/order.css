@@ -2,7 +2,7 @@
     display: flex;
     flex-direction: column;
     width: 100vh;
-    height: 90vh;/*뷰포트의 90%*/
+    height: 90vh; /*뷰포트의 90%*/
     padding: 10px;
     font-size: 1em;
     /*
@@ -33,14 +33,14 @@
     width: 67%;
 }
 
-#orderCenter #orderTop #orderTop2>ul {
+#orderCenter #orderTop #orderTop2 > ul {
     display: flex;
     height: 100%;
 }
 
-#orderCenter #orderTop #orderTop2>ul>li {
+#orderCenter #orderTop #orderTop2 > ul > li {
     /* flex:1 => flex:1 1 0  => flex:1을 사용하면 자동으로 basis가 0이 된다*/
-    flex-basis: 0;/*basis를 0으로 맞추고 요소의 기본넓이를 0으로 만들어서 flex-grow가 정확한 비율로 나누도록한다*/
+    flex-basis: 0; /*basis를 0으로 맞추고 요소의 기본넓이를 0으로 만들어서 flex-grow가 정확한 비율로 나누도록한다*/
     flex-grow: 1;
     /* 아래에서 다시 display:flex해주는건 a태그안에 문자를 정중앙에 위치시키기 위해서 */
     display: flex;
@@ -48,7 +48,7 @@
     align-items: center;
 }
 
-#orderCenter #orderTop #orderTop2>ul>li:nth-child(4) {
+#orderCenter #orderTop #orderTop2 > ul > li:nth-child(4) {
     margin-left: 10%;
     flex-grow: 1.5;
 }
@@ -79,13 +79,13 @@
     height: 20%;
 }
 
-#orderCenter #orderMid #menuBtnList #orderMidMidMenu>ul {
+#orderCenter #orderMid #menuBtnList #orderMidMidMenu > ul {
     height: 100%;
     display: flex;
 }
 
-#orderCenter #orderMid #menuBtnList #orderMidMidMenu>ul>li {
-    flex-basis: 0;/*요소의 사이즈를0으로 맞춰버리고 flex-grow하면 완벽한 비율이 된다.*/
+#orderCenter #orderMid #menuBtnList #orderMidMidMenu > ul > li {
+    flex-basis: 0; /*요소의 사이즈를0으로 맞춰버리고 flex-grow하면 완벽한 비율이 된다.*/
     flex-grow: 1;
     /* 문자 가운데 정렬 */
     display: flex;
@@ -97,13 +97,13 @@
     height: 80%;
 }
 
-#orderCenter #orderMid #menuBtnList #orderSmallMenu>ul {
+#orderCenter #orderMid #menuBtnList #orderSmallMenu > ul {
     display: flex;
     flex-wrap: wrap;
     height: 100%;
 }
 
-#orderCenter #orderMid #menuBtnList #orderSmallMenu>ul>li {
+#orderCenter #orderMid #menuBtnList #orderSmallMenu > ul > li {
     flex: 1; /*=>flex: 1 1 0*/
     flex-basis: 80px;
     /* 문자 가운데 정렬 */
@@ -122,41 +122,40 @@ hr.orderHr {
     display: flex;
     height: 20%;
 }
-#orderCenter div#orderBottomLeft{
+#orderCenter div#orderBottomLeft {
     width: 33%;
     height: 100%;
 }
-#orderCenter div#orderBottomLeft1{
+#orderCenter div#orderBottomLeft1 {
     height: 40%;
     /* 문자 가운데 정렬 */
     display: flex;
     justify-content: center;
     align-items: center;
 }
-#orderCenter div#orderBottomLeft2{
+#orderCenter div#orderBottomLeft2 {
     height: 60%;
-   
 }
-#orderCenter div#orderBottomLeft2>ul{
+#orderCenter div#orderBottomLeft2 > ul {
     height: 100%;
     display: flex;
 }
-#orderCenter div#orderBottomLeft2>ul>li{
+#orderCenter div#orderBottomLeft2 > ul > li {
     flex: 1;
     /* 문자 가운데 정렬 */
     display: flex;
     justify-content: center;
     align-items: center;
 }
-#orderCenter div#orderBottomMid{
+#orderCenter div#orderBottomMid {
     width: 53%;
 }
-#orderCenter div#orderBottomMid ul{
+#orderCenter div#orderBottomMid ul {
     display: flex;
     flex-wrap: wrap;
-    height: 100%;/*flex사용전 높이*/
+    height: 100%; /*flex사용전 높이*/
 }
-#orderCenter div#orderBottomMid ul>li{
+#orderCenter div#orderBottomMid ul > li {
     flex: 1;
     flex-basis: 54px;
     /* 문자 가운데 정렬 */
@@ -164,21 +163,22 @@ hr.orderHr {
     justify-content: center;
     align-items: center;
 }
-#orderCenter div#orderBottomRight{
+#orderCenter div#orderBottomRight {
     width: 13%;
 }
-#orderCenter div#orderBottomRight ul{
+#orderCenter div#orderBottomRight ul {
     display: flex;
     height: 100%;
 }
-#orderCenter div#orderBottomRight ul li{  
-    flex: 1;  
+#orderCenter div#orderBottomRight ul li {
+    flex: 1;
     /* 문자 가운데 정렬 */
     display: flex;
     justify-content: center;
     align-items: center;
 }
-#orderCenter img{
-    max-width: 100%; height: auto;
+#orderCenter img {
+    max-width: 100%;
+    height: auto;
     /* 이미지넓이 자동조정 */
 }

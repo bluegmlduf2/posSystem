@@ -36,66 +36,67 @@
     * -------------------------------- 
 * */
 
-
 //이런 방식으로 선언하면 new module()로 사용하고 지역변수로 사용된 경우 함수호출후 메모리에서 반환
 var module = function () {
     //아래의 함수들이 전부 비공개됨(클로저)
 
     //시간함수
-    function getCurTime(){ 
-        let today=new Date();
-        let hour=today.getHours().toString().lpad(2,'0') //자바스크립트는 인터프리터언어인데 lpad()를 module변수 아래에 
-        let min=today.getMinutes().toString().lpad(2,'0')
-        
+    function getCurTime() {
+        let today = new Date();
+        let hour = today.getHours().toString().lpad(2, "0"); //자바스크립트는 인터프리터언어인데 lpad()를 module변수 아래에
+        let min = today.getMinutes().toString().lpad(2, "0");
+
         return `${hour}시 ${min}분 `;
     }
 
     //시간+날짜함수
-    function getCurDate(){
-        let today=new Date();
-        let days=new Array("일","월","화","수","목","금","토");
-        
-        let year=today.getFullYear()
-        let month=today.getMonth()+1
-        let date=today.getDate()
-        let day=days[today.getDay()]
-        let hour=today.getHours().toString().lpad(2,'0') 
-        let min=today.getMinutes().toString().lpad(2,'0')
-        
+    function getCurDate() {
+        let today = new Date();
+        let days = new Array("일", "월", "화", "수", "목", "금", "토");
+
+        let year = today.getFullYear();
+        let month = today.getMonth() + 1;
+        let date = today.getDate();
+        let day = days[today.getDay()];
+        let hour = today.getHours().toString().lpad(2, "0");
+        let min = today.getMinutes().toString().lpad(2, "0");
+
         return `${year}년 ${month}월 ${date}일 ${day}요일 \n ${hour}시 ${min}분 `;
     }
 
     /**
      * 클래스 존재여부 체크
-     * @param {classList} classList 
-     * @param {Array} className 
+     * @param {classList} classList
+     * @param {Array} className
      */
     function hasClass(classList, className) {
-        let chk=false
-        let eleNm=''
+        let chk = false;
+        let eleNm = "";
 
-        classList.forEach((k,v)=>{
-            let arrChk=className.indexOf(k)
-            if(arrChk>-1){
-                eleNm=className[arrChk]
-                chk=true
+        classList.forEach((k, v) => {
+            let arrChk = className.indexOf(k);
+            if (arrChk > -1) {
+                eleNm = className[arrChk];
+                chk = true;
             }
-        })
+        });
 
-        return [chk,eleNm];
+        return [chk, eleNm];
         //아래의 객체리터럴의 반환형으로 function(){}형태로 한번더 안 감싸서 보내었기 때문에 공개됨
     }
 
-    // 공개될 멤버 (특권 메소드) 정의 
+    // 공개될 멤버 (특권 메소드) 정의
     // hasClass같은 경우는 function(){}으로 한번 더 안 감싼 상태기 때문에 공개됨 getCurTime,hasClass를 console.log()찍으면 나옴
     return {
-        getCurTime:function(){ return getCurTime();},//비공개
-        getCurDate:function(){ return getCurDate();},//비공개
-        hasClass:hasClass//공개
-    }
+        getCurTime: function () {
+            return getCurTime();
+        }, //비공개
+        getCurDate: function () {
+            return getCurDate();
+        }, //비공개
+        hasClass: hasClass, //공개
+    };
 };
-
-
 
 /**
  * 좌측문자열채우기
@@ -103,15 +104,14 @@ var module = function () {
  *  - padLen : 최대 채우고자 하는 길이
  *  - padStr : 채우고자하는 문자(char)
  */
-//String객체(원시객체).prototype.함수명으로 추가함 
-String.prototype.lpad = function(padLen, padStr) {
+//String객체(원시객체).prototype.함수명으로 추가함
+String.prototype.lpad = function (padLen, padStr) {
     var str = this;
     if (padStr.length > padLen) {
         console.log("오류 : 채우고자 하는 문자열이 요청 길이보다 큽니다");
         return str + "";
     }
-    while (str.length < padLen)
-        str = padStr + str;
+    while (str.length < padLen) str = padStr + str;
     str = str.length >= padLen ? str.substring(0, padLen) : str;
     return str;
 };
