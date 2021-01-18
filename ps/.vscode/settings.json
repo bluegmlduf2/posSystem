@@ -1,3 +1,4 @@
 {
-    "python.pythonPath": "/Users/yoon/Desktop/projects/project_posSystem/posSystem/ps/.venv/bin/python3.9"
+    /*현재  venv/bin/python3 인터프리터를 지정해준다 */ 
+    "python.pythonPath": "./posVenv/bin/python3"
 }

@@ -94,7 +94,7 @@
 
 #bottom > div {
     display: inline-block;
-    float: left;
+    /* float: left; */
 }
 
 #bottom #btnListSm {
