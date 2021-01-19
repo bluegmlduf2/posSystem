@@ -37,11 +37,11 @@
 * */
 
 //이런 방식으로 선언하면 new module()로 사용하고 지역변수로 사용된 경우 함수호출후 메모리에서 반환
-var module = function () {
+const module = (function () {
     //아래의 함수들이 전부 비공개됨(클로저)
 
     //시간함수
-    function getCurTime() {
+    function _getCurTime() {
         let today = new Date();
         let hour = today.getHours().toString().lpad(2, "0"); //자바스크립트는 인터프리터언어인데 lpad()를 module변수 아래에
         let min = today.getMinutes().toString().lpad(2, "0");
@@ -50,7 +50,7 @@ var module = function () {
     }
 
     //시간+날짜함수
-    function getCurDate() {
+    function _getCurDate() {
         let today = new Date();
         let days = new Array("일", "월", "화", "수", "목", "금", "토");
 
@@ -69,7 +69,7 @@ var module = function () {
      * @param {classList} classList
      * @param {Array} className
      */
-    function hasClass(classList, className) {
+    function _hasClass(classList, className) {
         let chk = false;
         let eleNm = "";
 
@@ -89,14 +89,15 @@ var module = function () {
     // hasClass같은 경우는 function(){}으로 한번 더 안 감싼 상태기 때문에 공개됨 getCurTime,hasClass를 console.log()찍으면 나옴
     return {
         getCurTime: function () {
-            return getCurTime();
-        }, //비공개
+            return _getCurTime();//비공개
+        }, //실행된 함수의 결과를 넘겨줌 ->비공개
         getCurDate: function () {
-            return getCurDate();
-        }, //비공개
-        hasClass: hasClass, //공개
+            return _getCurDate();//비공개
+        }, 
+        hasClass: _hasClass, //공개
+        //실행되기 전의 함수소스코드를 통채로 넘겨줌 -> 공개
     };
-};
+})();
 
 /**
  * 좌측문자열채우기

@@ -1,7 +1,12 @@
+/* For Debug
+"program": "${file}"	現在アクティブになっているファイルを開始します
+"program": "${workspaceRoot}/file.py"	ルートにあるfile.pyを開始します
+program	デバッグ対象のPythonファイルのパス
+pythonPath	Pythonインタプリタの絶対パス, 複数のバージョンのPythonを使い分けたい場合に使います
+*/
 {
     "version": "0.2.0",
     "configurations": [
-    
         {
             "name": "Python: Current File",
             "type": "python",

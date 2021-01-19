@@ -43,8 +43,7 @@ function outsideClick(e) {
 
 // CLICK 시 STATE변경
 document.querySelectorAll(".button").forEach((btn) => {
-    let m_ins = module();
-    let classChk = m_ins.hasClass(btn.classList, ["b_btn", "m_btn", "s_btn"]);
+    let classChk = module.hasClass(btn.classList, ["b_btn", "m_btn", "s_btn"]);
     if (classChk[0]) {
         //클릭시 초기화 후 체크
         btn.addEventListener("click", () => {
