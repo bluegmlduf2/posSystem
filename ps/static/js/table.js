@@ -1,7 +1,7 @@
 // 시간 1초마다 갱신
 setInterval(function () {
     let daytime = module.getCurDate();
-    document.querySelector("#curTime").innerHTML = daytime+"</br>";
+    document.querySelector("#curTime").innerHTML = daytime.substring(0,17)+"</br><h3>"+daytime.substring(17)+"</h3>";
     document.querySelector("#payTabTim").innerHTML = daytime;
 }, 1000);
 
