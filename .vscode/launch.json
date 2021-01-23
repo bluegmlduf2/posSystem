@@ -10,9 +10,10 @@
             "request": "launch",
             "module": "flask",
             "env": {
+                // FLASK APP의 설정. Flask(__name__).run() 할때 옵션으로 넣어도 되지만 이렇게 미리 설정도 된다
                 "FLASK_APP": "ps/app.py",//.vscode폴더가 root
-                "FLASK_ENV": "development",
-                "FLASK_DEBUG": "1"// 0:off ,1:on
+                // "FLASK_ENV": "development",
+                // "FLASK_DEBUG": "1"// 0:off ,1:on
             },
             "args": [
                 "run",

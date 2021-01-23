@@ -1,30 +1,14 @@
-from flask import Flask, render_template, request, redirect, url_for
-import json
-import traceback
+'''
+Flask를 실행할 프로그램
+factory_app로부터 app의 반환값을 받아서 실행한다
+'''
+import os
 
-app = Flask(__name__)
-
-
-@app.route('/table')
-def index():
-    '''테이블페이지'''
-    try:
-        return render_template('table.html')
-    except Exception:
-        # sys.exc_info()
-        print(traceback.print_exc())
-        # return render_template('error_404.html')
-        # return redirect("https://www.daum.net/")
-
-    finally:
-        print('프로그램 종료(Exits application)')
+from factory_app import create_app
 
 
-@app.errorhandler(404)
-def page_not_found(error):
-    return "페이지가 없습니다. URL를 확인 하세요", 404
+app = create_app('test')  # chose test, dev, pro
 
-
-# flask run & python app.py
-# if __name__ == '__main__':
-app.run(debug=True)
+if __name__ == '__main__':
+    # flask_path설정은 app.py일 경우 해주지 않아도 된다
+    app.run()
