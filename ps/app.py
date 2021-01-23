@@ -6,8 +6,7 @@ import os
 
 from factory_app import create_app
 
-
-app = create_app('test')  # chose test, dev, pro
+app = create_app('dev')  # chose test, dev, pro
 
 if __name__ == '__main__':
     # flask_path설정은 app.py일 경우 해주지 않아도 된다
