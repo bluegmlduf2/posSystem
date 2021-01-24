@@ -1,5 +1,5 @@
 {
     "python.pythonPath": "./posVenv/bin/python3",/*현재  venv/bin/python3 인터프리터를 지정해준다 */ 
-    "python.jediEnabled": false,
+    "python.jediEnabled": false,/*import 경로 에러 안나게 설정 */
     "python.languageServer": "Microsoft"
 }
