@@ -12,7 +12,10 @@ class InitConf(object):
     SECRET_KEY = os.urandom(16)
     
 class TestMode(InitConf):
+    MESSAGE = '---TEST---'
     TESTNG = True
 
 class DevMode(InitConf):
+    MESSAGE = '---Development---'
     DEBUG = True
+    
