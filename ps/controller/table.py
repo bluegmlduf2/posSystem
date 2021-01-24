@@ -1,4 +1,5 @@
 from flask import Blueprint, render_template
+from model import table
 
 # 라우팅 기본경로 table을 가지는 블루프린터 객체를 생성
 table_ab = Blueprint('table_ab', __name__)
