@@ -4,6 +4,7 @@ Flask설정
 from flask import Flask, render_template, request, redirect, url_for, Blueprint
 import traceback
 from controller import table 
+from controller import order 
 
 dict_confmode = {
     'test': 'setting.TestMode',
@@ -20,6 +21,7 @@ def create_app(config_mode="test"):
 
     #매개변수로 bluePrint객체를 받는다. 그러나 import해서 해당 컨트롤러에 blueprint객체를 가져와서 사용
     app.register_blueprint(table.table_ab, url_prefix='/table')
+    app.register_blueprint(order.order_ab, url_prefix='/order')
 
     return app
 
