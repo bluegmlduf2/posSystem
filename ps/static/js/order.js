@@ -58,3 +58,12 @@ document.querySelectorAll(".button").forEach((btn) => {
         });
     }
 });
+
+/**
+ * 메뉴 중분류 가져오기
+ */
+document.querySelectorAll("#orderMidMidMenu>ul>li").forEach((btn) => {
+    btn.addEventListener('click',()=>{
+        let reVal=module.ajax('POST','/order/menu');
+    })
+});

@@ -27,6 +27,6 @@ class Connection:
         return row
 
     # 정적메서드_인스턴스화 하지않고 바로 클래스명.메서드로 사용가능
-    @staticmethod
-    def commit():
+    # @staticmethod
+    def commit(self):
         self.db.commit()

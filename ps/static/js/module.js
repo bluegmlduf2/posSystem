@@ -64,6 +64,8 @@ const module = (function () {
         return `${year}년 ${month}월 ${date}일 ${day}요일 \n ${hour}시 ${min}분 `;
     }
 
+    //
+
     /**
      * 클래스 존재여부 체크
      * @param {classList} classList
@@ -85,17 +87,24 @@ const module = (function () {
         //아래의 객체리터럴의 반환형으로 function(){}형태로 한번더 안 감싸서 보내었기 때문에 공개됨
     }
 
+    /** AJAX 공통*/
+    function _ajax(http_method, url, sendData={'카':'테스트'}, aync = true) {
+        return ajax(http_method, url, sendData, aync); //여기서 실행하고 결과를 반환하면서 결과를 클로저시킨다
+    }
+
     // 공개될 멤버 (특권 메소드) 정의
     // hasClass같은 경우는 function(){}으로 한번 더 안 감싼 상태기 때문에 공개됨 getCurTime,hasClass를 console.log()찍으면 나옴
+    // 실행한 뒤 실행 결과를 넘길경우 클로저처리(비공개)됨
     return {
         getCurTime: function () {
-            return _getCurTime();//비공개
+            return _getCurTime(); //비공개
         }, //실행된 함수의 결과를 넘겨줌 ->비공개
         getCurDate: function () {
-            return _getCurDate();//비공개
-        }, 
+            return _getCurDate(); //비공개
+        },
         hasClass: _hasClass, //공개
         //실행되기 전의 함수소스코드를 통채로 넘겨줌 -> 공개
+        ajax: _ajax,
     };
 })();
 
@@ -116,3 +125,37 @@ String.prototype.lpad = function (padLen, padStr) {
     str = str.length >= padLen ? str.substring(0, padLen) : str;
     return str;
 };
+
+/**
+ * @param {*} http_method 'GET','POST', 'PUT', 'DELETE'
+ * @param {*} url  URL
+ * @param {*} sendData DATA
+ * @param {*} aync true / false
+ */
+function ajax(http_method, url, sendData, aync) {
+    var xhr = new XMLHttpRequest(); // XMLHttpRequest객체 생성, 함수 내 지역변수로 선언 권장
+    try {
+        // onreadystatechange는 서버와의 통신이 끝났을 때 호출 됨
+        xhr.onreadystatechange = function () {
+            // readyState = 2 송신완료 , 3 수신대기중 , 4,통신완료
+            if (xhr.readyState === 4) {
+                //401 인증실패(Unauthorized) ,403 접근거절(Forbidden),404 파일없음(Not Found)
+                if (xhr.status === 200||xhr.status !== 302) {
+                    console.log("통신성공");
+                    console.log(xhr.responseText);
+                }else {
+                    console.log("통신실패"); //이거 만약 안되면 promise로 처리해야함.
+                    throw new Error("에러메시지");
+                }
+            }
+        };
+
+        jsonData=JSON.stringify(sendData)//문자열로 송수신하기때문에 json형태의 문자열로 변경해준다
+
+        xhr.open(http_method, url, aync); // HTTP_METHOD / URL / true(비동기적), false(동기적)
+        xhr.setRequestHeader("Content-Type", "application/json"); // JSON전송시 사용
+        xhr.send(jsonData);//XMLHttpRequest객체가 통신을 시작
+    } catch (e) {
+        alert(e);
+    }
+}

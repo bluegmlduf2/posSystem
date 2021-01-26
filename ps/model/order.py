@@ -1,7 +1,7 @@
 from flask import jsonify
 from database import Connection
 
-def getMenu():
+def getMenu(args):
     conn= Connection()
     if conn:
         try:
@@ -11,8 +11,6 @@ def getMenu():
             return json_data
         except Exception as e:
             return jsonify({'message': f'{e}'}), 400
-        finally:
-            conn.close()
 
 # # INSERT 함수 예제
 # @test.route('/insert', methods=['GET'])

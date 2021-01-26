@@ -1,5 +1,10 @@
+/* 
+vscode 환경설정파일. “Cmd” + “,”
+해당프로젝트에 디폴트 설정이 있지만 추가로 설정할 시에 아래와 같이 추가된다
+python.pythonPath : 해당 프로젝트에서 사용할 파이선 경로
+*/
 {
-    "python.pythonPath": "./posVenv/bin/python3",/*현재  venv/bin/python3 인터프리터를 지정해준다 */ 
+    "python.pythonPath": ".venv/bin/python3.9",/*현재  venv/bin/python3 인터프리터를 지정해준다 */ 
     "python.jediEnabled": false,
     "python.languageServer": "Microsoft" /*import 경로 에러 안나게 설정 */
 }
