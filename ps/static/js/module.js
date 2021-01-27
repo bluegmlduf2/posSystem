@@ -88,7 +88,7 @@ const module = (function () {
     }
 
     /** AJAX 공통*/
-    function _ajax(http_method, url, sendData={'카':'테스트'}, aync = true) {
+    function _ajax(http_method, url, sendData = {}, aync = true) {
         return ajax(http_method, url, sendData, aync); //여기서 실행하고 결과를 반환하면서 결과를 클로저시킨다
     }
 
@@ -133,29 +133,32 @@ String.prototype.lpad = function (padLen, padStr) {
  * @param {*} aync true / false
  */
 function ajax(http_method, url, sendData, aync) {
-    var xhr = new XMLHttpRequest(); // XMLHttpRequest객체 생성, 함수 내 지역변수로 선언 권장
-    try {
-        // onreadystatechange는 서버와의 통신이 끝났을 때 호출 됨
-        xhr.onreadystatechange = function () {
-            // readyState = 2 송신완료 , 3 수신대기중 , 4,통신완료
-            if (xhr.readyState === 4) {
-                //401 인증실패(Unauthorized) ,403 접근거절(Forbidden),404 파일없음(Not Found)
-                if (xhr.status === 200||xhr.status !== 302) {
-                    console.log("통신성공");
-                    console.log(xhr.responseText);
-                }else {
-                    console.log("통신실패"); //이거 만약 안되면 promise로 처리해야함.
-                    throw new Error("에러메시지");
+    return new Promise((resolve, reject) => {
+        try {
+            var xhr = new XMLHttpRequest(); // XMLHttpRequest객체 생성, 함수 내 지역변수로 선언 권장
+            // onreadystatechange는 서버와의 통신이 끝났을 때 호출 됨
+            xhr.onreadystatechange = function () {
+                // readyState = 2 송신완료 , 3 수신대기중 , 4,통신완료
+                if (xhr.readyState === 4) {
+                    //401 인증실패(Unauthorized) ,403 접근거절(Forbidden),404 파일없음(Not Found)
+                    if (xhr.status === 200 || xhr.status !== 302) {
+                        console.log("통신성공");
+                        return resolve(xhr.responseText);
+                    } else {
+                        console.log("통신실패"); //이거 만약 안되면 promise로 처리해야함.
+                        throw reject(new Error("에러메시지"));
+                    }
                 }
-            }
-        };
+            };
+            
+            jsonData = JSON.stringify(sendData); //문자열로 송수신하기때문에 json형태의 문자열로 변경해준다
 
-        jsonData=JSON.stringify(sendData)//문자열로 송수신하기때문에 json형태의 문자열로 변경해준다
-
-        xhr.open(http_method, url, aync); // HTTP_METHOD / URL / true(비동기적), false(동기적)
-        xhr.setRequestHeader("Content-Type", "application/json"); // JSON전송시 사용
-        xhr.send(jsonData);//XMLHttpRequest객체가 통신을 시작
-    } catch (e) {
-        alert(e);
-    }
+            xhr.open(http_method, url, aync); // HTTP_METHOD / URL / true(비동기적), false(동기적)
+            xhr.setRequestHeader("Content-Type", "application/json"); // JSON전송시 사용
+            xhr.send(jsonData); //XMLHttpRequest객체가 통신을 시작
+            //throw new Error("에러테스트 ")
+        } catch (error) {
+            throw reject(error);
+        }
+    });
 }
