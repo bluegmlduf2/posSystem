@@ -7,7 +7,7 @@ order_ab = Blueprint('order_ab', __name__)
 def menu():
     if request.method == 'POST':
         args=request.get_json()
-        '''메뉴대분류 가져오기'''
+        '''메뉴중분류 가져오기'''
         return order.getMenu(args)
     #     print(data['email'])
     # if request.method == 'PUT':
@@ -17,3 +17,9 @@ def menu():
 
     #return make_response(jsonify({'status': True}), 200)
     
+@order_ab.route('/menuDetail' ,methods=['GET','POST', 'PUT', 'DELETE'])
+def menuDetail():
+    if request.method == 'POST':
+        args=request.get_json()
+        '''메뉴중분류 가져오기'''
+        return order.getMenuDetail(args)

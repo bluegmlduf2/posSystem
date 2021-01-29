@@ -12,13 +12,18 @@ function getMenu() {
     module
         .ajax("POST", "/order/menu")
         .then((result) => {
-            let resultJson = JSON.parse(result);//menu_cd,menu_kind
+            let resultJson = JSON.parse(result); //menu_cd,menu_kind
 
             document
                 .querySelectorAll("#orderMidMidMenu>ul>li")
                 .forEach((btn, idx) => {
-                    btn.innerHTML = resultJson[idx].menu_kind;
-                    btn.setAttribute('data-val', resultJson[idx].menu_cd);
+                    debugger
+                    let menuKind = resultJson[idx].menu_kind;
+                    if (menuKind.nullCheck()) {
+                        debugger
+                    }
+                    btn.innerHTML = menuKind;
+                    btn.setAttribute("data-val", resultJson[idx].menu_cd);
                     //console.log(elem.dataset.val);
                     //console.log(elem.getAttribute('data-val')); // 데이터셋 미지원 브라우저에서는 getAttribute()로 접근해야 함
                     //elem.dataset.val = "1";

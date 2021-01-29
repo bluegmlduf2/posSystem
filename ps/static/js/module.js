@@ -127,6 +127,25 @@ String.prototype.lpad = function (padLen, padStr) {
 };
 
 /**
+ * NULL CHECK
+ * @param {*} str 
+ */
+Object.prototype.nullCheck=function () {
+    debugger
+    
+    if(typeof this=='Object'){
+        debugger
+    }else if(typeof this=='String'){
+        let chkStr=this.toString()
+        if(chkStr===undefined||chkStr==null){
+            return true;
+        }else{
+            return false;
+        }
+    }   
+}
+
+/**
  * @param {*} http_method 'GET','POST', 'PUT', 'DELETE'
  * @param {*} url  URL
  * @param {*} sendData DATA
