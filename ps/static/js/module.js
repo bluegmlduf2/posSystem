@@ -133,9 +133,9 @@ String.prototype.lpad = function (padLen, padStr) {
 Object.prototype.nullCheck=function () {
     debugger
     
-    if(typeof this=='Object'){
+    if(typeof this=="object"){
         debugger
-    }else if(typeof this=='String'){
+    }else if(typeof this=="string"){
         let chkStr=this.toString()
         if(chkStr===undefined||chkStr==null){
             return true;
