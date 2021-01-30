@@ -128,21 +128,34 @@ String.prototype.lpad = function (padLen, padStr) {
 
 /**
  * NULL CHECK
- * @param {*} str 
+ * @param {*} str
  */
-Object.prototype.nullCheck=function () {
-    debugger
-    
-    if(typeof this=="object"){
-        debugger
-    }else if(typeof this=="string"){
-        let chkStr=this.toString()
-        if(chkStr===undefined||chkStr==null){
+function nullCheck(obj) {
+    if (typeof obj === "object") {
+        //빈객체인지체크
+        if (Object.keys(obj).length == 0) {
             return true;
-        }else{
+        } else {
             return false;
         }
-    }   
+    } else if (Array.isArray(obj)) {
+        //빈배열인지체크
+        if (obj.length == 0) {
+            return true;
+        } else {
+            return false;
+        }
+    } else if (typeof obj === "string") {
+        //문자열공백체크(정규식)
+        if (obj.replace(/(\s*)/g, "")=="") {
+            return true;
+        } else {
+            return false;
+        }
+    } else if (typeof obj === "undefined") {
+        //undefiend 체크
+        return true;
+    }
 }
 
 /**
@@ -169,7 +182,7 @@ function ajax(http_method, url, sendData, aync) {
                     }
                 }
             };
-            
+
             jsonData = JSON.stringify(sendData); //문자열로 송수신하기때문에 json형태의 문자열로 변경해준다
 
             xhr.open(http_method, url, aync); // HTTP_METHOD / URL / true(비동기적), false(동기적)

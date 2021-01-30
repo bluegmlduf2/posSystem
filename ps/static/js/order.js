@@ -47,8 +47,8 @@ document.querySelectorAll(".button").forEach((btn) => {
     if (classChk[0]) {
         //클릭시 초기화 후 체크
         btn.addEventListener("click", () => {
-            document.querySelectorAll("." + classChk[1]).forEach((ele) => {
-                ele.classList.remove("active");
+            document.querySelectorAll("." + classChk[1]).forEach((elem) => {
+                elem.classList.remove("active");
             });
             btn.classList.toggle("active");
         });
@@ -62,30 +62,29 @@ document.querySelectorAll(".button").forEach((btn) => {
 /**
  * 메뉴소분류가져오기
  */
-function getMenuDetail() {
-    document
-    .querySelectorAll("#orderMidMidMenu>ul>li")
-    .addEventListener('click',(e)=>{
-        console.log(e.value)
-    })
+document.querySelectorAll("#orderMidMidMenu>ul>li").forEach((elem) => {
+    elem.addEventListener("click", (e) => {
+        let args=elem.getAttribute("data-val");
 
-    // module
-    //     .ajax("POST", "/order/menuDetail")
-    //     .then((result) => {
-    //         let resultJson = JSON.parse(result);//menu_cd,menu_kind
+        module
+            .ajax("POST", "/order/menuDetail",{"menuCd":args})
+            .then((result) => {
+                console.log(result)
+                // let resultJson = JSON.parse(result); //menu_cd,menu_kind
 
-    //         document
-    //             .querySelectorAll("#orderMidMidMenu>ul>li")
-    //             .forEach((btn, idx) => {
-    //                 btn.innerHTML = resultJson[idx].menu_kind;
-    //                 btn.setAttribute('data-val', resultJson[idx].menu_cd);
-    //                 //console.log(elem.dataset.val);
-    //                 //console.log(elem.getAttribute('data-val')); // 데이터셋 미지원 브라우저에서는 getAttribute()로 접근해야 함
-    //                 //elem.dataset.val = "1";
-    //                 //elem.dataset //맵형태로 모든 데이터셋반환
-    //             });
-    //     })
-    //     .catch((result) => {
-    //         console.log(result);
-    //     });
-}
+                // document
+                //     .querySelectorAll("#orderMidMidMenu>ul>li")
+                //     .forEach((btn, idx) => {
+                //         if (nullCheck(resultJson[idx])) {
+                //             return; //continue
+                //         }
+                //         let menuKind = resultJson[idx].menu_kind;
+                //         btn.innerHTML = menuKind;
+                //         btn.setAttribute("data-val", resultJson[idx].menu_cd);
+                //     });
+            })
+            .catch((result) => {
+                console.log(result);
+            });
+    });
+});

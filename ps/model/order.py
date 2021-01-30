@@ -13,13 +13,13 @@ def getMenu(args):
         except Exception as e:
             return jsonify({'message': f'{e}'}), 400
 
+
 def getMenuDetail(args):
     conn = Connection()
     if conn:
         try:
             sql = '''SELECT MENU_DETAIL_CD, MENU_CD, MENU_NM, MENU_PRICE, MENU_COST
-            FROM MENU_DETAIL_TBL WHERE MENU_CD = {menuCd}'''
-            sql.format(name=args)
+            FROM MENU_DETAIL_TBL WHERE MENU_CD = {menuCd}'''.format(menuCd=args['menuCd'])
             data = conn.executeAll(sql)
             json_data = jsonify(data)
             return json_data
