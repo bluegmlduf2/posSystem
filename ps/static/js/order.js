@@ -69,19 +69,23 @@ document.querySelectorAll("#orderMidMidMenu>ul>li").forEach((elem) => {
         module
             .ajax("POST", "/order/menuDetail",{"menuCd":args})
             .then((result) => {
-                console.log(result)
-                // let resultJson = JSON.parse(result); //menu_cd,menu_kind
 
-                // document
-                //     .querySelectorAll("#orderMidMidMenu>ul>li")
-                //     .forEach((btn, idx) => {
-                //         if (nullCheck(resultJson[idx])) {
-                //             return; //continue
-                //         }
-                //         let menuKind = resultJson[idx].menu_kind;
-                //         btn.innerHTML = menuKind;
-                //         btn.setAttribute("data-val", resultJson[idx].menu_cd);
-                //     });
+                let resultJson = JSON.parse(result); //menu_cd,menu_kind
+   
+                document
+                    .querySelectorAll("#orderSmallMenu>ul>li")
+                    .forEach((btn, idx) => {
+                        btn.innerHTML=''
+                        btn.removeAttribute("data-val")
+
+                        if (nullCheck(resultJson[idx])) {
+                            return; //continue
+                        }
+
+                        let menuNm = resultJson[idx].MENU_NM;
+                        btn.innerHTML = menuNm;
+                        btn.setAttribute("data-val",JSON.stringify(resultJson[idx]));
+                    });
             })
             .catch((result) => {
                 console.log(result);
