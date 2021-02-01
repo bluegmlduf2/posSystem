@@ -174,7 +174,7 @@ function ajax(http_method, url, sendData, aync) {
                 if (xhr.readyState === 4) {
                     //401 인증실패(Unauthorized) ,403 접근거절(Forbidden),404 파일없음(Not Found)
                     if (xhr.status === 200 || xhr.status !== 302) {
-                        console.log("통신성공");
+                        //console.log("통신성공");
                         return resolve(xhr.responseText);
                     } else {
                         console.log("통신실패"); //이거 만약 안되면 promise로 처리해야함.
