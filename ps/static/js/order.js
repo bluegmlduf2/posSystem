@@ -64,6 +64,11 @@ document.querySelectorAll(".button").forEach((btn) => {
  */
 document.querySelectorAll("#orderMidMidMenu>ul>li").forEach((elem) => {
     elem.addEventListener("click", (e) => {
+
+        if(nullCheck(e.target.innerText)){
+            e.target.classList.remove("active")
+            return false
+        }
         let args = elem.getAttribute("data-val");
 
         module

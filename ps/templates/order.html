@@ -12,7 +12,27 @@
             </div>
         </div>
         <div id="orderMid">
-            <div id="menuList"><textarea name="" id="orderitemList" disabled></textarea></div>
+            <div id="menuList">
+                <ul id="orderitemList">
+                    <!-- li>a[href='#a']>span.sp#sp$*5 //EMMET 사용   -->
+                    <li >
+                        <span class="sp sp_hd sp_sz1">순번</span>
+                        <span class="sp sp_hd sp_sz2">메뉴명</span>
+                        <span class="sp sp_hd sp_sz3">수량</span>
+                        <span class="sp sp_hd sp_sz4">금액</span>
+                    </li>
+                    <div id="order1">
+                    {% for i in range(20) %}      
+                        <li >
+                            <span class="sp sp_sz1" >100</span>
+                            <span class="sp sp_sz2" >부대찌게&emsp;(10:11)</span>
+                            <span class="sp sp_sz3" >100</span>
+                            <span class="sp sp_sz4" >10,000,000</span>
+                        </li>
+                    {%endfor%}
+                    </div>
+                </ul>
+            </div>
             <div id="menuBtnList">
                 <div id="orderMidMidMenu">
                     <ul>
@@ -54,11 +74,9 @@
                     <li class="button"><a href="#a">포장</a></li>
                     <li class="button"><a href="#a">배달</a></li>
                     <li class="button"><a href="#a">서비스</a></li>
-                    <li class="button"><a href="#a">이전</br>취소</a></li>
+                    <li class="button"><a href="#a">선택</br>취소</a></li>
                     <li class="button"><a href="#a">전체</br>취소</a></li>
-                    <li class="button"><a href="#a">저장</br>취소</a></li>
-                    <li class="button"><a href="#a">수량</br>입력</a></li>
-                    <li class="button"><a href="#a">선불</a></li>
+                    <li class="button"><a href="#a">저장</a></li>
                 </ul>
             </div>
             <div id="orderBottomRight">

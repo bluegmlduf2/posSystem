@@ -22,7 +22,7 @@
 }
 
 #orderCenter #orderTop #orderTop1 {
-    width: 33%;
+    width: 45%;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -30,7 +30,7 @@
 }
 
 #orderCenter #orderTop #orderTop2 {
-    width: 67%;
+    width: 55%;
 }
 
 #orderCenter #orderTop #orderTop2 > ul {
@@ -61,18 +61,63 @@
 }
 
 #orderCenter #orderMid #menuList {
-    width: 33%;
+    width: 45%;
+    resize: none;
+    border: 2px solid skyblue;
+    background-color: rgba(0, 0, 0, 0);
+    border-radius: 5px;
+    overflow-x:hidden; 
+    overflow-y:auto; 
 }
 
 #orderCenter #orderMid #menuList #orderitemList {
-    width: 95%;
-    height: 97%;
+    padding: 3%;
+}
+
+#orderCenter #orderMid #menuList #orderitemList li {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    vertical-align: middle;
+    cursor: pointer;
+}
+
+#orderCenter #orderMid #menuList #orderitemList>div>li:hover{
+    background-color: skyblue;
+    font-weight: bold;
+}
+
+.sp {
+    display: inline-block;
+    text-align: center;
+    font-size: medium;
+    padding: 5% 0;
+}
+
+.sp_hd {
+    font-weight: bold;
+    font-size: large;
+}
+
+.sp_sz1 {
+    width: 5%;
+}
+.sp_sz2 {
+    padding-left: 5%;
+    width: 40%;
+}
+.sp_sz3 {
+    width: 15%;
+}
+.sp_sz4 {
+    padding-left: 5%;
+    width: 10%;
 }
 
 #orderCenter #orderMid #menuBtnList {
     display: flex;
     flex-direction: column;
-    width: 67%;
+    width: 55%;
 }
 
 #orderCenter #orderMid #menuBtnList #orderMidMidMenu {
@@ -137,7 +182,7 @@ hr.orderHr {
     height: 20%;
 }
 #orderCenter div#orderBottomLeft {
-    width: 33%;
+    width: 55%;
     height: 100%;
 }
 #orderCenter div#orderBottomLeft1 {
@@ -192,7 +237,8 @@ hr.orderHr {
     align-items: center;
 }
 #orderCenter img {
-    max-width: 100%;
+    padding-left: 10%;
+    width: 80%;
     height: auto;
     /* 이미지넓이 자동조정 */
 }
