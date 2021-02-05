@@ -64,10 +64,9 @@ document.querySelectorAll(".button").forEach((btn) => {
  */
 document.querySelectorAll("#orderMidMidMenu>ul>li").forEach((elem) => {
     elem.addEventListener("click", (e) => {
-
-        if(nullCheck(e.target.innerText)){
-            e.target.classList.remove("active")
-            return false
+        if (nullCheck(e.target.innerText)) {
+            e.target.classList.remove("active");
+            return false;
         }
         let args = elem.getAttribute("data-val");
 
@@ -109,9 +108,27 @@ document.querySelectorAll("#orderSmallMenu>ul>li").forEach((btn, idx) => {
     btn.addEventListener("dblclick", () => {
         btn.classList.remove("active");
     });
+
+    let divEle = document.createElement("div");
+    divEle.setAttribute("id", "order1");
+
+    let liEle = document.createElement("li");
+
+    for (var i = 0; i < 4; i++) {
+        var spanEle = document.createElement("span");
+        spanEle.setAttribute("class", "sp sp_sz`${i}`");
+        spanEle.innerHTML = i;
+        liEle.appendChild(spanEle);
+    }
+
+    divEle.appendChild(liEle);
+
+    let orderEle = document.querySelector("#order1");
+    divEle.removeChild(orderEle);
+
     //클릭시 초기화 후 체크
     // btn.addEventListener("click", () => {
-        
+
     //     // document.querySelectorAll(".seat").forEach((seatCls) => {
     //     //     seatCls.classList.remove("active");
     //     // });
