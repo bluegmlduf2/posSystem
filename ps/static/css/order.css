@@ -62,55 +62,56 @@
 
 #orderCenter #orderMid #menuList {
     width: 45%;
-    resize: none;
+    height: 100%;
     border: 2px solid skyblue;
     background-color: rgba(0, 0, 0, 0);
     border-radius: 5px;
-    overflow-x:hidden; 
-    overflow-y:auto; 
-}
-
-#orderCenter #orderMid #menuList #orderitemList {
-    padding: 3%;
-}
-
-#orderCenter #orderMid #menuList #orderitemList li {
-    overflow: hidden;
-    white-space: nowrap;
-    text-overflow: ellipsis;
+    overflow-y: auto;
+    text-align: center;
     vertical-align: middle;
     cursor: pointer;
 }
+#orderCenter #orderMid #menuList table {
+    width: 100%;/*부모에게서 width:45%를 받으므로 새로 정의해줘야함*/
+}
 
-#orderCenter #orderMid #menuList #orderitemList>div>li:hover{
+#orderCenter #orderMid tbody tr:hover {
     background-color: skyblue;
     font-weight: bold;
+    letter-spacing: -0.5px; /*꿈틀거리기 피함*/
 }
 
-.sp {
-    display: inline-block;
-    text-align: center;
-    font-size: medium;
-    padding: 5% 0;
-}
-
-.sp_hd {
-    font-weight: bold;
+#orderCenter #orderMid #menuList thead tr {
     font-size: large;
+    height: 45px;
 }
 
+#orderCenter #orderMid #menuList tbody tr {
+    font-size: medium;
+    height: 35px;
+}
+#menuList thead th{
+    border: 1.5px solid skyblue;
+}
+#menuList tbody td{
+    border: 1px solid skyblue;
+}
+#menuList tbody td:nth-child(2){
+    border-right: 0;
+}
+#menuList tbody td:nth-child(3){
+    border-left: 0;
+}
 .sp_sz1 {
     width: 5%;
 }
 .sp_sz2 {
-    padding-left: 5%;
     width: 40%;
 }
 .sp_sz3 {
     width: 15%;
 }
 .sp_sz4 {
-    padding-left: 5%;
     width: 10%;
 }
 
@@ -136,6 +137,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    color: black!important;
 }
 
 .button.m_btn.active {
@@ -158,6 +160,7 @@
 #orderCenter #orderMid #menuBtnList #orderSmallMenu > ul > li {
     flex: 1; /*=>flex: 1 1 0*/
     flex-basis: 80px;
+    color: black!important;
     /* 문자 가운데 정렬 */
     display: flex;
     justify-content: center;
