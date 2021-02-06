@@ -166,7 +166,7 @@ document.querySelector("#btnOrderAdd").addEventListener("click", (e) => {
 
     if (keyNum[0]) {
         //동일한 주문이 이미 있을경우
-        keyNum[1].children[2].innerText = module.getCurTime();
+        keyNum[1].children[2].innerText = `(${module.getCurTime()})`;
         keyNum[1].children[3].innerText = Number(keyNum[1].children[3].innerText) + 1;
         keyNum[1].children[4].innerText =
             Number(keyNum[1].children[4].innerText) + orderAddData.MENU_PRICE;
