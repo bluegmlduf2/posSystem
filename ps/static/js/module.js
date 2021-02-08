@@ -127,6 +127,24 @@ String.prototype.lpad = function (padLen, padStr) {
 };
 
 /**
+ * 컴마 3자릿수로 표시
+ * @param {} str 
+ */
+Object.prototype.addComma=function (str) {
+    var regexp = /\B(?=(\d{3})+(?!\d))/g;
+    return str.toString().replace(regexp, ',');
+}
+
+/**
+ * 컴마 제거
+ * @param {} str 
+ */
+Object.prototype.removeComma=function (str) {
+    var regexp = /,/g;
+    return str.toString().replace(regexp, '');
+}
+
+/**
  * NULL CHECK
  * @param {*} str
  */

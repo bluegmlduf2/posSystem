@@ -124,3 +124,9 @@ A:link {text-decoration:none; color:#646464;}
 A:visited {text-decoration:none; color:#646464;}
 A:active {text-decoration:none; color:#646464;}
 A:hover {text-decoration:none; color:#646464;}
+
+/* 드래그 방지 :웹킷(크롬)만 넣음 */
+*{
+    -webkit-user-select: none;
+    user-select: none;
+}

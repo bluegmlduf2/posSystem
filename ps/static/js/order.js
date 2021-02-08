@@ -25,18 +25,17 @@ function openModal() {
 
     let liTag = document.querySelector(".seat.active").children[0].children;
 
-    document.querySelector("#orderTop1").innerHTML = liTag[0].innerHTML;
+    document.querySelector("#orderTop1 span").innerHTML = liTag[0].innerHTML;
     modal_order.style.display = "block"; /* none -> display */
 }
 
 // Close modal
 function closeModal() {
-    if(document.querySelector('#menuList tbody').hasChildNodes()){
-        if(!confirm('주문중인 정보가 있습니다.\n취소하고 닫겠습니까?')){
-            return false
+    if (document.querySelector("#menuList tbody").hasChildNodes()) {
+        if (!confirm("주문중인 정보가 있습니다.\n취소하고 닫겠습니까?")) {
+            return false;
         }
     }
-    
 
     document.querySelectorAll("#orderMidMidMenu>ul>li").forEach((btn, idx) => {
         btn.classList.remove("active");
@@ -48,7 +47,7 @@ function closeModal() {
         btn.classList.remove("active");
     });
 
-    document.querySelector('#menuList tbody').innerHTML='';
+    document.querySelector("#menuList tbody").innerHTML = "";
     modal_order.style.display = "none"; /* display -> none */
 }
 
@@ -106,7 +105,7 @@ document.querySelectorAll("#orderMidMidMenu>ul>li").forEach((elem) => {
 
                         let menuNm = resultJson[idx].MENU_NM;
                         let menuPrice = resultJson[idx].MENU_PRICE;
-                        btn.innerHTML = `${menuNm}<br>${menuPrice}`;
+                        btn.innerHTML = `${menuNm}<br>${addComma(menuPrice)}`;
                         btn.setAttribute(
                             "data-val",
                             JSON.stringify(resultJson[idx])
@@ -167,9 +166,13 @@ document.querySelector("#btnOrderAdd").addEventListener("click", (e) => {
     if (keyNum[0]) {
         //동일한 주문이 이미 있을경우
         keyNum[1].children[2].innerText = `(${module.getCurTime()})`;
-        keyNum[1].children[3].innerText = Number(keyNum[1].children[3].innerText) + 1;
-        keyNum[1].children[4].innerText =
-            Number(keyNum[1].children[4].innerText) + orderAddData.MENU_PRICE;
+        keyNum[1].children[3].innerText = addComma(
+            Number(keyNum[1].children[3].innerText) + 1
+        );
+        keyNum[1].children[4].innerText = addComma(
+            Number(removeComma(keyNum[1].children[4].innerText)) +
+                Number(orderAddData.MENU_PRICE)
+        );
     } else {
         //신규주문
         var a1 = document.createElement("td");
@@ -177,13 +180,13 @@ document.querySelector("#btnOrderAdd").addEventListener("click", (e) => {
         var a3 = document.createElement("td");
         var a4 = document.createElement("td");
         var a5 = document.createElement("td");
-        
+
         a1.setAttribute("data-val", orderAddData.MENU_DETAIL_CD); // a1.dataset.val=orderAddData.MENU_DETAIL_CD
         a1.innerText = orderKeys + 1;
         a2.innerText = orderAddData.MENU_NM;
         a3.innerText = `(${module.getCurTime()})`;
-        a4.innerText = 1;
-        a5.innerText = orderAddData.MENU_PRICE;
+        a4.innerText = addComma(1);
+        a5.innerText = addComma(orderAddData.MENU_PRICE);
 
         trEle.appendChild(a1);
         trEle.appendChild(a2);
@@ -193,4 +196,41 @@ document.querySelector("#btnOrderAdd").addEventListener("click", (e) => {
 
         tbodyEle.appendChild(trEle);
     }
+    
+    //주문리스트 선택시 하이라이트 주기 이벤트(active)
+    trEle.addEventListener("click", () => {
+        trEle.classList.toggle("active");
+    });
+
+    //총합구하기
+    let tot = 0;
+    document.querySelectorAll("#menuList tbody tr").forEach((e, i) => {
+        tot += Number(removeComma(e.childNodes[4].textContent));
+    });
+
+    document.querySelector("#bottomTot").textContent = addComma(tot);
 });
+
+//주문 선택취소
+document.querySelector('#btnOrderRemove').addEventListener("click",() => {
+    let btnList=[]
+    let trEle=document.querySelectorAll("#menuList tbody tr")
+    
+    trEle.forEach((e, i) => {
+        var chk = module.hasClass(e.classList, "active");
+        if (chk[0]) {
+            btnList.push(e.getAttribute('id'))
+        }
+    });
+
+    if(confirm(`선택한 ${btnList.length}건의 주문을 삭제하시겠습니까?`)){
+        btnList.forEach((orderKeyId)=>{
+            trEle.forEach((elem,idx)=>{
+                if(orderKeyId==elem.getAttribute('id')){
+                    document.querySelector("#menuList tbody").removeChild(elem)
+                }
+            })
+        })
+    }
+})
+

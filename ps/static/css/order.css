@@ -5,6 +5,7 @@
     height: 90vh; /*뷰포트의 90%*/
     padding: 10px;
     font-size: 1em;
+    border-radius: 2%;
     /*
     align-items: stretch;한 행 수직정렬
     align-content: stretch;여러 행 수직정렬(wrap사용)
@@ -27,6 +28,14 @@
     justify-content: center;
     align-items: center;
     font-size: 1.5em;
+    font-weight: bold;
+}
+
+#orderCenter #orderTop #orderTop1 span{
+    background-color: cornflowerblue;
+    border-radius: 50%;
+    padding: 5%;
+    color: white;
 }
 
 #orderCenter #orderTop #orderTop2 {
@@ -77,8 +86,7 @@
 
 #orderCenter #orderMid tbody tr:hover {
     background-color: skyblue;
-    font-weight: bold;
-    letter-spacing: -0.5px; /*꿈틀거리기 피함*/
+    /* letter-spacing: -1px; 꿈틀거리기 피함 */
 }
 
 #orderCenter #orderMid #menuList thead tr {
@@ -165,6 +173,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    text-align: center;
 }
 
 .button.s_btn.active {
@@ -178,6 +187,12 @@ hr.orderHr {
     width: 95%;
     border: 0.5px solid skyblue;
 }
+
+tr.active {
+    background-color: skyblue;
+    font-weight: bold;
+}
+
 
 /* BOTTOM */
 #orderCenter #orderBottom {
@@ -195,6 +210,12 @@ hr.orderHr {
     justify-content: center;
     align-items: center;
 }
+#orderCenter div#orderBottomLeft1 div {
+    flex: 1 ;
+    text-align: center;
+    font-size: x-large;
+}
+
 #orderCenter div#orderBottomLeft2 {
     height: 60%;
 }

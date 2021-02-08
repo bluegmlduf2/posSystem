@@ -1,7 +1,7 @@
 <div id="orderBg" class="modal-overlay">
     <div id="orderCenter" class="modal-content">
         <div id="orderTop">
-            <div id="orderTop1"></div>
+            <div id="orderTop1"><span></span></div>
             <div id="orderTop2">
                 <ul>
                     <li id="b1" class="button b_btn"><a href="#a">일반메뉴</a></li>
@@ -48,7 +48,10 @@
         </div>
         <div id="orderBottom">
             <div id="orderBottomLeft">
-                <div id="orderBottomLeft1">합계</div>
+                <div id="orderBottomLeft1">                
+                    <div>합계</div>
+                    <div id="bottomTot">0</div>
+                </div>
                 <div id="orderBottomLeft2">
                     <ul>
                         <li id="ob1" class="button">주문<br>합계<a href="#a"></a></li>
@@ -67,14 +70,14 @@
                     <li class="button"><a href="#a">포장</a></li>
                     <li class="button"><a href="#a">배달</a></li>
                     <li class="button"><a href="#a">서비스</a></li>
-                    <li class="button"><a href="#a">선택</br>취소</a></li>
                     <li class="button"><a href="#a">전체</br>취소</a></li>
-                    <li class="button"><a href="#a">추가</a></li>
+                    <li class="button" id="btnOrderRemove"><a href="#a">선택</br>취소</a></li>
+                    <li class="button" id="btnOrderAdd"><a href="#a">추가</a></li>
                 </ul>
             </div>
             <div id="orderBottomRight">
                 <ul>
-                    <li class="button" id="btnOrderAdd"><a href="#a">주문</a></li>
+                    <li class="button" id="btnOrder"><a href="#a">주문</a></li>
                 </ul>
             </div>
         </div>
