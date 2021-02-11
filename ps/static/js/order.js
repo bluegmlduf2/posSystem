@@ -18,6 +18,7 @@ window.addEventListener("click", outsideClick);
 
 // Open modal
 function openModal() {
+    //querySelector의 결과가 없다면 null반환
     if (!document.querySelector(".seat.active")) {
         alert("좌석을 선택해주세요.");
         return;
@@ -57,6 +58,35 @@ function outsideClick(e) {
         closeModal();
     }
 }
+
+/**
+ * 총합구하기
+ */
+function getTotal() {
+    let tot = 0;
+    document.querySelectorAll("#menuList tbody tr").forEach((e, i) => {
+        tot += Number(removeComma(e.childNodes[4].textContent));
+    });
+    return tot;
+}
+
+/**
+ * 왼쪽 주문리스트 하이라이트 제거
+ */
+function removeMenuListActive() {
+    document.querySelectorAll("#menuList tbody tr").forEach((btn, idx) => {
+        btn.classList.remove("active");
+    });
+}
+/**
+ * 오른쪽 주문메뉴 하이라이트 제거
+ */
+function removeSmlMenuListActive() {
+    document.querySelectorAll("#orderSmallMenu ul li").forEach((btn, idx) => {
+        btn.classList.remove("active");
+    });
+}
+/**************************이벤트 핸들링**************************/
 
 // 모든 버튼 CLICK 시 STATE변경
 document.querySelectorAll(".button").forEach((btn) => {
@@ -128,12 +158,13 @@ document.querySelectorAll("#orderSmallMenu>ul>li").forEach((btn, idx) => {
 });
 
 /**
- * 주문버튼 클릭
+ * 추가 버튼 클릭
  */
 document.querySelector("#btnOrderAdd").addEventListener("click", (e) => {
     let orderAddData = null;
+    let orderKeys = null;
 
-    document.querySelectorAll("#orderSmallMenu>ul>li").forEach((btn, idx) => {
+    document.querySelectorAll("#orderSmallMenu ul li").forEach((btn, idx) => {
         var chk = module.hasClass(btn.classList, "active");
 
         if (chk[0]) {
@@ -147,10 +178,22 @@ document.querySelector("#btnOrderAdd").addEventListener("click", (e) => {
         }
     });
 
-    let orderKeys = document.querySelectorAll("#menuList tbody tr").length;
+    if (!orderAddData) {
+        alert("추가할 항목을 선택해주세요");
+        return;
+    }
+    //NodeList를 Array로 받음 ==  [...document.querySelectorAll("#menuList tbody tr")]
+    //reduce(callbackFunc((리턴된값,현재값)=>),acc의최초값[없으면배열의0번째가최초acc가됨]) ..
+    orderKeys = Array.from(
+        document.querySelectorAll("#menuList tbody tr")
+    ).reduce((acc, cur) => {
+        var orderCnt = Number(cur.getAttribute("id").substring(5)) + 1;
+        return acc > orderCnt ? acc : orderCnt; //retrun 값이 다음의 acc가 됨
+    }, 1);
+
     let tbodyEle = document.querySelector("#menuList tbody");
     let trEle = document.createElement("tr");
-    trEle.setAttribute("id", `order${orderKeys + 1}`);
+    trEle.setAttribute("id", `order${orderKeys}`);
 
     //이미 같은 메뉴를 등록한 경우
     let keyNum = [false];
@@ -182,7 +225,7 @@ document.querySelector("#btnOrderAdd").addEventListener("click", (e) => {
         var a5 = document.createElement("td");
 
         a1.setAttribute("data-val", orderAddData.MENU_DETAIL_CD); // a1.dataset.val=orderAddData.MENU_DETAIL_CD
-        a1.innerText = orderKeys + 1;
+        a1.innerText = orderKeys;
         a2.innerText = orderAddData.MENU_NM;
         a3.innerText = `(${module.getCurTime()})`;
         a4.innerText = addComma(1);
@@ -196,41 +239,56 @@ document.querySelector("#btnOrderAdd").addEventListener("click", (e) => {
 
         tbodyEle.appendChild(trEle);
     }
-    
+
     //주문리스트 선택시 하이라이트 주기 이벤트(active)
     trEle.addEventListener("click", () => {
         trEle.classList.toggle("active");
     });
 
     //총합구하기
-    let tot = 0;
-    document.querySelectorAll("#menuList tbody tr").forEach((e, i) => {
-        tot += Number(removeComma(e.childNodes[4].textContent));
-    });
-
-    document.querySelector("#bottomTot").textContent = addComma(tot);
+    document.querySelector("#bottomTot").textContent = addComma(getTotal());
+    removeMenuListActive();
 });
 
 //주문 선택취소
-document.querySelector('#btnOrderRemove').addEventListener("click",() => {
-    let btnList=[]
-    let trEle=document.querySelectorAll("#menuList tbody tr")
-    
+document.querySelector("#btnOrderRemove").addEventListener("click", () => {
+    let btnList = [];
+    let trEle = document.querySelectorAll("#menuList tbody tr");
+
     trEle.forEach((e, i) => {
         var chk = module.hasClass(e.classList, "active");
         if (chk[0]) {
-            btnList.push(e.getAttribute('id'))
+            btnList.push(e.getAttribute("id"));
         }
     });
 
-    if(confirm(`선택한 ${btnList.length}건의 주문을 삭제하시겠습니까?`)){
-        btnList.forEach((orderKeyId)=>{
-            trEle.forEach((elem,idx)=>{
-                if(orderKeyId==elem.getAttribute('id')){
-                    document.querySelector("#menuList tbody").removeChild(elem)
-                }
-            })
-        })
+    //0건 체크
+    if (btnList.length < 1){
+        alert("삭제할 항목을 선택해주세요.")
+        return false;
     }
-})
 
+    if (confirm(`선택한 ${btnList.length}건의 주문을 삭제하시겠습니까?`)) {
+        btnList.forEach((orderKeyId) => {
+            trEle.forEach((elem, idx) => {
+                if (orderKeyId == elem.getAttribute("id")) {
+                    document.querySelector("#menuList tbody").removeChild(elem);
+                }
+            });
+        });
+    }
+
+    document.querySelector("#bottomTot").textContent = addComma(getTotal());
+    removeMenuListActive();
+    removeSmlMenuListActive();
+});
+
+//전체 주문 취소
+document.querySelector("#btnOrderCancelAll").addEventListener("click", () => {
+    if (confirm("주문목록을 전부 삭제하겠습니까?")) {
+        document.querySelector("#menuList tbody").innerHTML = "";
+        document.querySelector("#bottomTot").textContent = addComma(getTotal());
+        removeMenuListActive();
+        removeSmlMenuListActive();
+    }
+});

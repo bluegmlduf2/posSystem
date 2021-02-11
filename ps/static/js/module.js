@@ -185,6 +185,7 @@ function nullCheck(obj) {
 function ajax(http_method, url, sendData, aync) {
     return new Promise((resolve, reject) => {
         try {
+            //프로미스내에서 resolve, reject를 만난 경우 즉시 종료됨 
             var xhr = new XMLHttpRequest(); // XMLHttpRequest객체 생성, 함수 내 지역변수로 선언 권장
             // onreadystatechange는 서버와의 통신이 끝났을 때 호출 됨
             xhr.onreadystatechange = function () {
@@ -193,10 +194,10 @@ function ajax(http_method, url, sendData, aync) {
                     //401 인증실패(Unauthorized) ,403 접근거절(Forbidden),404 파일없음(Not Found)
                     if (xhr.status === 200 || xhr.status !== 302) {
                         //console.log("통신성공");
-                        return resolve(xhr.responseText);
+                        resolve(xhr.responseText);
                     } else {
                         console.log("통신실패"); //이거 만약 안되면 promise로 처리해야함.
-                        throw reject(new Error("에러메시지"));
+                        reject(new Error("에러메시지"));
                     }
                 }
             };
@@ -208,7 +209,8 @@ function ajax(http_method, url, sendData, aync) {
             xhr.send(jsonData); //XMLHttpRequest객체가 통신을 시작
             //throw new Error("에러테스트 ")
         } catch (error) {
-            throw reject(error);
+            //try문에서 문법적 오류가 있을 경우 캐치. 그리고 reject
+            reject(error);
         }
     });
 }
