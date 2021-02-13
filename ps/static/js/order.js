@@ -236,7 +236,7 @@ document.querySelector("#btnOrderAdd").addEventListener("click", (e) => {
         trEle.appendChild(a3);
         trEle.appendChild(a4);
         trEle.appendChild(a5);
-
+        
         tbodyEle.appendChild(trEle);
     }
 
@@ -292,3 +292,8 @@ document.querySelector("#btnOrderCancelAll").addEventListener("click", () => {
         removeSmlMenuListActive();
     }
 });
+
+
+document.querySelector("#btnOrderPlus").addEventListener('click',function name(params) {
+
+})
