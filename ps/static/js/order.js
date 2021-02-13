@@ -292,8 +292,97 @@ document.querySelector("#btnOrderCancelAll").addEventListener("click", () => {
         removeSmlMenuListActive();
     }
 });
+ 
+/**
+ * 플러스 추가버튼
+ */
+document.querySelector("#btnOrderPlus").addEventListener('click',()=>{
+    let orderAddData = null;
 
+    document.querySelectorAll("#orderSmallMenu ul li").forEach((btn, idx) => {
+        var chk = module.hasClass(btn.classList, "active");
 
-document.querySelector("#btnOrderPlus").addEventListener('click',function name(params) {
+        if (chk[0]) {
+            //공백체크
+            if (nullCheck(btn.innerText)) {
+                btn.classList.remove("active");
+                return false;
+            }
+            //dataset->JSONobj
+            orderAddData = JSON.parse(btn.dataset.val);
+        }
+    });
 
+    if (!orderAddData) {
+        alert("추가할 항목을 선택해주세요");
+        return;
+    }
+
+    //이미 같은 메뉴를 등록한 경우
+    let keyNum = [false];
+    document.querySelectorAll("#menuList tbody tr td").forEach((e, i) => {
+        var detailCd_bef = e.getAttribute("data-val");
+        var detailCd_aft = orderAddData.MENU_DETAIL_CD;
+        if (detailCd_bef == detailCd_aft) {
+            //keyNum = [true, e.parentNode.getAttribute("id")];
+            keyNum = [true, e.parentNode];
+        }
+    });
+
+    if (keyNum[0]) {
+        //동일한 주문이 이미 있을경우
+        keyNum[1].children[2].innerText = `(${module.getCurTime()})`;
+        keyNum[1].children[3].innerText = addComma(
+            Number(keyNum[1].children[3].innerText) + 1
+        );
+        keyNum[1].children[4].innerText = addComma(
+            Number(removeComma(keyNum[1].children[4].innerText)) +
+                Number(orderAddData.MENU_PRICE)
+        );
+    }else{
+        alert("선택된 메뉴가 등록되어 있지 않습니다\n신규추가 해주세요.")
+        return
+    }
+
+    //총합구하기
+    document.querySelector("#bottomTot").textContent = addComma(getTotal());
+    removeMenuListActive();
+})
+
+/**
+ * 마이너스 선택제거 버튼
+ */
+document.querySelector("#btnOrderMinus").addEventListener('click',()=>{
+    let btnList = [];
+    let trEle = document.querySelectorAll("#menuList tbody tr");
+
+    trEle.forEach((e, i) => {
+        var chk = module.hasClass(e.classList, "active");
+        if (chk[0]) {
+            btnList.push(e.getAttribute("id"));
+        }
+    });
+
+    //선택된 리스트가 있는지 체크
+    if (btnList.length < 1){
+        alert("삭제할 항목을 선택해주세요.")
+        return false;
+    }
+
+    //1건은 제거 불가능 체크
+    //1건만 제거하는 로직으로 수정
+
+    if (confirm(`선택한 ${btnList.length}건의 주문을 삭제하시겠습니까?`)) {
+        btnList.forEach((orderKeyId) => {
+            trEle.forEach((elem, idx) => {
+                if (orderKeyId == elem.getAttribute("id")) {
+                    document.querySelector("#menuList tbody").removeChild(elem);
+                }
+            });
+        });
+    }
+
+    document.querySelector("#bottomTot").textContent = addComma(getTotal());
+    removeMenuListActive();
+    removeSmlMenuListActive();
 })
