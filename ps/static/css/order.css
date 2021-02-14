@@ -123,6 +123,16 @@
     width: 10%;
 }
 
+#orderCenter #orderMid #menuList tbody td.blink{
+    animation: blinker 1s linear infinite;
+}
+@keyframes blinker {
+    /*0.5초동안 투명해짐*/
+    50% {
+      opacity: 0;
+    }
+}
+
 #orderCenter #orderMid #menuBtnList {
     display: flex;
     flex-direction: column;
