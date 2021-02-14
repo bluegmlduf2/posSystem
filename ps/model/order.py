@@ -26,18 +26,45 @@ def getMenuDetail(args):
         except Exception as e:
             return jsonify({'message': f'{e}'}), 400
 
+
 def insertOrder(args):
     conn = Connection()
     if conn:
         try:
+            tableCd = args['orderList']['tableCd']
+            orderItems = args['orderList']['orderItems']
+
+            #주문등록
             sql = '''INSERT INTO posDB.ORDER_TBL
             (TABLE_CD)
-            VALUES({tableCd})'''.format(tableCd=args['orderList']['tableCd'])
+            VALUES({tableCd})'''.format(tableCd=tableCd)
 
             data = conn.execute(sql)
-            a=conn.insertLastKey()
-            print(a)
-            print('1111111')
+            orderCd = conn.insertLastKey()
+
+            #테이블사용등록
+            sql = '''UPDATE posDB.TABLE_TBL SET ORDER_CD={orderCd}
+            WHERE TABLE_CD={tableCd}'''.format(orderCd=orderCd, tableCd=tableCd)
+
+            data = conn.execute(sql)
+
+            #주문상세등록
+            for e in orderItems:
+                sql = '''INSERT INTO posDB.ORDER_DETAIL_TBL
+                (ORDER_CD, ORDER_AMOUNT, ORDER_COUNT, MENU_DETAIL_CD)
+                VALUES({orderCd}, {orderAmount}, {orderCount}, {menuDetailCd})'''.format(orderCd=orderCd,orderAmount=e["orderAmount"],orderCount=e["orderCount"],menuDetailCd=e["menuDetailCd"])
+
+                data = conn.execute(sql)
+
+            # sql='''
+            # SELECT TABLE_CD, ORDER_CD, RESER_TIME, RESER_PEOPLE
+            # FROM posDB.TABLE_TBL
+            # WHERE TABLE_CD ={tableCd}
+            # '''.format(tableCd=args['orderList']['tableCd'])
+            # data = conn.executeAll(sql)
+            # if data[0]['ORDER_CD'] is None:
+            #     raise Exception('선택한 테이블이 이미 사용중입니다.')
+
             conn.commit()
             return jsonify({'message': 'success'}), 200
         except Exception as e:
@@ -45,7 +72,7 @@ def insertOrder(args):
             return jsonify({'message': f'{e}'}), 400
         finally:
             conn.close()
-            
+
 # # INSERT 함수 예제
 # @test.route('/insert', methods=['GET'])
 # def insert():

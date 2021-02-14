@@ -398,8 +398,26 @@ document.querySelectorAll("#btnOrderPlus,#btnOrderMinus").forEach((e, i) => {
  * 주문버튼
  */
 document.querySelector("#btnOrder").addEventListener('click',()=>{
+    let tabNum=document.querySelector('#orderTop1 span').innerText;
+    let orderItems=new Array()
+    let orderListTr=document.querySelectorAll("#menuList tbody tr");
+    
+    if(nullCheck(orderListTr)){
+        alert('주문리스트를 추가해주세요.')
+        return
+    }
+
+    orderListTr.forEach((e, i) => {
+        let itemInfo=new Object()
+        itemInfo.orderAmount=Number(removeComma(e.childNodes[4].textContent))//금액
+        itemInfo.orderCount=Number(e.childNodes[3].textContent)//수량
+        itemInfo.menuDetailCd=e.childNodes[0].dataset.val//아이템번호
+        orderItems.push(itemInfo)
+    });
+
+
     module
-    .ajax("POST", "/order/insertOrder", { orderList: {"tableCd":"1","orderItems":['111','222']} })
+    .ajax("POST", "/order/insertOrder", { orderList: {"tableCd":tabNum,"orderItems":orderItems} })
     .then((result) => {
         // let resultJson = JSON.parse(result); //menu_cd,menu_kind
 
