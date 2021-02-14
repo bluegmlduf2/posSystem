@@ -23,3 +23,17 @@ def menuDetail():
         args=request.get_json()
         '''메뉴중분류 가져오기'''
         return order.getMenuDetail(args)
+
+@order_ab.route('/insertOrder' ,methods=['GET','POST', 'PUT', 'DELETE'])
+def insertOrder():
+    if request.method == 'POST':
+        args=request.get_json()
+        '''주문입력'''
+        return order.insertOrder(args)
+    #     print(data['email'])
+    # if request.method == 'PUT':
+    #     user = request.args.get('email')
+    # if request.method == 'DELETE':
+    #     user = request.args.get('email')
+
+    #return make_response(jsonify({'status': True}), 200)

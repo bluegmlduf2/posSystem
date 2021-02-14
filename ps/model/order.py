@@ -25,6 +25,27 @@ def getMenuDetail(args):
             return json_data
         except Exception as e:
             return jsonify({'message': f'{e}'}), 400
+
+def insertOrder(args):
+    conn = Connection()
+    if conn:
+        try:
+            sql = '''INSERT INTO posDB.ORDER_TBL
+            (TABLE_CD)
+            VALUES({tableCd})'''.format(tableCd=args['orderList']['tableCd'])
+
+            data = conn.execute(sql)
+            a=conn.insertLastKey()
+            print(a)
+            print('1111111')
+            conn.commit()
+            return jsonify({'message': 'success'}), 200
+        except Exception as e:
+            conn.rollback()
+            return jsonify({'message': f'{e}'}), 400
+        finally:
+            conn.close()
+            
 # # INSERT 함수 예제
 # @test.route('/insert', methods=['GET'])
 # def insert():

@@ -30,3 +30,13 @@ class Connection:
     # @staticmethod
     def commit(self):
         self.db.commit()
+
+    def rollback(self):
+        self.db.rollback()
+
+    def close(self):
+        self.db.close()
+
+    def insertLastKey(self):
+        return self.db.insert_id()
+

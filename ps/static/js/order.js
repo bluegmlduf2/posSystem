@@ -50,6 +50,9 @@ function closeModal() {
 
     document.querySelector("#menuList tbody").innerHTML = "";
     modal_order.style.display = "none"; /* display -> none */
+
+    //총합
+    document.querySelector("#bottomTot").textContent = 0;
 }
 
 // Click outside and close (모달 밖을 클릭)
@@ -339,12 +342,10 @@ document.querySelectorAll("#btnOrderPlus,#btnOrderMinus").forEach((e, i) => {
             return;
         }
 
-        debugger;
         btnList.forEach((orderKeyId) => {
             trEle.forEach((elem, idx) => {
                 if (orderKeyId == elem.getAttribute("id")) {
                     //추가
-                    debugger;
                     if (elem.children[1].innerText == orderAddData.MENU_NM) {
                         if (curEleId == "btnOrderPlus") {
                             //주문리스트와 선택메뉴가 동일한 메뉴인지 체크
@@ -392,3 +393,38 @@ document.querySelectorAll("#btnOrderPlus,#btnOrderMinus").forEach((e, i) => {
         document.querySelector("#bottomTot").textContent = addComma(getTotal());
     });
 });
+
+/**
+ * 주문버튼
+ */
+document.querySelector("#btnOrder").addEventListener('click',()=>{
+    module
+    .ajax("POST", "/order/insertOrder", { orderList: {"tableCd":"1","orderItems":['111','222']} })
+    .then((result) => {
+        // let resultJson = JSON.parse(result); //menu_cd,menu_kind
+
+        // document
+        //     .querySelectorAll("#orderSmallMenu>ul>li")
+        //     .forEach((btn, idx) => {
+        //         btn.innerHTML = "";
+        //         btn.removeAttribute("data-val");
+        //         btn.classList.remove("active");
+
+        //         if (nullCheck(resultJson[idx])) {
+        //             return; //continue
+        //         }
+
+        //         let menuNm = resultJson[idx].MENU_NM;
+        //         let menuPrice = resultJson[idx].MENU_PRICE;
+        //         btn.innerHTML = `${menuNm}<br>${addComma(menuPrice)}`;
+        //         btn.setAttribute(
+        //             "data-val",
+        //             JSON.stringify(resultJson[idx])
+        //         );
+        //     });
+    })
+    .catch((result) => {
+        console.log(result);
+    });
+})
+
