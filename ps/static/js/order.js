@@ -419,30 +419,21 @@ document.querySelector("#btnOrder").addEventListener('click',()=>{
     module
     .ajax("POST", "/order/insertOrder", { orderList: {"tableCd":tabNum,"orderItems":orderItems} })
     .then((result) => {
-        // let resultJson = JSON.parse(result); //menu_cd,menu_kind
+        let resultJson = JSON.parse(result); //menu_cd,menu_kind
+        let status=resultJson.status
+        let message=resultJson.message
 
-        // document
-        //     .querySelectorAll("#orderSmallMenu>ul>li")
-        //     .forEach((btn, idx) => {
-        //         btn.innerHTML = "";
-        //         btn.removeAttribute("data-val");
-        //         btn.classList.remove("active");
+        if(status){
+            alert(message)
+        }else{
+            alert(message)
+        }
 
-        //         if (nullCheck(resultJson[idx])) {
-        //             return; //continue
-        //         }
-
-        //         let menuNm = resultJson[idx].MENU_NM;
-        //         let menuPrice = resultJson[idx].MENU_PRICE;
-        //         btn.innerHTML = `${menuNm}<br>${addComma(menuPrice)}`;
-        //         btn.setAttribute(
-        //             "data-val",
-        //             JSON.stringify(resultJson[idx])
-        //         );
-        //     });
     })
     .catch((result) => {
-        console.log(result);
+        debugger
+        alert(result.message)
+        console.error(result.message);
     });
 })
 
