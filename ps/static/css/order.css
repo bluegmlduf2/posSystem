@@ -122,22 +122,34 @@
 .sp_sz4 {
     width: 10%;
 }
-
+/*
 #orderCenter #orderMid #menuList tbody td.blink{
     animation: blinker 1s linear infinite;
 }
-@keyframes blinker {
-    /*0.5초동안 투명해짐*/
+/*0.5초동안 투명해짐*/
+/*
+@keyframes blinker {    
     50% {
       opacity: 0;
     }
 }
-
+@keyframes slidein {
+  from {
+    margin-left: 100%;
+    width: 300%;
+  }
+  to {
+    margin-left: 0%;
+    width: 100%;
+  }
+}
+*/
 #orderCenter #orderMid #menuBtnList {
     display: flex;
     flex-direction: column;
     width: 55%;
 }
+
 
 #orderCenter #orderMid #menuBtnList #orderMidMidMenu {
     height: 20%;

@@ -10,7 +10,7 @@ modalBtn_order.forEach((btn) => {
 // Get close button
 const closeBtn_order = document.querySelectorAll(".ordcloseBtn");
 closeBtn_order.forEach((btn) => {
-    btn.addEventListener("click", closeModal);
+    btn.addEventListener("click", ()=>{closeModal()});//이벤트파라미터가 e가 1번파라미터로 전송되어서 이렇게 처리
 });
 
 // Listen for outside click
@@ -31,8 +31,9 @@ function openModal() {
 }
 
 // Close modal
-function closeModal() {
-    if (document.querySelector("#menuList tbody").hasChildNodes()) {
+function closeModal(afterOrder=false) {
+    debugger
+    if (document.querySelector("#menuList tbody").hasChildNodes()&&!afterOrder) {
         if (!confirm("주문중인 정보가 있습니다.\n취소하고 닫겠습니까?")) {
             return false;
         }
@@ -377,11 +378,22 @@ document.querySelectorAll("#btnOrderPlus,#btnOrderMinus").forEach((e, i) => {
                                 ) - Number(orderAddData.MENU_PRICE)
                             );
                         }
-                        //깜빡임이벤트추가
-                        elem.children[3].classList.add('blink')
-                        setTimeout(() => {
-                            elem.children[3].classList.remove('blink')                        
-                        }, 2000);
+
+                        //깜빡임 효과
+                        //Animation API
+                        //element.animate(keyframes, options);  
+                        //애니메이션 2가지 패턴
+                        //transform:translate(), scale(), rotate(), skew() 4종 //요소변형
+                        //transition:left 1.5s //요소속성 변경
+                        elem.children[3].animate([ 
+                            { opacity: 1 },
+                            { transform: 'scale(2)', color: '#ff0000' },
+                            { opacity: 0 } ],{ 
+                                //options
+                                duration: 300,
+                                iterations: 3
+                        });
+                        
                     } else {
                         alert("선택된 메뉴가 주문리스트에 없습니다 \n신규추가 해주세요.");
                         return;
@@ -425,13 +437,13 @@ document.querySelector("#btnOrder").addEventListener('click',()=>{
 
         if(status){
             alert(message)
+            closeModal(true)
         }else{
+        //사용자 예외
             alert(message)
         }
-
     })
     .catch((result) => {
-        debugger
         alert(result.message)
         console.error(result.message);
     });
