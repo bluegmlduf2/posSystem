@@ -78,7 +78,9 @@
     left: 3px;
     
 }
-#table .seat div.tabTime>span{
+#table .seat div.tabTime span{
+    display: inline-block;
+    width: 120px;
     text-align: right;
 }
 
@@ -88,7 +90,9 @@
     left: 3px;
 }
 
-#table .seat div.tabTot>span{
+#table .seat div.tabTot span{
+    display: inline-block;
+    width: 140px;
     text-align: right;
 }
 
@@ -187,6 +191,4 @@ textarea {
 }
 #itemList {
     margin-bottom: 10px;
-}
-#itemTotal {
 }

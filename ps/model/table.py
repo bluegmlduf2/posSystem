@@ -4,7 +4,12 @@ def getTable():
     conn = Connection()
     if conn:
         try:
-            sql = """SELECT TT.TABLE_CD ,OT.ORDER_CD ,TT.RESER_PEOPLE ,SUM(ORDER_AMOUNT) AS AMT
+            sql = """SELECT 
+                    TT.TABLE_CD 
+                    ,OT.ORDER_CD 
+                    ,DATE_FORMAT(OT.ORDER_TIME, '%%H:%%i:%%s') AS ORDER_TIME 
+                    ,IFNULL(TT.RESER_PEOPLE,0) AS RESER_PEOPLE 
+                    ,SUM(ORDER_AMOUNT) AS AMT
                     FROM posDB.TABLE_TBL AS TT
                     JOIN posDB.ORDER_TBL AS OT 
                     ON TT.ORDER_CD = OT.ORDER_CD 

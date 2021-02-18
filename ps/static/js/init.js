@@ -71,11 +71,10 @@ function setTable() {
                     }
 
                     tableEle.querySelector('.tabNum span').dataset.orderCd=filteredArr[0].ORDER_CD
-                    tableEle.querySelector('.tabTime span').innerText=filteredArr[0].RESER_PEOPLE
+                    tableEle.querySelector('.tabTime span').innerText=`${filteredArr[0].RESER_PEOPLE} / ${filteredArr[0].ORDER_TIME} `
                     tableEle.querySelector('.tabTot span').innerText=filteredArr[0].AMT
-                    // let menuKind = resultJson[idx].menu_kind;
-                    // btn.innerHTML = menuKind;
-                    // btn.setAttribute("data-val", resultJson[idx].menu_cd);
+
+                    // tableEle.style.borderWidth = "thick";
                 });
         })
         .catch((result) => {
