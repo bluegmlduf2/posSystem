@@ -1,5 +1,7 @@
 import time
 import traceback
+import simplejson as json # dumps(객체) ->json문자열 , loads(json문자열) ->객체
+from database import Connection
 
 def decorate(func):
     print ("##### 메소드 시작 => ("+func.__name__+")#####")

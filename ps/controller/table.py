@@ -12,9 +12,8 @@ def index():
     if request.method == 'GET':
         return render_template('/table.html')
 
-@order_ab.route('/table' ,methods=['GET','POST', 'PUT', 'DELETE'])
-def table():
+@table_ab.route('/info' ,methods=['GET','POST', 'PUT', 'DELETE'])
+def info():
     if request.method == 'POST':
-        args=request.get_json()
         '''테이블리스트 가져오기'''
-        return table.getTable(args)
+        return table.getTable()

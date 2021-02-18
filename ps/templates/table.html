@@ -52,9 +52,9 @@
                     {% for i in range(25) %}
                     <li class="seat">
                         <a href="#a">
-                            <div>{{loop.index}}</div>
-                            <div id="tabTime">시간/인원</div>
-                            <div id="tabTot">총금액</div>
+                            <div class="tabNum">{{loop.index}}<span></span></div>
+                            <div class="tabTime">시간/인원<span></span></div>
+                            <div class="tabTot">총금액<span></span></div>
                         </a>
                     </li>
                     {% endfor %}

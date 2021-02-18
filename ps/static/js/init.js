@@ -6,9 +6,7 @@
 //함수선언문의 hoisting 때문에 호출문이 먼저와도 실행이 된다.
 preventDrag();
 setMenu(); //메뉴중분류가져오기
-
-
-
+setTable(); //테이블초기화
 
 /**
  * 드래그방지
@@ -40,6 +38,44 @@ function setMenu() {
                     let menuKind = resultJson[idx].menu_kind;
                     btn.innerHTML = menuKind;
                     btn.setAttribute("data-val", resultJson[idx].menu_cd);
+                });
+        })
+        .catch((result) => {
+            //module.ajax() 내부에서 reject가 실행된 경우 실행됨
+            console.log(result);
+        });
+}
+
+/**
+ * 메뉴중분류가져오기
+ */
+function setTable() {
+    module
+        .ajax("POST", "/table/info")
+        .then((result) => {
+            //module.ajax() 내부에서 resolve가 실행된 경우 실행됨
+            let resultJson = JSON.parse(result); //menu_cd,menu_kind
+
+            document
+                .querySelectorAll("#table .seat")
+                .forEach((tableEle, idx) => {
+
+                    let tabNum=Number(tableEle.querySelector('.tabNum').innerText)
+                    //필터함수로 배열 검색가능
+                    let filteredArr = resultJson.filter((e)=>{
+                        return e.TABLE_CD==tabNum;
+                    });
+
+                    if (nullCheck(filteredArr)) {
+                        return; //continue
+                    }
+
+                    tableEle.querySelector('.tabNum span').dataset.orderCd=filteredArr[0].ORDER_CD
+                    tableEle.querySelector('.tabTime span').innerText=filteredArr[0].RESER_PEOPLE
+                    tableEle.querySelector('.tabTot span').innerText=filteredArr[0].AMT
+                    // let menuKind = resultJson[idx].menu_kind;
+                    // btn.innerHTML = menuKind;
+                    // btn.setAttribute("data-val", resultJson[idx].menu_cd);
                 });
         })
         .catch((result) => {

@@ -1,5 +1,3 @@
-from flask import jsonify
-from database import Connection
 from common import *
 
 def getMenu(args):
@@ -8,10 +6,10 @@ def getMenu(args):
         try:
             sql = "select menu_cd,menu_kind from menu_tbl"
             data = conn.executeAll(sql)
-            json_data = jsonify(data)
+            json_data = json.dumps((data))
             return json_data
         except Exception as e:
-            return jsonify({'message': f'{e}'}), 400
+            return json.dumps({'message': f'{e}'}), 400
 
 def getMenuDetail(args):
     conn = Connection()
@@ -20,10 +18,10 @@ def getMenuDetail(args):
             sql = '''SELECT MENU_DETAIL_CD, MENU_CD, MENU_NM, MENU_PRICE, MENU_COST
             FROM MENU_DETAIL_TBL WHERE MENU_CD = {menuCd}'''.format(menuCd=args['menuCd'])
             data = conn.executeAll(sql)
-            json_data = jsonify(data)
+            json_data = json.dumps(data)
             return json_data
         except Exception as e:
-            return jsonify({'message': f'{e}'}), 400
+            return json.dumps({'message': f'{e}'}), 400
 
 def insertOrder(args):
     conn = Connection()
@@ -104,14 +102,14 @@ def insertOrder(args):
                 reMsg='기존 주문에 추가하였습니다'
         except UserError as e:
             #raise UserError('사용자에러 테스트')
-            return jsonify({'status':False,'message': e.msg}), 200
+            return json.dumps({'status':False,'message': e.msg}), 200
         except Exception as e:
             traceback.print_exc()
             conn.rollback()
-            return jsonify({'message': '관리자에게 문의해주세요.'}), 400
+            return json.dumps({'message': '관리자에게 문의해주세요.'}), 400
         else:
             conn.commit()
-            return jsonify({'status':True,'message': reMsg}), 200
+            return json.dumps({'status':True,'message': reMsg}), 200
         finally:
             conn.close()
 
