@@ -145,7 +145,7 @@ Object.prototype.removeComma=function (str) {
 }
 
 /**
- * NULL CHECK
+ * NULL CHECK (if null return true )
  * @param {*} str
  */
 function nullCheck(obj) {

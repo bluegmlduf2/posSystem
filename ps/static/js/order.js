@@ -28,16 +28,76 @@ function openModal() {
 
     document.querySelector("#orderTop1 span").innerHTML = liTag[0].innerHTML;
     modal_order.style.display = "block"; /* none -> display */
+
+    /**기존 주문정보가 있을 시 불러옴  */
+    let orderCd=liTag[0].children[0].dataset.orderCd//부모로부터 받은 주문번호    
+
+    if(!nullCheck(orderCd)){
+        module
+        .ajax("POST", "/order/orderList", { orderList: {"orderCd":orderCd} })
+        .then((result) => {
+            let resultJson = JSON.parse(result); 
+            let tbodyEle = document.querySelector("#menuList tbody");
+
+            resultJson.forEach((e,i)=>{
+                let trEle = document.createElement("tr");
+                trEle.setAttribute("id", `order${i+1}`);
+
+                //기존 주문 내역 추가
+                var a1 = document.createElement("td");
+                var a2 = document.createElement("td");
+                var a3 = document.createElement("td");
+                var a4 = document.createElement("td");
+                var a5 = document.createElement("td");
+        
+                a1.setAttribute("data-val", e.MENU_DETAIL_CD); // a1.dataset.val=orderAddData.MENU_DETAIL_CD
+                a1.innerText = i+1;
+                a2.innerText = e.MENU_NM;
+                a3.innerText = `(${e.ORDER_DETAIL_TIME.substring(0,2)}시 ${e.ORDER_DETAIL_TIME.substring(3,5)}분)`;
+                a4.innerText = addComma(e.ORDER_COUNT);
+                a5.innerText = addComma(e.ORDER_AMOUNT);
+        
+                trEle.appendChild(a1);
+                trEle.appendChild(a2);
+                trEle.appendChild(a3);
+                trEle.appendChild(a4);
+                trEle.appendChild(a5);
+        
+                tbodyEle.appendChild(trEle);
+                
+                //주문리스트 선택시 하이라이트 주기 이벤트(active)
+                trEle.addEventListener("click", () => {
+                    trEle.classList.toggle("active");
+                });
+            })
+
+            //총합구하기
+            document.querySelector("#bottomTot").textContent = addComma(getTotal());
+            removeMenuListActive();
+        })
+        .catch((result) => {
+            alert(result.message)
+            console.error(result.message);
+        });
+    }
+    console.log(liTag[0].children[0].dataset.orderCd)
+    
 }
 
-// Close modal
+/**
+ * Close modal
+ * @param {*} afterOrder 주문 완료 후 닫기 플래그
+ */
 function closeModal(afterOrder=false) {
-    debugger
     if (document.querySelector("#menuList tbody").hasChildNodes()&&!afterOrder) {
         if (!confirm("주문중인 정보가 있습니다.\n취소하고 닫겠습니까?")) {
             return false;
         }
     }
+
+    location.reload()//새로고침
+
+    /**location.reload()를 사용하므로써 이 아래의 소스코드는 필요없음. */
 
     document.querySelectorAll("#orderMidMidMenu>ul>li").forEach((btn, idx) => {
         btn.classList.remove("active");
@@ -306,7 +366,8 @@ document.querySelectorAll("#btnOrderPlus,#btnOrderMinus").forEach((e, i) => {
         let curEleId = event.target.getAttribute("id");
         let status = curEleId == "btnOrderPlus" ? "추가" : "삭제";
         let trEle = document.querySelectorAll("#menuList tbody tr");
-
+        
+        //주문리스트 엘리먼트 가져오기
         trEle.forEach((e, i) => {
             var chk = module.hasClass(e.classList, "active");
             if (chk[0]) {
@@ -320,7 +381,7 @@ document.querySelectorAll("#btnOrderPlus,#btnOrderMinus").forEach((e, i) => {
             return false;
         }
 
-        let orderAddData = null; //상품정보
+        let orderAddData = null; //선택한 상품정보
 
         document
             .querySelectorAll("#orderSmallMenu ul li")
@@ -339,13 +400,14 @@ document.querySelectorAll("#btnOrderPlus,#btnOrderMinus").forEach((e, i) => {
             });
 
         if (!orderAddData) {
-            alert("추가할 항목을 선택해주세요");
+            alert(`메뉴 리스트에서 ${status}할 항목을 선택해주세요`);
             return;
         }
 
         btnList.forEach((orderKeyId) => {
             trEle.forEach((elem, idx) => {
                 if (orderKeyId == elem.getAttribute("id")) {
+                    
                     //추가
                     if (elem.children[1].innerText == orderAddData.MENU_NM) {
                         if (curEleId == "btnOrderPlus") {
@@ -413,17 +475,22 @@ document.querySelector("#btnOrder").addEventListener('click',()=>{
     let tabNum=document.querySelector('#orderTop1 span').innerText;
     let orderItems=new Array()
     let orderListTr=document.querySelectorAll("#menuList tbody tr");
-    
+ 
     if(nullCheck(orderListTr)){
         alert('주문리스트를 추가해주세요.')
         return
     }
-
     orderListTr.forEach((e, i) => {
+
+        let today = new Date();
+        let date = `${today.getFullYear()}-${(today.getMonth()+1).toString().lpad(2,'0')}-${today.getDate().toString().lpad(2,'0')} ` ;
+        let time=`${e.childNodes[2].innerText.substring(1,3)}:${e.childNodes[2].innerText.substring(5,7)}`;
+
         let itemInfo=new Object()
         itemInfo.orderAmount=Number(removeComma(e.childNodes[4].textContent))//금액
         itemInfo.orderCount=Number(e.childNodes[3].textContent)//수량
         itemInfo.menuDetailCd=e.childNodes[0].dataset.val//아이템번호
+        itemInfo.orderDeatilTime=date+time//아이템등록일자
         orderItems.push(itemInfo)
     });
 

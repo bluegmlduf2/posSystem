@@ -47,7 +47,7 @@ function setMenu() {
 }
 
 /**
- * 메뉴중분류가져오기
+ * 테아블최초정보가져오기
  */
 function setTable() {
     module
@@ -70,9 +70,10 @@ function setTable() {
                         return; //continue
                     }
 
-                    tableEle.querySelector('.tabNum span').dataset.orderCd=filteredArr[0].ORDER_CD
-                    tableEle.querySelector('.tabTime span').innerText=`${filteredArr[0].RESER_PEOPLE} / ${filteredArr[0].ORDER_TIME} `
-                    tableEle.querySelector('.tabTot span').innerText=filteredArr[0].AMT
+                    tableEle.querySelector('.tabNum span').dataset.orderCd=filteredArr[0].ORDER_CD //주문번호
+                    tableEle.querySelector('.tabPeople span').innerText=`${filteredArr[0].RESER_PEOPLE} 명` //주문인원
+                    tableEle.querySelector('.tabTime span').innerText=`${filteredArr[0].ORDER_TIME}` //주문시간
+                    tableEle.querySelector('.tabTot span').innerText=Object.addComma(filteredArr[0].AMT)+'원'//금액
 
                     // tableEle.style.borderWidth = "thick";
                 });

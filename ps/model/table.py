@@ -7,7 +7,7 @@ def getTable():
             sql = """SELECT 
                     TT.TABLE_CD 
                     ,OT.ORDER_CD 
-                    ,DATE_FORMAT(OT.ORDER_TIME, '%%H:%%i:%%s') AS ORDER_TIME 
+                    ,DATE_FORMAT(OT.ORDER_TIME, '%%Y-%%m-%%d %%H:%%i') AS ORDER_TIME 
                     ,IFNULL(TT.RESER_PEOPLE,0) AS RESER_PEOPLE 
                     ,SUM(ORDER_AMOUNT) AS AMT
                     FROM posDB.TABLE_TBL AS TT

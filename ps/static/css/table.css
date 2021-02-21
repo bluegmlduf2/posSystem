@@ -52,7 +52,7 @@
 /* TABLE */
 #table {
     clear: both;
-    height: 430px;
+    height: 530px;
     text-align: center;
     background-color: #eee;
     border-radius: 2%;
@@ -63,24 +63,36 @@
 #table .seat {
     float: left;
     width: 185px;
-    height: 70px;
+    height: 90px;
     margin: 5px;
 }
 
 #table .seat div:first-child {
     padding-top: 3px;
+    font-size: 1.2em;
     font-weight: bold;
 }
 
 #table .seat div.tabTime {
     position: absolute;
-    bottom: 25px;
+    bottom: 48px;
     left: 3px;
     
 }
 #table .seat div.tabTime span{
     display: inline-block;
-    width: 120px;
+    width: 140px;
+    text-align: right;
+}
+
+#table .seat div.tabPeople {
+    position: absolute;
+    bottom: 25px;
+    left: 3px;
+}
+#table .seat div.tabPeople span{
+    display: inline-block;
+    width: 140px;
     text-align: right;
 }
 
@@ -92,7 +104,7 @@
 
 #table .seat div.tabTot span{
     display: inline-block;
-    width: 140px;
+    width: 130px;
     text-align: right;
 }
 

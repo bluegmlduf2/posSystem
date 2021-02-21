@@ -24,6 +24,13 @@ def menuDetail():
         '''메뉴중분류 가져오기'''
         return order.getMenuDetail(args)
 
+@order_ab.route('/orderList' ,methods=['GET','POST', 'PUT', 'DELETE'])
+def orderList():
+    if request.method == 'POST':
+        args=request.get_json()
+        '''주문리스트 가져오기'''
+        return order.getOrderList(args)        
+
 @order_ab.route('/insertOrder' ,methods=['GET','POST', 'PUT', 'DELETE'])
 def insertOrder():
     if request.method == 'POST':
