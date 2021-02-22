@@ -45,7 +45,9 @@ def getOrderList(args):
                 ON OT.ORDER_CD =ODT.ORDER_CD 
                 JOIN posDB.MENU_DETAIL_TBL AS MDT
                 ON ODT.MENU_DETAIL_CD = MDT.MENU_DETAIL_CD
-                WHERE OT.ORDER_CD ={orderCd}'''.format(orderCd=orderCd)
+                WHERE OT.ORDER_CD ={orderCd}
+                ORDER BY ODT.ORDER_DETAIL_TIME DESC
+                '''.format(orderCd=orderCd)
 
             data = conn.executeAll(sql)
             json_data = json.dumps((data))

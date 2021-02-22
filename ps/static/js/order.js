@@ -361,27 +361,30 @@ document.querySelector("#btnOrderCancelAll").addEventListener("click", () => {
  * 주문추가삭제 플러스 마이너스 버튼 
  */
 document.querySelectorAll("#btnOrderPlus,#btnOrderMinus").forEach((e, i) => {
-    e.addEventListener("click", (event) => {
-        let btnList = [];
+    e.addEventListener("click", (event) => { 
         let curEleId = event.target.getAttribute("id");
         let status = curEleId == "btnOrderPlus" ? "추가" : "삭제";
         let trEle = document.querySelectorAll("#menuList tbody tr");
+        let nodata=false
         
+        //let orderList = [];
         //주문리스트 엘리먼트 가져오기
-        trEle.forEach((e, i) => {
-            var chk = module.hasClass(e.classList, "active");
-            if (chk[0]) {
-                btnList.push(e.getAttribute("id"));
-            }
-        });
+        // trEle.forEach((e, i) => {
+        //     var chk = module.hasClass(e.classList, "active");
+        //     if (chk[0]) {
+        //         orderList.push(e.getAttribute("id"));
+        //     }
+        // });
 
         //선택된 리스트가 있는지 체크
-        if (btnList.length != 1) {
+        /** 
+        if (orderList.length != 1) {
             alert(`주문리스트에서 ${status}할 \n하나의 항목을 선택해주세요.`);
             return false;
         }
+        */
 
-        let orderAddData = null; //선택한 상품정보
+        let selectedMenu = null; //선택한 상품정보
 
         document
             .querySelectorAll("#orderSmallMenu ul li")
@@ -395,74 +398,77 @@ document.querySelectorAll("#btnOrderPlus,#btnOrderMinus").forEach((e, i) => {
                         return false;
                     }
                     //dataset->JSONobj
-                    orderAddData = JSON.parse(btn.dataset.val);
+                    selectedMenu = JSON.parse(btn.dataset.val);
                 }
             });
 
-        if (!orderAddData) {
+        if (!selectedMenu) {
             alert(`메뉴 리스트에서 ${status}할 항목을 선택해주세요`);
             return;
         }
 
-        btnList.forEach((orderKeyId) => {
-            trEle.forEach((elem, idx) => {
-                if (orderKeyId == elem.getAttribute("id")) {
-                    
-                    //추가
-                    if (elem.children[1].innerText == orderAddData.MENU_NM) {
-                        if (curEleId == "btnOrderPlus") {
-                            //주문리스트와 선택메뉴가 동일한 메뉴인지 체크
+        trEle.forEach((elem, idx) => {
+            if (elem.children[0].dataset.val == selectedMenu.MENU_DETAIL_CD) {
+                //추가
+                if (curEleId == "btnOrderPlus") {
+                    //주문리스트와 선택메뉴가 동일한 메뉴인지 체크
 
-                            elem.children[2].innerText = `(${module.getCurTime()})`;
-                            elem.children[3].innerText = addComma(
-                                Number(elem.children[3].innerText) + 1
-                            );
-                            elem.children[4].innerText = addComma(
-                                Number(
-                                    removeComma(elem.children[4].innerText)
-                                ) + Number(orderAddData.MENU_PRICE)
-                            );
+                    elem.children[2].innerText = `(${module.getCurTime()})`;
+                    elem.children[3].innerText = addComma(
+                        Number(elem.children[3].innerText) + 1
+                    );
+                    elem.children[4].innerText = addComma(
+                        Number(removeComma(elem.children[4].innerText)) +
+                            Number(selectedMenu.MENU_PRICE)
+                    );
 
-                            elem.children[3].classList.add('blink')
-                        } else if (curEleId == "btnOrderMinus") {
-                            //삭제
-                            let itemCnt = Number(elem.children[3].innerText);
-                            if (itemCnt < 2) {
-                                alert("수량이 1개뿐입니다");
-                                return;
-                            }
-
-                            elem.children[2].innerText = `(${module.getCurTime()})`;
-                            elem.children[3].innerText = itemCnt - 1;
-                            elem.children[4].innerText = addComma(
-                                Number(
-                                    removeComma(elem.children[4].innerText)
-                                ) - Number(orderAddData.MENU_PRICE)
-                            );
-                        }
-
-                        //깜빡임 효과
-                        //Animation API
-                        //element.animate(keyframes, options);  
-                        //애니메이션 2가지 패턴
-                        //transform:translate(), scale(), rotate(), skew() 4종 //요소변형
-                        //transition:left 1.5s //요소속성 변경
-                        elem.children[3].animate([ 
-                            { opacity: 1 },
-                            { transform: 'scale(2)', color: '#ff0000' },
-                            { opacity: 0 } ],{ 
-                                //options
-                                duration: 300,
-                                iterations: 3
-                        });
-                        
-                    } else {
-                        alert("선택된 메뉴가 주문리스트에 없습니다 \n신규추가 해주세요.");
+                    elem.children[3].classList.add("blink");
+                } else if (curEleId == "btnOrderMinus") {
+                    //삭제
+                    let itemCnt = Number(elem.children[3].innerText);
+                    if (itemCnt < 2) {
+                        alert("수량이 1개뿐입니다");
                         return;
                     }
+
+                    elem.children[2].innerText = `(${module.getCurTime()})`;
+                    elem.children[3].innerText = itemCnt - 1;
+                    elem.children[4].innerText = addComma(
+                        Number(removeComma(elem.children[4].innerText)) -
+                            Number(selectedMenu.MENU_PRICE)
+                    );
                 }
-            });
+
+                //깜빡임 효과
+                //Animation API
+                //element.animate(keyframes, options);
+                //애니메이션 2가지 패턴
+                //transform:translate(), scale(), rotate(), skew() 4종 //요소변형
+                //transition:left 1.5s //요소속성 변경
+                elem.children[3].animate(
+                    [
+                        { opacity: 1 },
+                        { transform: "scale(2)", color: "#ff0000" },
+                        { opacity: 0 },
+                    ],
+                    {
+                        //options
+                        duration: 300,
+                        iterations: 3,
+                    }
+                );
+            } else {
+                nodata=true
+            }
+            
         });
+
+        //일치하는데이터가 없을 경우
+        if(nodata){
+            alert("선택된 메뉴가 주문리스트에 없습니다 \n신규추가 해주세요.");
+            return;
+        }
+
         //총합
         document.querySelector("#bottomTot").textContent = addComma(getTotal());
     });

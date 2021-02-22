@@ -146,7 +146,7 @@ Object.prototype.removeComma=function (str) {
 
 /**
  * NULL CHECK (if null return true )
- * @param {*} str
+ * @param {*} 체크할 파라미터
  */
 function nullCheck(obj) {
     if (typeof obj === "object") {
