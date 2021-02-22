@@ -36,9 +36,10 @@ def getOrderList(args):
                 OT.ORDER_CD 
                 ,ODT.MENU_DETAIL_CD 
                 ,MDT.MENU_NM 
-                ,DATE_FORMAT(ODT.ORDER_DETAIL_TIME, '%%H:%%i') AS ORDER_DETAIL_TIME 
+                ,DATE_FORMAT(ODT.ORDER_DETAIL_TIME, '%%Y-%%m-%%d %%H:%%i:%%s') AS ORDER_DETAIL_TIME 
                 ,ODT.ORDER_COUNT 
-                ,ODT.ORDER_AMOUNT 
+                ,ODT.ORDER_AMOUNT
+                ,DATE_FORMAT(ODT.ORDER_DETAIL_TIME, '%%Y-%%m-%%d %%H:%%i:%%s') AS UPDATED_TIME
                 FROM 
                 posDB.ORDER_TBL AS OT
                 LEFT JOIN posDB.ORDER_DETAIL_TBL AS ODT
@@ -46,7 +47,7 @@ def getOrderList(args):
                 JOIN posDB.MENU_DETAIL_TBL AS MDT
                 ON ODT.MENU_DETAIL_CD = MDT.MENU_DETAIL_CD
                 WHERE OT.ORDER_CD ={orderCd}
-                ORDER BY ODT.ORDER_DETAIL_TIME DESC
+                ORDER BY UPDATED_TIME DESC
                 '''.format(orderCd=orderCd)
 
             data = conn.executeAll(sql)

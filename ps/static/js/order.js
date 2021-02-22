@@ -51,9 +51,10 @@ function openModal() {
                 var a5 = document.createElement("td");
         
                 a1.setAttribute("data-val", e.MENU_DETAIL_CD); // a1.dataset.val=orderAddData.MENU_DETAIL_CD
+                a1.setAttribute("data-time", e.ORDER_DETAIL_TIME); // a1.dataset.time=orderAddData.ORDER_DETAIL_TIME
                 a1.innerText = i+1;
                 a2.innerText = e.MENU_NM;
-                a3.innerText = `(${e.ORDER_DETAIL_TIME.substring(0,2)}시 ${e.ORDER_DETAIL_TIME.substring(3,5)}분)`;
+                a3.innerText = `(${e.ORDER_DETAIL_TIME.substring(11,13)}시 ${e.ORDER_DETAIL_TIME.substring(14,16)}분)`;
                 a4.innerText = addComma(e.ORDER_COUNT);
                 a5.innerText = addComma(e.ORDER_AMOUNT);
         
@@ -79,9 +80,7 @@ function openModal() {
             alert(result.message)
             console.error(result.message);
         });
-    }
-    console.log(liTag[0].children[0].dataset.orderCd)
-    
+    }    
 }
 
 /**
@@ -89,7 +88,17 @@ function openModal() {
  * @param {*} afterOrder 주문 완료 후 닫기 플래그
  */
 function closeModal(afterOrder=false) {
-    if (document.querySelector("#menuList tbody").hasChildNodes()&&!afterOrder) {
+    let updChk=false//수정된행이 있으면 true
+
+    document.querySelectorAll("#menuList tbody tr").forEach((e, i) => {
+        debugger
+        let status=e.children[0].getAttribute("data-status")
+        if(status=='I'||status=='U'){
+            updChk=true        
+        }
+    });
+
+    if (document.querySelector("#menuList tbody").hasChildNodes()&&!afterOrder&&updChk) {
         if (!confirm("주문중인 정보가 있습니다.\n취소하고 닫겠습니까?")) {
             return false;
         }
@@ -222,7 +231,7 @@ document.querySelectorAll("#orderSmallMenu>ul>li").forEach((btn, idx) => {
 });
 
 /**
- * 추가 버튼 클릭
+ * 신규 추가 버튼 클릭
  */
 document.querySelector("#btnOrderAdd").addEventListener("click", (e) => {
     let orderAddData = null;
@@ -272,6 +281,8 @@ document.querySelector("#btnOrderAdd").addEventListener("click", (e) => {
 
     if (keyNum[0]) {
         //동일한 주문이 이미 있을경우
+        keyNum[1].children[0].dataset.status = "U"; //기존주문이있을경우 상태변경
+        keyNum[1].children[0].dataset.time = module.getCurDateHyphen(); //기존주문이있을경우 시간
         keyNum[1].children[2].innerText = `(${module.getCurTime()})`;
         keyNum[1].children[3].innerText = addComma(
             Number(keyNum[1].children[3].innerText) + 1
@@ -288,7 +299,9 @@ document.querySelector("#btnOrderAdd").addEventListener("click", (e) => {
         var a4 = document.createElement("td");
         var a5 = document.createElement("td");
 
+        a1.setAttribute("data-status", "I"); //신규 주문이있을경우 상태변경
         a1.setAttribute("data-val", orderAddData.MENU_DETAIL_CD); // a1.dataset.val=orderAddData.MENU_DETAIL_CD
+        a1.setAttribute("data-time", module.getCurDateHyphen()); // 신규 주문이있을경우 시간
         a1.innerText = orderKeys;
         a2.innerText = orderAddData.MENU_NM;
         a3.innerText = `(${module.getCurTime()})`;
@@ -365,7 +378,7 @@ document.querySelectorAll("#btnOrderPlus,#btnOrderMinus").forEach((e, i) => {
         let curEleId = event.target.getAttribute("id");
         let status = curEleId == "btnOrderPlus" ? "추가" : "삭제";
         let trEle = document.querySelectorAll("#menuList tbody tr");
-        let nodata=false
+        let nodata=true //주문리스트에 데이터 체크
         
         //let orderList = [];
         //주문리스트 엘리먼트 가져오기
@@ -409,6 +422,8 @@ document.querySelectorAll("#btnOrderPlus,#btnOrderMinus").forEach((e, i) => {
 
         trEle.forEach((elem, idx) => {
             if (elem.children[0].dataset.val == selectedMenu.MENU_DETAIL_CD) {
+                nodata=false//데이터가 존재함으로 false
+
                 //추가
                 if (curEleId == "btnOrderPlus") {
                     //주문리스트와 선택메뉴가 동일한 메뉴인지 체크
@@ -422,7 +437,7 @@ document.querySelectorAll("#btnOrderPlus,#btnOrderMinus").forEach((e, i) => {
                             Number(selectedMenu.MENU_PRICE)
                     );
 
-                    elem.children[3].classList.add("blink");
+                    // elem.children[3].classList.add("blink");
                 } else if (curEleId == "btnOrderMinus") {
                     //삭제
                     let itemCnt = Number(elem.children[3].innerText);
@@ -438,7 +453,8 @@ document.querySelectorAll("#btnOrderPlus,#btnOrderMinus").forEach((e, i) => {
                             Number(selectedMenu.MENU_PRICE)
                     );
                 }
-
+                elem.children[0].dataset.time = module.getCurDateHyphen(); //기존주문이있을경우 시간변경
+                elem.children[0].dataset.status = "U"; //기존주문이있을경우 상태변경
                 //깜빡임 효과
                 //Animation API
                 //element.animate(keyframes, options);
@@ -457,10 +473,7 @@ document.querySelectorAll("#btnOrderPlus,#btnOrderMinus").forEach((e, i) => {
                         iterations: 3,
                     }
                 );
-            } else {
-                nodata=true
-            }
-            
+            } 
         });
 
         //일치하는데이터가 없을 경우
@@ -487,16 +500,16 @@ document.querySelector("#btnOrder").addEventListener('click',()=>{
         return
     }
     orderListTr.forEach((e, i) => {
-
-        let today = new Date();
-        let date = `${today.getFullYear()}-${(today.getMonth()+1).toString().lpad(2,'0')}-${today.getDate().toString().lpad(2,'0')} ` ;
-        let time=`${e.childNodes[2].innerText.substring(1,3)}:${e.childNodes[2].innerText.substring(5,7)}`;
+        //let today = new Date();
+        //let date = `${today.getFullYear()}-${(today.getMonth()+1).toString().lpad(2,'0')}-${today.getDate().toString().lpad(2,'0')} ` ;//TODAY
+        //let date = module.getCurDateHyphen();
+        //let time=`${e.childNodes[2].innerText.substring(1,3)}:${e.childNodes[2].innerText.substring(5,7)}`;
 
         let itemInfo=new Object()
         itemInfo.orderAmount=Number(removeComma(e.childNodes[4].textContent))//금액
         itemInfo.orderCount=Number(e.childNodes[3].textContent)//수량
         itemInfo.menuDetailCd=e.childNodes[0].dataset.val//아이템번호
-        itemInfo.orderDeatilTime=date+time//아이템등록일자
+        itemInfo.orderDeatilTime=e.childNodes[0].dataset.time//아이템등록일자
         orderItems.push(itemInfo)
     });
 

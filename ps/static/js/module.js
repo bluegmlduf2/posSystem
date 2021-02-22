@@ -64,7 +64,21 @@ const module = (function () {
         return `${year}년 ${month}월 ${date}일 ${day}요일 \n ${hour}시 ${min}분 `;
     }
 
-    //
+    //시간+날짜함수
+    function _getCurDateHyphen() {
+        let today = new Date();
+        let days = new Array("일", "월", "화", "수", "목", "금", "토");
+
+        let year = today.getFullYear();
+        let month = today.getMonth() + 1;
+        let date = today.getDate();
+        let day = days[today.getDay()];
+        let hour = today.getHours().toString().lpad(2, "0");
+        let min = today.getMinutes().toString().lpad(2, "0");
+        let sec = today.getSeconds().toString().lpad(2, "0");
+
+        return `${year}-${month}-${date} ${hour}:${min}:${sec}`;
+    }
 
     /**
      * 클래스 존재여부 체크
@@ -101,6 +115,9 @@ const module = (function () {
         }, //실행된 함수의 결과를 넘겨줌 ->비공개
         getCurDate: function () {
             return _getCurDate(); //비공개
+        },
+        getCurDateHyphen: function () {
+            return _getCurDateHyphen(); //비공개
         },
         hasClass: _hasClass, //공개
         //실행되기 전의 함수소스코드를 통채로 넘겨줌 -> 공개
