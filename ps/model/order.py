@@ -90,54 +90,50 @@ def insertOrder(args):
                     sql = '''INSERT INTO posDB.ORDER_DETAIL_TBL
                     (ORDER_CD, ORDER_AMOUNT, ORDER_COUNT, MENU_DETAIL_CD, ORDER_DETAIL_TIME)
                     VALUES({orderCd}, {orderAmount}, {orderCount}, {menuDetailCd},STR_TO_DATE('{orderDeatilTime}', '%%Y-%%m-%%d %%H:%%i:%%s'))'''.format(
-                        orderCd=orderCd_new
-                        , orderAmount=e["orderAmount"]
-                        , orderCount=e["orderCount"]
-                        , menuDetailCd=e["menuDetailCd"]
-                        , orderDeatilTime=e["orderDeatilTime"])
+                        orderCd=orderCd_new, orderAmount=e["orderAmount"], orderCount=e["orderCount"], menuDetailCd=e["menuDetailCd"], orderDeatilTime=e["orderDeatilTime"])
                     data = conn.execute(sql)
 
                 reMsg = '신규 주문을 완료하였습니다'
             else:
                 for e in orderItems:
-                    #기존주문정보가져오기
-                    sql = '''SELECT ORDER_AMOUNT, ORDER_COUNT
-                    FROM posDB.ORDER_DETAIL_TBL
-                    WHERE ORDER_CD={orderCd} AND MENU_DETAIL_CD={menuDetailCd}'''.format(
-                        orderCd=orderCd, menuDetailCd=e["menuDetailCd"])
-                    data = conn.executeOne(sql)
+                    #삭제정보체크
+                    if "orderId" not in e:
+                        #기존주문정보가져오기
+                        sql = '''SELECT ORDER_AMOUNT, ORDER_COUNT, ORDER_DETAIL_CD
+                        FROM posDB.ORDER_DETAIL_TBL
+                        WHERE ORDER_CD={orderCd} AND MENU_DETAIL_CD={menuDetailCd}'''.format(
+                            orderCd=orderCd, menuDetailCd=e["menuDetailCd"])
+                        data = conn.executeOne(sql)
 
-                    #기존주문정보가 존재하지 않으면 신규주문등록
-                    if data is None:
-                        #주문상세등록
-                        sql = '''INSERT INTO posDB.ORDER_DETAIL_TBL
-                        (ORDER_CD, ORDER_AMOUNT, ORDER_COUNT, MENU_DETAIL_CD, ORDER_DETAIL_TIME)
-                        VALUES({orderCd}, {orderAmount}, {orderCount}, {menuDetailCd},STR_TO_DATE('{orderDeatilTime}', '%%Y-%%m-%%d %%H:%%i:%%s'))'''.format(
-                            orderCd=orderCd
-                            , orderAmount=e["orderAmount"]
-                            , orderCount=e["orderCount"]
-                            , menuDetailCd=e["menuDetailCd"]
-                            , orderDeatilTime=e["orderDeatilTime"]
+                        #기존주문정보가 존재하지 않으면 신규주문등록
+                        if data is None:
+                            #주문상세등록
+                            sql = '''INSERT INTO posDB.ORDER_DETAIL_TBL
+                            (ORDER_CD, ORDER_AMOUNT, ORDER_COUNT, MENU_DETAIL_CD, ORDER_DETAIL_TIME)
+                            VALUES({orderCd}, {orderAmount}, {orderCount}, {menuDetailCd},STR_TO_DATE('{orderDeatilTime}', '%%Y-%%m-%%d %%H:%%i:%%s'))'''.format(
+                                orderCd=orderCd, orderAmount=e["orderAmount"], orderCount=e[
+                                    "orderCount"], menuDetailCd=e["menuDetailCd"], orderDeatilTime=e["orderDeatilTime"]
                             )
-                        data = conn.execute(sql)
+                            data = conn.execute(sql)
+                        else:
+                            #주문상세수정
+                            sql = '''UPDATE posDB.ORDER_DETAIL_TBL
+                            SET ORDER_AMOUNT={orderAmount}, ORDER_COUNT={orderCount},ORDER_DETAIL_TIME=STR_TO_DATE('{orderDeatilTime}', '%%Y-%%m-%%d %%H:%%i:%%s')
+                            WHERE ORDER_CD={orderCd} AND MENU_DETAIL_CD={menuDetailCd}
+                            '''.format(
+                                orderCd=orderCd, orderAmount=e["orderAmount"], orderCount=e[
+                                    "orderCount"], menuDetailCd=e["menuDetailCd"], orderDeatilTime=e["orderDeatilTime"]
+                            )
+                            data = conn.execute(sql)
                     else:
-                        orderAmt_bef = data['ORDER_AMOUNT']
-                        orderCnt_bef = data['ORDER_COUNT']
-
-                        #주문상세수정
-                        sql = '''UPDATE posDB.ORDER_DETAIL_TBL
-                        SET ORDER_AMOUNT={orderAmount}, ORDER_COUNT={orderCount},ORDER_DETAIL_TIME=STR_TO_DATE('{orderDeatilTime}', '%%Y-%%m-%%d %%H:%%i:%%s')
-                        WHERE ORDER_CD={orderCd} AND MENU_DETAIL_CD={menuDetailCd}
+                        #주문삭제
+                        sql = '''DELETE FROM posDB.ORDER_DETAIL_TBL AS ODT 
+                        WHERE ODT.ORDER_CD ={orderCd} AND ODT.MENU_DETAIL_CD ={menuDetailCd}
                         '''.format(
-                            orderCd=orderCd
-                            , orderAmount=e["orderAmount"]
-                            , orderCount=e["orderCount"]
-                            , menuDetailCd=e["menuDetailCd"]
-                            , orderDeatilTime=e["orderDeatilTime"]
-                            )
+                            orderCd=orderCd, menuDetailCd=e["menuDetailCd"]
+                        )
                         data = conn.execute(sql)
-
-                reMsg = '기존 주문에 추가하였습니다'
+                reMsg = '기존 주문을 수정하였습니다'
         except UserError as e:
             #raise UserError('사용자에러 테스트')
             return json.dumps({'status': False, 'message': e.msg}), 200
