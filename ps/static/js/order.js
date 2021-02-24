@@ -1,4 +1,5 @@
 // Get modal element
+//아쉬운점..document.querySelector("#menuList tbody")같은 경우는 함수 내부에서 초기화 되는 경우가 아니면 const로 할것..
 const modal_order = document.querySelector("#orderBg");
 const modalBtn_order = document.querySelectorAll(".ordBtn");
 const closeBtn_order = document.querySelectorAll(".ordcloseBtn");
@@ -20,7 +21,9 @@ closeBtn_order.forEach((btn) => {
 // Listen for outside click
 window.addEventListener("click", outsideClick);
 
-// Open modal
+/**
+ * Open modal
+ */
 function openModal() {
     //querySelector의 결과가 없다면 null반환
     if (!document.querySelector(".seat.active")) {
@@ -287,8 +290,9 @@ document.querySelector("#btnOrderAdd").addEventListener("click", (e) => {
 
                 //이전에 삭제된 항목중에 아직 저장되지 않은 항목이 있을경우.
                 if(checkDeleteBefore(orderAddData.MENU_DETAIL_CD)){
-                    //exception이 없기때문에 객체를 생성해서 넘겨줌
-                    throw {message:"삭제된 항목중에 아직 저장되지 않은 항목이 존재합니다.\n먼저 저장해주세요."}
+                    throw new Error("삭제된 항목중에 아직 저장되지 않은 항목이 존재합니다.\n먼저 저장해주세요.")
+                    // throw {message:"삭제된 항목중에 아직 저장되지 않은 항목이 존재합니다.\n먼저 저장해주세요."}
+                    //1. exception이 없기때문에 객체를 생성해서 넘겨줌 2.new Error()는 존재함으로 Error사용
                 }
             }
         });
@@ -477,8 +481,9 @@ document.querySelectorAll("#btnOrderPlus,#btnOrderMinus").forEach((e, i) => {
                         
                         //이전에 삭제된 항목중에 아직 저장되지 않은 항목이 있을경우.
                         if(checkDeleteBefore(selectedMenu.MENU_DETAIL_CD)){
-                            //exception이 없기때문에 객체를 생성해서 넘겨줌
-                            throw {message:"삭제된 항목중에 아직 저장되지 않은 항목이 존재합니다.\n먼저 저장해주세요."}
+                            throw new Error("삭제된 항목중에 아직 저장되지 않은 항목이 존재합니다.\n먼저 저장해주세요.")
+                            //throw {message:"삭제된 항목중에 아직 저장되지 않은 항목이 존재합니다.\n먼저 저장해주세요."}
+                            //1. exception이 없기때문에 객체를 생성해서 넘겨줌 2.new Error()는 존재함으로 Error사용
                         }
                     }
                 });
@@ -553,6 +558,7 @@ document.querySelectorAll("#btnOrderPlus,#btnOrderMinus").forEach((e, i) => {
             //총합
             document.querySelector("#bottomTot").textContent = addComma(getTotal());
         } catch (error) {
+            debugger
             alert(error.message)
             console.error(error.message)
         }

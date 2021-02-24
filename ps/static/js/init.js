@@ -4,7 +4,7 @@
 
 
 //함수선언문의 hoisting 때문에 호출문이 먼저와도 실행이 된다.
-preventDrag();
+preventDrag();//드래그방지
 setMenu(); //메뉴중분류가져오기
 setTable(); //테이블초기화
 

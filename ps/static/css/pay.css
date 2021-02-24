@@ -45,7 +45,11 @@
     border-radius: 5px;
     line-height: 60px;
     text-indent: 10px;
+    font-size: 1.5em;
+    text-align: right;
+    padding-right: 5%;
 }
+
 
 #payBtn {
     height: 60px;
@@ -64,35 +68,33 @@
 }
 
 /* 데이터 테이블 그리드 */
-#datagrid {
+#payList {
     font: normal 12px/150% Arial, Helvetica, sans-serif;
     background: #fff;
 }
 
-#datagrid table {
+#payList table {
     border-collapse: collapse; /* border-collapse: collapse; table의 선이 겹치는 부분을 합친다 */
     text-align: center;
     width: 100%;
+    font-weight: bold;
+    font-size: 1.3em;
 }
 
-#datagrid table thead th {
+#payList table thead th {
     background-color: #8c8c8c;
     color: #ffffff;
-    font-size: 15px;
-    font-weight: bold;
     border: 1px solid #a3a3a3;
     height: 40px;
 }
 
-#datagrid table tbody td {
+#payList table tbody td {
     color: #7d7d7d;
     border: 1px solid #dbdbdb;
-    font-size: 12px;
-    font-weight: normal;
     height: 35px;
 }
 
-#datagrid table tbody .alt td {
+#payList table tbody .alt td {
     background: #ebebeb;
     color: #7d7d7d;
 }
