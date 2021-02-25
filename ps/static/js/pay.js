@@ -82,6 +82,7 @@ function openModal() {
  */
 function closeModal() {
     modal_pay.style.display = "none";
+    location.reload()//새로고침
 }
 
 // Click outside and close
@@ -118,7 +119,17 @@ document.querySelectorAll("#payCard,#payMoney").forEach((elem) => {
             module
             .ajax("POST", "/pay/insertPay", {"tableCd":tabNum,"orderCd":orderCd,"payType":status[1]})
             .then((result) => {
-                debugger
+                let resultJson = JSON.parse(result);
+                let status=resultJson.status
+                let message=resultJson.message
+
+                if(status){
+                    alert(message)
+                    closeModal(true)
+                }else{
+                    //사용자 예외
+                    alert(message)
+                }
             }).catch((result) => {
                 alert(result.message)
                 console.error(result.message);

@@ -605,7 +605,7 @@ document.querySelector("#btnOrder").addEventListener('click',()=>{
         let resultJson = JSON.parse(result); //menu_cd,menu_kind
         let status=resultJson.status
         let message=resultJson.message
-
+        
         if(status){
             alert(message)
             closeModal(true)

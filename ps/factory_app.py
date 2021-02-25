@@ -5,7 +5,8 @@ from flask import Flask, render_template, request, redirect, url_for, Blueprint
 import traceback
 from controller import table 
 from controller import order 
-from controller import pay 
+from controller import pay
+from controller import resv
 
 dict_confmode = {
     'test': 'setting.TestMode',
@@ -24,6 +25,7 @@ def create_app(config_mode="test"):
     app.register_blueprint(table.table_ab, url_prefix='/table')
     app.register_blueprint(order.order_ab, url_prefix='/order')
     app.register_blueprint(pay.pay_ab, url_prefix='/pay')
+    app.register_blueprint(resv.resv_ab, url_prefix='/resv')
 
     return app
 
