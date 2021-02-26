@@ -9,3 +9,10 @@ def insertResv():
         args=request.get_json()
         '''예약입력'''
         return resv.insertResv(args)
+
+@resv_ab.route('/cancelResv' ,methods=['GET','POST', 'PUT', 'DELETE'])
+def cancelResv():
+    if request.method == 'POST':
+        args=request.get_json()
+        '''예약취소'''
+        return resv.cancelResv(args)

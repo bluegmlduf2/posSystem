@@ -91,7 +91,46 @@ document.querySelector("#btnResv").addEventListener("click", () => {
 });
 
 // 예약취소버튼
-document.querySelector("#btnCancleResv").addEventListener("click", () => {});
+document.querySelector("#btnCancleResv").addEventListener("click", () => {
+    let tabDiv = document.querySelector(".seat.active .tabNum");
+    let tabDiv_span = tabDiv.querySelector("span");
+    const tabNum = tabDiv.textContent;
+
+    if (!document.querySelector(".seat.active")) {
+        alert("좌석을 선택해주세요.");
+        return;
+    }
+
+    if (!nullCheck(tabDiv_span.dataset.orderCd)) {
+        alert("주문하지 않은 좌석을 선택해주세요.");
+        return;
+    }
+
+    if(confirm("예약을 취소하시겠습니까?")){
+        module
+        .ajax("POST", "/resv/cancelResv", {
+            tableCd: tabNum
+        })
+        .then((result) => {
+            let resultJson = JSON.parse(result);
+            let status = resultJson.status;
+            let message = resultJson.message;
+
+            if (status) {
+                alert(message);
+                // closeModal(true);
+            } else {
+                //사용자 예외
+                alert(message);
+            }
+        })
+        .catch((result) => {
+            debugger
+            alert(result.message);
+            console.error(result.message);
+        });
+    }
+});
 
 /* Window.onload 는 image로드까지 기다리기 때문에 느림 
 그러나 DOMContentLoaded는 DOM객체를 생성후 이벤트를 발생한다. 
