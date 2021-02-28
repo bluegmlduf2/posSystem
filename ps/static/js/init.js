@@ -53,16 +53,20 @@ function setTable() {
     module
         .ajax("POST", "/table/info")
         .then((result) => {
+            
             //module.ajax() 내부에서 resolve가 실행된 경우 실행됨
             let resultJson = JSON.parse(result); //menu_cd,menu_kind
+            let dataMain=resultJson[0];
+            let dataResv=resultJson[1];
 
+            debugger
             document
                 .querySelectorAll("#table .seat")
                 .forEach((tableEle, idx) => {
 
                     let tabNum=Number(tableEle.querySelector('.tabNum').innerText)
                     //필터함수로 배열 검색가능
-                    let filteredArr = resultJson.filter((e)=>{
+                    let filteredArr = dataMain.filter((e)=>{
                         return e.TABLE_CD==tabNum;
                     });
 
@@ -77,6 +81,9 @@ function setTable() {
 
                     // tableEle.style.borderWidth = "thick";
                 });
+
+            debugger
+            
         })
         .catch((result) => {
             //module.ajax() 내부에서 reject가 실행된 경우 실행됨
