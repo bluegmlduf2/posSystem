@@ -37,6 +37,13 @@ def insertOrder():
         args=request.get_json()
         '''주문입력'''
         return order.insertOrder(args)
+
+@order_ab.route('/cancelOrder' ,methods=['GET','POST', 'PUT', 'DELETE'])
+def cancelOrder():
+    if request.method == 'POST':
+        args=request.get_json()
+        '''주문입력'''
+        return order.cancelOrder(args)
     #     print(data['email'])
     # if request.method == 'PUT':
     #     user = request.args.get('email')

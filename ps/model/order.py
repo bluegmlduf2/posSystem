@@ -81,7 +81,7 @@ def insertOrder(args):
                 orderCd_new = conn.insertLastKey()
 
                 #테이블사용등록
-                sql = '''UPDATE posDB.TABLE_TBL SET ORDER_CD={orderCd}
+                sql = '''UPDATE posDB.TABLE_TBL SET ORDER_CD={orderCd} , RESER_TIME=NULL
                 WHERE TABLE_CD={tableCd}'''.format(orderCd=orderCd_new, tableCd=tableCd)
                 data = conn.execute(sql)
 
@@ -147,6 +147,32 @@ def insertOrder(args):
         finally:
             conn.close()
 
+def cancelOrder(args):
+    conn = Connection()
+    if conn:
+        try:
+            tableCd = args['tableCd']
+            reMsg = ''
+
+            #주문취소
+            sql = '''UPDATE posDB.TABLE_TBL
+            SET ORDER_CD=NULL, RESER_TIME=NULL, RESER_PEOPLE=NULL
+            WHERE TABLE_CD={tableCd}'''.format(tableCd=tableCd)
+            data = conn.execute(sql)
+
+            reMsg = '기존 주문을 취소하였습니다'
+        except UserError as e:
+            #raise UserError('사용자에러 테스트')
+            return json.dumps({'status': False, 'message': e.msg}), 200
+        except Exception as e:
+            traceback.print_exc()
+            conn.rollback()
+            return json.dumps({'message': '관리자에게 문의해주세요.'}), 400
+        else:
+            conn.commit()
+            return json.dumps({'status': True, 'message': reMsg}), 200
+        finally:
+            conn.close()
 # # INSERT 함수 예제
 # @test.route('/insert', methods=['GET'])
 # def insert():

@@ -32,7 +32,15 @@ function openModal() {
     }
 
     let liTag = document.querySelector(".seat.active").children[0].children;
-
+    let resvChk=liTag[3].innerText;
+    
+    //string.indexOf("serachWord") = -1 (같지않음)
+    if(resvChk.indexOf("예약중")>-1){
+        if (!confirm("예약 좌석에 주문하겠습니까?")) {
+            return;
+        }
+    }
+    
     document.querySelector("#orderTop1 span").innerHTML = liTag[0].innerHTML;
     modal_order.style.display = "block"; /* none -> display */
 

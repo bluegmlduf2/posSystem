@@ -26,9 +26,11 @@ document.querySelectorAll(".seat").forEach((btn) => {
 
 // 예약하기버튼
 document.querySelector("#btnResv").addEventListener("click", () => {
-    let tabDiv = document.querySelector(".seat.active .tabNum");
+    let seat= document.querySelector(".seat.active");
+    let tabDiv = seat.querySelector(".tabNum");
     let tabDiv_span = tabDiv.querySelector("span");
     const tabNum = tabDiv.textContent;
+    const resvChk =seat.querySelector(".tabTot b").innerText;
 
     if (!document.querySelector(".seat.active")) {
         alert("좌석을 선택해주세요.");
@@ -39,6 +41,12 @@ document.querySelector("#btnResv").addEventListener("click", () => {
         alert("주문하지 않은 좌석을 선택해주세요.");
         return;
     }
+
+    if(resvChk.indexOf("예약중")>-1){
+        alert("예약하지 않은 좌석을 선택해주세요.");
+        return;
+    }
+
     const year=new Date().getFullYear()
     const resvDay = prompt("예약일자를 입력해주세요 \n(ex:0101)");
     const resvTime = prompt("예약시간을 입력해주세요 \n(ex:2359)");
@@ -77,6 +85,7 @@ document.querySelector("#btnResv").addEventListener("click", () => {
 
             if (status) {
                 alert(message);
+                location.reload();
                 // closeModal(true);
             } else {
                 //사용자 예외
@@ -91,10 +100,12 @@ document.querySelector("#btnResv").addEventListener("click", () => {
 });
 
 // 예약취소버튼
-document.querySelector("#btnCancleResv").addEventListener("click", () => {
-    let tabDiv = document.querySelector(".seat.active .tabNum");
+document.querySelector("#btnCancelResv").addEventListener("click", () => {
+    let seat= document.querySelector(".seat.active");
+    let tabDiv = seat.querySelector(".tabNum");
     let tabDiv_span = tabDiv.querySelector("span");
     const tabNum = tabDiv.textContent;
+    const resvChk =seat.querySelector(".tabTot b").innerText;
 
     if (!document.querySelector(".seat.active")) {
         alert("좌석을 선택해주세요.");
@@ -103,6 +114,11 @@ document.querySelector("#btnCancleResv").addEventListener("click", () => {
 
     if (!nullCheck(tabDiv_span.dataset.orderCd)) {
         alert("주문하지 않은 좌석을 선택해주세요.");
+        return;
+    }
+
+    if(resvChk.indexOf("예약중")==-1){
+        alert("예약된 좌석을 선택해주세요.");
         return;
     }
 
@@ -118,6 +134,58 @@ document.querySelector("#btnCancleResv").addEventListener("click", () => {
 
             if (status) {
                 alert(message);
+                location.reload();
+                // closeModal(true);
+            } else {
+                //사용자 예외
+                alert(message);
+            }
+        })
+        .catch((result) => {
+            debugger
+            alert(result.message);
+            console.error(result.message);
+        });
+    }
+});
+
+
+// 주문취소버튼
+document.querySelector("#btnCancelOrder").addEventListener("click", () => {
+    let seat= document.querySelector(".seat.active");
+    let tabDiv = seat.querySelector(".tabNum");
+    let tabDiv_span = tabDiv.querySelector("span");
+    const tabNum = tabDiv.textContent;
+    const resvChk =seat.querySelector(".tabTot b").innerText;
+
+    if (!document.querySelector(".seat.active")) {
+        alert("좌석을 선택해주세요.");
+        return;
+    }
+
+    if (nullCheck(tabDiv_span.dataset.orderCd)) {
+        alert("주문된 좌석을 선택해주세요.");
+        return;
+    }
+
+    if(resvChk.indexOf("예약중")>-1){
+        alert("예약하지 않은 좌석을 선택해주세요.");
+        return;
+    }
+
+    if(confirm("주문을 취소하시겠습니까?")){
+        module
+        .ajax("POST", "/order/cancelOrder", {
+            tableCd: tabNum
+        })
+        .then((result) => {
+            let resultJson = JSON.parse(result);
+            let status = resultJson.status;
+            let message = resultJson.message;
+
+            if (status) {
+                alert(message);
+                location.reload();
                 // closeModal(true);
             } else {
                 //사용자 예외

@@ -59,31 +59,41 @@ function setTable() {
             let dataMain=resultJson[0];
             let dataResv=resultJson[1];
 
-            debugger
             document
                 .querySelectorAll("#table .seat")
                 .forEach((tableEle, idx) => {
 
                     let tabNum=Number(tableEle.querySelector('.tabNum').innerText)
                     //필터함수로 배열 검색가능
-                    let filteredArr = dataMain.filter((e)=>{
+                    let filterArr = dataMain.filter((e)=>{
                         return e.TABLE_CD==tabNum;
                     });
 
-                    if (nullCheck(filteredArr)) {
-                        return; //continue
+                    //필터함수로 배열 검색가능
+                    let filterResvArr = dataResv.filter((e)=>{
+                        return e.TABLE_CD==tabNum;
+                    });
+
+                    //일반주문추가
+                    if (!nullCheck(filterArr)) {
+                        tableEle.querySelector('.tabNum span').dataset.orderCd=filterArr[0].ORDER_CD //주문번호
+                        tableEle.querySelector('.tabPeople span').innerText=`${filterArr[0].RESER_PEOPLE} 명` //주문인원
+                        tableEle.querySelector('.tabTime span').innerText=`${filterArr[0].ORDER_TIME}` //주문시간
+                        tableEle.querySelector('.tabTot span').innerText=Object.addComma(filterArr[0].AMT)+'원'//금액                            
                     }
 
-                    tableEle.querySelector('.tabNum span').dataset.orderCd=filteredArr[0].ORDER_CD //주문번호
-                    tableEle.querySelector('.tabPeople span').innerText=`${filteredArr[0].RESER_PEOPLE} 명` //주문인원
-                    tableEle.querySelector('.tabTime span').innerText=`${filteredArr[0].ORDER_TIME}` //주문시간
-                    tableEle.querySelector('.tabTot span').innerText=Object.addComma(filteredArr[0].AMT)+'원'//금액
+                    //예약추가
+                    if (!nullCheck(filterResvArr)) {
+                        tableEle.querySelector('.tabPeople span').innerText=`${filterResvArr[0].RESER_PEOPLE} 명` //주문인원
+                        tableEle.querySelector('.tabTime span').innerText=`${filterResvArr[0].RESER_TIME}` //주문시간           
+                        tableEle.querySelector('.tabTot b').innerText="예약중";
+                        tableEle.querySelector('.tabTot').style.left="7.5%";
+                        tableEle.querySelector('.tabTot').style.bottom="-15%";
+                        tableEle.querySelector('.tabTot').style.color="red";
+                    }
 
                     // tableEle.style.borderWidth = "thick";
                 });
-
-            debugger
-            
         })
         .catch((result) => {
             //module.ajax() 내부에서 reject가 실행된 경우 실행됨
