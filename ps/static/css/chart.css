@@ -1,0 +1,148 @@
+#chartCenter {
+    display: flex;
+    flex-direction:column;
+    width: 100vh;
+    height: 90vh; 
+    /*뷰포트의 90%*/
+    padding: 10px;
+    font-size: 1em;
+    border-radius: 2%;
+}
+
+#chartTop{
+    /* flex 4,3,1 다합쳐서 8개중에 4를 차지 */
+    flex: 4;
+    margin-bottom: 2%;
+    display: flex;
+}
+
+#chartTop ul{
+    width: 100%;
+}
+
+#chartTop ul li{
+    display: inline-block;
+    background-color: #fff;
+    margin: 2%;
+    height: 40px;
+    width: 90%;
+    border-radius: 40px;
+    box-sizing: border-box;/*볼더넓이를제외*/
+ }
+
+#chartTop ul>span{
+    display: inline-block;
+    width: 6%;
+    text-align: right;
+    font-size: large;
+    font-weight: bold;
+}
+
+#chartTop ul li span{
+    display: block;
+    background-color:steelblue;
+    height: 40px;
+    line-height: 40px;
+    color: #fff;
+    border-radius: 40px;
+    padding-right: 10px;
+    text-align: right;
+}
+
+#graph1 span{
+    animation: stack1 2s 1;
+    /*2초동안 1번의 애니메이션*/
+}
+#graph2 span{
+    animation: stack2 2s 1;
+}
+#graph3 span{
+    animation: stack3 2s 1;
+}
+#graph4 span{
+    animation: stack4 2s 1;
+}
+#graph5 span{
+    animation: stack5 2s 1;
+}
+#graph6 span{
+    animation: stack6 2s 1;
+}
+#graph7 span{
+    animation: stack7 2s 1;
+}
+@keyframes stack1{
+    0%{width: 0;}
+    100%{width: 0;}
+}
+@keyframes stack2{
+    0%{width: 0;}
+    100%{width: 0;}
+}
+@keyframes stack3{
+    0%{width: 0;}
+    100%{width: 0;}
+}
+@keyframes stack4{
+    0%{width: 0;}
+    100%{width: 0;}
+}
+@keyframes stack5{
+    0%{width: 0;}
+    100%{width: 0;}
+}
+@keyframes stack6{
+    0%{width: 0;}
+    100%{width: 0;}
+}
+@keyframes stack7{
+    0%{width: 0;}
+    100%{width: 0;}
+}
+
+#chartMiddle{
+    flex: 3;
+    border: solid 2px skyblue;
+    margin-bottom: 2%;
+}
+#chartMiddle table{
+    overflow-y: auto;
+    text-align: center;
+    vertical-align: middle;
+    cursor: pointer;
+    width: 100%;/*정의필수*/
+}
+
+#chartMiddle tbody tr:hover {
+    background-color: skyblue;
+    /* letter-spacing: -1px; 꿈틀거리기 피함 */
+}
+
+#chartMiddle thead tr {
+    font-size: large;
+    height: 45px;
+}
+
+#chartMiddle tbody tr {
+    font-size: medium;
+    height: 35px;
+}
+#chartMiddle thead th{
+    border: 1.5px solid skyblue;
+}
+#chartMiddle tbody td{
+    border: 1px solid skyblue;
+}
+#chartMiddle tbody td:nth-child(2){
+    border-right: 0;
+}
+#chartMiddle tbody td:nth-child(3){
+    border-left: 0;
+}
+
+
+#chartBottom{
+    flex: 1;
+    border:solid 2px skyblue;
+    margin-bottom: 2%;
+}

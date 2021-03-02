@@ -25,6 +25,10 @@
             rel="stylesheet"
             href="{{ url_for('static', filename='css/pay.css') }}"
         />
+        <link
+            rel="stylesheet"
+            href="{{ url_for('static', filename='css/chart.css') }}"
+        />
     </head>
 
     <body>
@@ -41,7 +45,7 @@
                 <div id="curTime"></div>
                 <h2>메뉴등록판</h2>
                 <ul>
-                    <li id="exit" class="button"><a href="#a">매출관리</a></li>
+                    <li id="btnChart" class="button"><a href="#a">매출관리</a></li>
                     <li id="workManage" class="button">
                         <a href="#a">상품관리</a>
                     </li>
@@ -120,12 +124,13 @@
                 </div>
             </div>
         </div>
-        {% include 'order.html' %} {% include 'pay.html' %}
+        {% include 'order.html' %} {% include 'pay.html' %} {% include 'chart.html' %}
         <script src="{{ url_for('static', filename='js/instance.js') }}"></script>
         <script src="{{ url_for('static', filename='js/module.js') }}"></script>
         <script src="{{ url_for('static', filename='js/init.js') }}"></script>
         <script src="{{ url_for('static', filename='js/table.js') }}"></script>
         <script src="{{ url_for('static', filename='js/pay.js') }}"></script>
         <script src="{{ url_for('static', filename='js/order.js') }}"></script>
+        <script src="{{ url_for('static', filename='js/chart.js') }}"></script>
     </body>
 </html>
