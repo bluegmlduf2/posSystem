@@ -140,9 +140,37 @@
     border-left: 0;
 }
 
-
+/************************* BOTTOM  ******************************/
 #chartBottom{
     flex: 1;
     border:solid 2px skyblue;
     margin-bottom: 2%;
 }
+#chartBottom form{
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center ;
+}
+#chartBottom div:nth-child(1){
+    flex: 3;
+    text-align: right;
+}
+#chartBottom div:nth-child(2){
+    flex: 1;
+    text-align: center;
+}
+#chartBottom div>*{
+    font-weight: bold;
+    display: inline-block;
+}
+
+#chartBottom div ul li{
+    display: inline-block;
+}
+
+#chartBottom button{
+    width: 75px;
+    height: 35px;
+}
+

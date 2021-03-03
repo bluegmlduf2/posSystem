@@ -46,3 +46,14 @@ li{
     width: 70%;
     box-shadow: 0 5px 8px 0 rgba(0, 0, 0, 0.2), 0 7px 20px 0 rgba(0, 0, 0, 0.17);
 }
+input[type=week]{
+    color: skyblue;
+    border: 2px solid skyblue;
+    font-size: large;
+    border-color: aliceblue;
+    border-radius: 5px;
+}
+
+input[type=week]:focus {
+    font-size : 120%;
+}
