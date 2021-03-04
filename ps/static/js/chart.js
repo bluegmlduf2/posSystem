@@ -6,7 +6,7 @@ const modal_chart = document.querySelector("#chartBg");
 document.querySelector("#btnChart").addEventListener("click",openModal);
 
 // Get close button
-// document.querySelector("#btnChartClose").addEventListener("click", ()=>{closeModal()});//이벤트파라미터가 e가 1번파라미터로 전송되어서 이렇게 처리
+document.querySelector("#btnChartClose").addEventListener("click", ()=>{closeModal()});//이벤트파라미터가 e가 1번파라미터로 전송되어서 이렇게 처리
 
 // Listen for outside click
 window.addEventListener("click", outsideClick);
@@ -16,7 +16,24 @@ window.addEventListener("click", outsideClick);
  */
 function openModal() {    
     modal_chart.style.display = "block"; /* none -> display */
+    let chartWeek=document.querySelector("#chartWeek");
+    chartWeek.value= (new Date()).toISOString().split('T')[0];
+
     initChart();
+}
+
+/**
+ * Close modal
+ */
+function closeModal() {
+    location.reload()//새로고침
+}
+
+// Click outside and close (모달 밖을 클릭)
+function outsideClick(e) {
+    if (e.target == modal_chart) {
+        closeModal();
+    }
 }
 
 function initChart() {
@@ -45,47 +62,11 @@ function initChart() {
         e.innerText=`${percent[i]}%`;
     })
 }
-/**
- * Close modal
- * @param {*} afterOrder 주문 완료 후 닫기 플래그
- */
-function closeModal(afterOrder=false) {
-    let updChk=checkStatus()//수정된행이 있으면 true
 
-    //주문완료후
-    if(!afterOrder){
-        //주문리스트에행이존재하는경우 & 주문완료후닫을때 & 수정 & 삭제
-        if (document.querySelector("#menuList tbody").hasChildNodes()&&updChk||delChk) {
-            if (!confirm("주문중인 정보가 있습니다.\n취소하고 닫겠습니까?")) {
-                return false;
-            }
-        }    
-    }
-
-    location.reload()//새로고침
-
-    /**location.reload()를 사용하므로써 이 아래의 소스코드는 필요없음. */
-
-    document.querySelectorAll("#orderMidMidMenu>ul>li").forEach((btn, idx) => {
-        btn.classList.remove("active");
-    });
-
-    document.querySelectorAll("#orderSmallMenu>ul>li").forEach((btn, idx) => {
-        btn.innerHTML = "";
-        btn.removeAttribute("data-val");
-        btn.classList.remove("active");
-    });
-
-    document.querySelector("#menuList tbody").innerHTML = "";
-    modal_order.style.display = "none"; /* display -> none */
-
-    //총합
-    document.querySelector("#bottomTot").textContent = 0;
-}
-
-// Click outside and close (모달 밖을 클릭)
-function outsideClick(e) {
-    if (e.target == modal_order) {
-        closeModal();
-    }
+function initWeek() {
+    //set week default value
+    let today = new Date();
+    let year = today.getFullYear();
+    let week = today.getWeek().toString().lpad(2,"0");
+    chartWeek.value=`${year}-W${week}`
 }

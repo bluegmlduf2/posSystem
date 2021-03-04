@@ -233,3 +233,11 @@ function ajax(http_method, url, sendData, aync) {
         throw new Error(JSON.parse(result).message)
     });
 }
+
+//GetWeek (날짜의 주를 가져온다)
+Date.prototype.getWeek = function() {
+  var onejan = new Date(this.getFullYear(),0,1);
+  var today = new Date(this.getFullYear(),this.getMonth(),this.getDate());
+  var dayOfYear = ((today - onejan + 86400000)/86400000);
+  return Math.ceil(dayOfYear/7)
+};

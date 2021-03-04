@@ -143,8 +143,6 @@
 /************************* BOTTOM  ******************************/
 #chartBottom{
     flex: 1;
-    border:solid 2px skyblue;
-    margin-bottom: 2%;
 }
 #chartBottom form{
     height: 100%;
@@ -153,11 +151,11 @@
     align-items: center ;
 }
 #chartBottom div:nth-child(1){
-    flex: 3;
+    flex: 4;
     text-align: right;
 }
 #chartBottom div:nth-child(2){
-    flex: 1;
+    flex: 2;
     text-align: center;
 }
 #chartBottom div>*{
@@ -170,7 +168,18 @@
 }
 
 #chartBottom button{
-    width: 75px;
-    height: 35px;
+    width: 85px;
+    height: 45px;
 }
 
+#chartBottom input{
+    text-align: center;
+    height: 40px;
+    font-size: 15px;
+    border-radius: 10px;
+}
+
+#chartBottom label{
+    font-size: 15px;
+    padding-right: 5px;
+}

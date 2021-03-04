@@ -25,15 +25,18 @@
             </table>
         </div>
         <div id="chartBottom">
-            <form action="">
+            <form action="/chart/getChart" method="POST">
                 <div>
-                    <label for="chartForm">주</label>
-                    <input type="week" name="" id="chartForm">
+                    <label for="chartAmt">목표금액</label>
+                    <input type="number" name="amount" value="1000000" id="chartAmt">
+                    <label for="chartWeek">검색일자</label>
+                    <input type="date" name="date" id="chartWeek">
                 </div>
                 <div>
                     <ul>
-                        <li><button class="button" type="submit">검색</button></li>
-                        <li ><button class="button" type="button">닫기</button></li>
+                        <li ><button class="button" type="reset">검색조건</br>초기화</button></li>
+                        <li><button class="button" id="btnChartSerach" type="submit">검색</button></li>
+                        <li ><button class="button" id="btnChartClose" type="button">닫기</button></li>
                     </ul>
                 </div>
             </form>
