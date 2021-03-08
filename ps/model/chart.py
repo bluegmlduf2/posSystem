@@ -7,7 +7,7 @@ def getChart(args):
             amount=args['amount']
             date=args['date']
             #ChartData
-            sql = """SELECT  PAY_DATE ,AMT,(AMT / {amount}) * 100 AS percentage FROM (
+            sql = """SELECT  PAY_DATE ,AMT,(AMT / {amount}) * 100 AS PERCENTAGE FROM (
                 SELECT DATE_FORMAT(pt.PAY_DATE , "%%Y-%%m-%%d") AS PAY_DATE ,SUM(odt.ORDER_AMOUNT) AS AMT 
                 FROM PAY_TBL pt 
                 LEFT JOIN ORDER_DETAIL_TBL odt ON pt.ORDER_CD =odt.ORDER_CD 
