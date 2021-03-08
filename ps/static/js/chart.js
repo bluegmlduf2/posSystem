@@ -39,18 +39,28 @@ function outsideClick(e) {
 function initChart(percentArr) {
     //for of = 이터러블을 가진 객체에서 사용 가능 Symbol.iterator
     let cssChart = document.styleSheets[5].cssRules; //해당페이지의 5번째 스타일시트의 css룰을 다 가져옴
+    let objLen=Object.keys(percentArr).length
     let cnt = 0;
     let percent = [0, 30, 40, 50, 60, 70, 100];
-
+    
     //1.차트컨트롤
     //CSS의 키프레임을 직접적으로 제어
     for (i of cssChart) {
-        if (i.type === 7) {
-            if (percent[cnt] == 0) {
+        //css키프레임타입&&객체의길이만큼실행
+        if (i.type === 7&&cnt>=objLen) {
+            let percentage=percentArr[cnt]["percentage"]<100?percentArr[cnt]["percentage"]:100
+            let amt=percentArr[cnt]["amt"]
+    
+            //0%생략
+            if ( percentage == 0) {
                 cnt += 1;
                 continue;
             }
-            i[1].style.cssText = `width:${percent[cnt]}%;`;
+debugger
+            //퍼센트추가
+            i[1].style.cssText = `width:${amt}%;`;
+            
+            //다음행
             cnt += 1;
         }
     }
@@ -58,8 +68,18 @@ function initChart(percentArr) {
     //2.차트컨트롤
     //키프레임의 width와 span의 width를 동일한 퍼센트를 줘야한다(포인트)
     document.querySelectorAll("#chartTop li span").forEach((e, i) => {
-        e.style.width = `${percent[i]}%`;
-        e.innerText = `${percent[i]}%`;
+        //객체의길이만큼실행, 그이외엔 0퍼센트 처리
+        if (i>=objLen) {
+            e.style.width = "0%";
+            e.innerText = "0%";
+            return
+        }
+
+        let payDate=percentArr[i]["payDate"]
+        let percentage=percentArr[i]["percentage"]<100?percentArr[i]["percentage"]:100
+        e.style.width = `${percentage}%`;
+        e.innerText = `${percentage}%`;
+        e.parentElement.previousElementSibling.innerText=payDate;
     });
 }
 

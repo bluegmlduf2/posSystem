@@ -18,6 +18,7 @@
 
 #chartTop ul{
     width: 100%;
+    text-align: right;
 }
 
 #chartTop ul li{
@@ -25,14 +26,14 @@
     background-color: #fff;
     margin: 2%;
     height: 40px;
-    width: 90%;
+    width: 77%;
     border-radius: 40px;
     box-sizing: border-box;/*볼더넓이를제외*/
  }
 
 #chartTop ul>span{
     display: inline-block;
-    width: 6%;
+    width: 15%;
     text-align: right;
     font-size: large;
     font-weight: bold;
@@ -49,11 +50,12 @@
     text-align: right;
 }
 
-#graph1 span{
+ /*2초동안 1번의 애니메이션*/
+/* #graph1 span{
     animation: stack1 2s 1;
-    /*2초동안 1번의 애니메이션*/
-}
-#graph2 span{
+   
+} */
+/* #graph2 span{
     animation: stack2 2s 1;
 }
 #graph3 span{
@@ -70,7 +72,7 @@
 }
 #graph7 span{
     animation: stack7 2s 1;
-}
+} */
 @keyframes stack1{
     0%{width: 0;}
     100%{width: 0;}
