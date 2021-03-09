@@ -29,12 +29,12 @@
                 <div>
                     <label for="chartAmt">목표금액</label>
                     <input type="number" name="amount" value="100000" id="chartAmt">
-                    <label for="chartWeek">검색일자</label>
+                    <label for="chartWeek">검색일자</br>&emsp;(~1Week)</label>
                     <input type="date" name="date" id="chartWeek">
                 </div>
                 <div>
                     <ul>
-                        <li ><button class="button" type="reset">검색조건</br>초기화</button></li>
+                        <li ><button class="button" id="btnReset" type="button" >검색조건</br>초기화</button></li>
                         <li><button class="button" id="btnChartSerach" type="submit">검색</button></li>
                         <li ><button class="button" id="btnChartClose" type="button">닫기</button></li>
                     </ul>
@@ -42,88 +42,4 @@
             </form>
         </div>
     </div>
-     <!-- li>a[href='#a']>span.sp#sp$*5 //EMMET 사용 -->
-    <!-- <div id="orderCenter" class="modal-content">
-        <div id="orderTop">
-            <div id="orderTop1"><span></span></div>
-            <div id="orderTop2">
-                <ul>
-                    <li id="b1" class="button b_btn"><a href="#a">일반메뉴</a></li>
-                    <li id="b2" class="button b_btn"><a href="#a">여름메뉴</a></li>
-                    <li id="b3" class="button b_btn"><a href="#a">겨울메뉴</a></li>
-                    <li id="orderClose" class="button ordcloseBtn"><a href="#a">닫기</a></li>
-                </ul>
-            </div>
-        </div>
-        <div id="orderMid">
-           
-            <div id="menuList">
-                <table>
-                    <thead>
-                        <tr>
-                            <th>순번</th>
-                            <th colspan="2">메뉴명</th>
-                            <th>수량</th>
-                            <th>금액</th>
-                        </tr>
-                    </thead>
-                    <tbody></tbody>
-                </table>
-            </div>
-            <div id="menuBtnList">
-                <div id="orderMidMidMenu">
-                    <ul>
-                        <li id="m1" class="button m_btn"><a href="#a"></a></li>
-                        <li id="m2" class="button m_btn"><a href="#a"></a></li>
-                        <li id="m3" class="button m_btn"><a href="#a"></a></li>
-                        <li id="m4" class="button m_btn"><a href="#a"></a></li>
-                        <li id="m5" class="button m_btn"><a href="#a"></a></li>
-                    </ul>
-                </div>
-                <hr class="orderHr">
-                <div id="orderSmallMenu">
-                    <ul>
-                        {% for i in range(20) %}
-                        <li id="s{{loop.index}}" class="button s_btn"><a href="#a"></a></li>
-                        {% endfor %}
-                    </ul>
-                </div>
-            </div>
-        </div>
-        <div id="orderBottom">
-            <div id="orderBottomLeft">
-                <div id="orderBottomLeft1">                
-                    <div>합계</div>
-                    <div id="bottomTot">0</div>
-                </div>
-                <div id="orderBottomLeft2">
-                    <ul>
-                        <li id="ob1" class="button">주문<br>합계<a href="#a"></a></li>
-                        <li id="ob2" class="button">주방<br>메모<a href="#a"></a></li>
-                        <li id="ob3" class="button"><a href="#a"><img
-                                    src="{{ url_for('static', filename='img/arrow_up.png') }}" alt="nextButton"></a></li>
-                        <li id="ob4" class="button"><a href="#a"><img
-                                    src="{{ url_for('static', filename='img/arrow_down.png') }}" alt="nextButton"></a></li>
-                    </ul>
-                </div>
-            </div>
-            <div id="orderBottomMid">
-                <ul>
-                    <li class="button" id="btnOrderPlus"><a href="#a">+</a></li>
-                    <li class="button" id="btnOrderMinus"><a href="#a">-</a></li>
-                    <li class="button"><a href="#a">포장</a></li>
-                    <li class="button"><a href="#a">배달</a></li>
-                    <li class="button"><a href="#a">서비스</a></li>
-                    <li class="button" id="btnOrderCancelAll"><a href="#a">전체</br>취소</a></li>
-                    <li class="button" id="btnOrderRemove"><a href="#a">선택</br>취소</a></li>
-                    <li class="button" id="btnOrderAdd"><a href="#a">신규</br>추가</a></li>
-                </ul>
-            </div>
-            <div id="orderBottomRight">
-                <ul>
-                    <li class="button" id="btnOrder"><a href="#a">주문</a></li>
-                </ul>
-            </div>
-        </div>
-    </div> -->
 </div>

@@ -11,7 +11,7 @@
 
 #chartTop{
     /* flex 4,3,1 다합쳐서 8개중에 4를 차지 */
-    flex: 4;
+    /* flex: 4 */
     margin-bottom: 2%;
     display: flex;
 }
@@ -22,19 +22,20 @@
 }
 
 #chartTop ul li{
-    display: inline-block;
+    display: none;
     background-color: #fff;
     margin: 2%;
     height: 40px;
-    width: 77%;
+    width: 96%;
     border-radius: 40px;
     box-sizing: border-box;/*볼더넓이를제외*/
  }
 
 #chartTop ul>span{
-    display: inline-block;
-    width: 15%;
-    text-align: right;
+    display: block;
+    width: 100%;
+    padding-left:5%;
+    text-align: left;
     font-size: large;
     font-weight: bold;
 }
@@ -45,17 +46,17 @@
     height: 40px;
     line-height: 40px;
     color: #fff;
+    width: 0;
     border-radius: 40px;
     padding-right: 10px;
     text-align: right;
 }
 
  /*2초동안 1번의 애니메이션*/
-/* #graph1 span{
+#graph1 span{
     animation: stack1 2s 1;
-   
-} */
-/* #graph2 span{
+} 
+#graph2 span{
     animation: stack2 2s 1;
 }
 #graph3 span{
@@ -72,7 +73,7 @@
 }
 #graph7 span{
     animation: stack7 2s 1;
-} */
+}
 @keyframes stack1{
     0%{width: 0;}
     100%{width: 0;}

@@ -1,4 +1,5 @@
 const modal_chart = document.querySelector("#chartBg");
+let keyFrameArr=[] // CssKeyFream & 검색전적
 
 /**********************************GLOBAL VALUES************************************************* */
 
@@ -36,68 +37,16 @@ function outsideClick(e) {
     }
 }
 
-function initChart(percentArr) {
-    //for of = 이터러블을 가진 객체에서 사용 가능 Symbol.iterator
-    let cssChart = document.styleSheets[5].cssRules; //해당페이지의 5번째 스타일시트의 css룰을 다 가져옴
-    let objLen=Object.keys(percentArr).length
-    let cnt = 0;
-    let percent = [0, 30, 40, 50, 60, 70, 100];
-    
-    //1.차트컨트롤
-    //CSS의 키프레임을 직접적으로 제어
-    for (i of cssChart) {
-        //css키프레임타입&&객체의길이만큼실행
-        if (i.type === 7&&cnt>=objLen) {
-            let percentage=percentArr[cnt]["percentage"]<100?percentArr[cnt]["percentage"]:100
-            let amt=percentArr[cnt]["amt"]
-    
-            //0%생략
-            if ( percentage == 0) {
-                cnt += 1;
-                continue;
-            }
-debugger
-            //퍼센트추가
-            i[1].style.cssText = `width:${amt}%;`;
-            
-            //다음행
-            cnt += 1;
-        }
-    }
-
-    //2.차트컨트롤
-    //키프레임의 width와 span의 width를 동일한 퍼센트를 줘야한다(포인트)
-    document.querySelectorAll("#chartTop li span").forEach((e, i) => {
-        //객체의길이만큼실행, 그이외엔 0퍼센트 처리
-        if (i>=objLen) {
-            e.style.width = "0%";
-            e.innerText = "0%";
-            return
-        }
-
-        let payDate=percentArr[i]["payDate"]
-        let percentage=percentArr[i]["percentage"]<100?percentArr[i]["percentage"]:100
-        e.style.width = `${percentage}%`;
-        e.innerText = `${percentage}%`;
-        e.parentElement.previousElementSibling.innerText=payDate;
-    });
-}
-
-function initWeek() {
-    //set week default value
-    let today = new Date();
-    let year = today.getFullYear();
-    let week = today.getWeek().toString().lpad(2, "0");
-    chartWeek.value = `${year}-W${week}`;
-}
 
 function getChart(params) {
     module
         .ajax("POST", "/chart/getChart", params)
         .then((result) => {
+            debugger
             let resultJson = JSON.parse(result); //menu_cd,menu_kind
 
             if (nullCheck(resultJson)) {
+                removeChart()//차트초기화
                 return false;
             }
             //obj.assign() -> DeepCopy , 객체복사에 사용됨
@@ -112,13 +61,86 @@ function getChart(params) {
                     "percentage": e.PERCENTAGE
                 }))
             );
-            
+            removeChart()//차트초기화
             initChart(obj);
         })
         .catch((result) => {
             console.log(result);
         });
 }
+
+function initChart(percentArr) {
+    //for of = 이터러블을 가진 객체에서 사용 가능 Symbol.iterator
+    let cssChart = document.styleSheets[5].cssRules; //해당페이지의 5번째 스타일시트의 css룰을 다 가져옴
+    let len=Object.keys(percentArr).length
+    
+    //자료가 없을 경우 차트를 그리지 않음
+    if (0>len) {
+        return
+    }
+    
+    //1.차트컨트롤
+    //CSS의 키프레임을 직접적으로 제어
+    for (i of cssChart) {
+        //해당하는 css키프레임타입을 가져오기
+        if (i.type === 7) {
+            keyFrameArr.push(i[1]) 
+        }
+    }
+
+    //2.차트컨트롤
+    //키프레임의 width와 span의 width를 동일한 퍼센트를 줘야한다(포인트)
+    for (let i = 0; i < len; i++) {
+        let percentage=percentArr[i]["percentage"]<100?percentArr[i]["percentage"]:100
+        let payDate=percentArr[i]["payDate"]
+        let spanEle=document.querySelectorAll("#chartTop li span")[i]
+        spanEle.parentElement.style.display="inline-block"
+        
+        
+        //1.keyFrame에 퍼센트 추가
+        keyFrameArr[i].style.cssText=`width:${percentage}%;`;
+
+        //2.cssElement에 퍼센트 추가
+        spanEle.style.width = `${percentage}%`;
+        spanEle.innerText = `${percentage}%`;
+        
+        //span에 일자추가
+        spanEle.parentElement.previousElementSibling.innerText=payDate;
+    }
+ 
+}
+
+function removeChart() {
+    if(nullCheck(keyFrameArr)){
+        return
+    }
+
+    for (let i = 0; i < 6; i++) {
+        let spanEle=document.querySelectorAll("#chartTop li span")[i]
+        spanEle.parentElement.style.display="none"
+        
+        //1.keyFrame에 퍼센트 추가
+        keyFrameArr[i].style.cssText=`width:0%;`;
+
+        //2.cssElement에 퍼센트 추가
+        spanEle.style.width = "0%";
+        spanEle.innerText = "0%";
+        
+        //span에 일자추가
+        spanEle.parentElement.previousElementSibling.innerText="";
+    }
+
+    keyFrameArr=[]// CssKeyFream & 검색전적 초기화
+}
+
+function initWeek() {
+    //set week default value
+    let today = new Date();
+    let year = today.getFullYear();
+    let week = today.getWeek().toString().lpad(2, "0");
+    chartWeek.value = `${year}-W${week}`;
+}
+
 
 /**SUBMIT RELOAD 방지 3가지
  * 첫째, 버튼을 form 태그 밖으로 뺀다.
@@ -146,3 +168,8 @@ document.querySelector("#chartForm").addEventListener("submit", (e) => {
         getChart({ amount: amount, date: date });
     }
 });
+
+document.querySelector("#btnReset").addEventListener("click",()=>{
+    let curDate=module.getCurDateYMD().substring(0,10)
+    document.querySelector("#chartWeek").value='2021-03-03'
+})

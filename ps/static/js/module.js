@@ -50,7 +50,7 @@ const module = (function () {
     }
 
     //시간+날짜함수
-    function _getCurDate() {
+    function _getCurDate(param) {
         let today = new Date();
         let days = new Array("일", "월", "화", "수", "목", "금", "토");
 
@@ -73,6 +73,20 @@ const module = (function () {
         let month = today.getMonth() + 1;
         let date = today.getDate();
         let day = days[today.getDay()];
+        let hour = today.getHours().toString().lpad(2, "0");
+        let min = today.getMinutes().toString().lpad(2, "0");
+        let sec = today.getSeconds().toString().lpad(2, "0");
+
+        return `${year}-${month}-${date} ${hour}:${min}:${sec}`;
+    }
+
+    //시간+날짜함수
+    function _getCurDateYMD() {
+        let today = new Date();
+
+        let year = today.getFullYear();
+        let month = (today.getMonth() + 1).toString().lpad(2, "0");
+        let date = today.getDate().toString().lpad(2, "0");
         let hour = today.getHours().toString().lpad(2, "0");
         let min = today.getMinutes().toString().lpad(2, "0");
         let sec = today.getSeconds().toString().lpad(2, "0");
@@ -118,6 +132,9 @@ const module = (function () {
         },
         getCurDateHyphen: function () {
             return _getCurDateHyphen(); //비공개
+        },
+        getCurDateYMD: function () {
+            return _getCurDateYMD(); //비공개
         },
         hasClass: _hasClass, //공개
         //실행되기 전의 함수소스코드를 통채로 넘겨줌 -> 공개
