@@ -1,5 +1,5 @@
 const modal_chart = document.querySelector("#chartBg");
-let keyFrameArr=[] // CssKeyFream & 검색전적
+const keyFrameArr=[] // CssKeyFream & 검색전적
 
 /**********************************GLOBAL VALUES************************************************* */
 
@@ -130,7 +130,7 @@ function removeChart() {
         spanEle.parentElement.previousElementSibling.innerText="";
     }
 
-    keyFrameArr=[]// CssKeyFream & 검색전적 초기화
+    keyFrameArr.length=0// CssKeyFream & 검색전적 초기화
 }
 
 function initWeek() {
