@@ -42,11 +42,12 @@ function getChart(params) {
     module
         .ajax("POST", "/chart/getChart", params)
         .then((result) => {
-            debugger
-            let resultJson = JSON.parse(result); //menu_cd,menu_kind
+            let resultJson = JSON.parse(result)[0]; //menu_cd,menu_kind
+            let resultTotalJson = JSON.parse(result)[1][0]; //menu_cd,menu_kind
 
             if (nullCheck(resultJson)) {
                 removeChart()//차트초기화
+                removeChartTotal()//차트통계초기화
                 return false;
             }
             //obj.assign() -> DeepCopy , 객체복사에 사용됨
@@ -61,8 +62,13 @@ function getChart(params) {
                     "percentage": e.PERCENTAGE
                 }))
             );
+            
             removeChart()//차트초기화
-            initChart(obj);
+            removeChartTotal()//차트통계초기화
+
+            initChart(obj);//차트데이터
+            initCharList(obj);//차트리스트 
+            initChartTotal(resultTotalJson);//차트통계데이터
         })
         .catch((result) => {
             console.log(result);
@@ -107,9 +113,44 @@ function initChart(percentArr) {
         //span에 일자추가
         spanEle.parentElement.previousElementSibling.innerText=payDate;
     }
- 
 }
 
+function initCharList(percentArr) {
+    let tbodyEle = document.querySelector("#chartMiddle tbody");
+    
+
+    for (const key in percentArr) {
+        let value=percentArr[key]
+        debugger
+        let trEle = document.createElement("tr");
+        let tdDate=document.createElement("td");
+        let tdAmt=document.createElement("td");
+        let tdPer=document.createElement("td");
+        tdDate.innerText = value.payDate
+        tdAmt.innerText = value.amt
+        tdPer.innerText = value.percentage
+        trEle.appendChild(tdDate);
+        trEle.appendChild(tdAmt);
+        trEle.appendChild(document.createElement("td"));
+        trEle.appendChild(tdPer);
+        
+        tbodyEle.appendChild(trEle);
+    }
+
+}
+
+function initChartTotal(totalArr) {
+    debugger
+    document.querySelector("#totalSum").innerText=addComma(totalArr.SUM)+" 원"
+    document.querySelector("#totalAvg").innerText=addComma(totalArr.AVG)+" 원"
+    document.querySelector("#totalPerAvg").innerText=totalArr.PERAVG+" %"
+}
+
+function removeChartTotal() {
+    document.querySelector("#totalSum").innerText=0
+    document.querySelector("#totalAvg").innerText=0
+    document.querySelector("#totalPerAvg").innerText=0
+}
 function removeChart() {
     if(nullCheck(keyFrameArr)){
         return

@@ -107,6 +107,8 @@
     flex: 3;
     border: solid 2px skyblue;
     margin-bottom: 2%;
+    position: relative;
+    overflow: auto;
 }
 #chartMiddle table{
     overflow-y: auto;
@@ -125,7 +127,6 @@
     font-size: large;
     height: 45px;
 }
-
 #chartMiddle tbody tr {
     font-size: medium;
     height: 35px;
@@ -141,6 +142,22 @@
 }
 #chartMiddle tbody td:nth-child(3){
     border-left: 0;
+}
+#chartMiddle tfoot{
+    display: table;
+    width: 100%;
+    position: absolute;
+    bottom: 0px;
+    
+}
+#chartMiddle tfoot tr{
+    font-size: medium;
+    height: 45px;
+}
+#chartMiddle tfoot td{
+    width: 15%;
+    border: 1.5px solid skyblue;
+    font-weight: bold;
 }
 
 /************************* BOTTOM  ******************************/
