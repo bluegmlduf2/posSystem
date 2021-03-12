@@ -21,23 +21,23 @@
                     </tr>
                 </thead>
                 <tbody></tbody>
-                <tfoot>
-                    <tr>
-                        <td>합계</td>
-                        <td id="totalSum">0</td>
-                        <td>평균</td>
-                        <td id="totalAvg">0</td>
-                        <td>평균퍼센트</td>
-                        <td id="totalPerAvg">0</td>
-                    </tr>                        
-                </tfoot>
             </table>
+        </div>
+        <div id="chartTotal">
+            <ul>
+                <li>합계</li>
+                <li id="totalSum">0</li>
+                <li>평균</li>
+                <li id="totalAvg">0</li>
+                <li>평균퍼센트</li>
+                <li id="totalPerAvg">0</li>
+            </ul>
         </div>
         <div id="chartBottom">
             <form action="/chart/getChart" id="chartForm" method="POST">
                 <div>
                     <label for="chartAmt">목표금액</label>
-                    <input type="number" name="amount" value="100000" id="chartAmt">
+                    <input type="text" name="amount" value="1,000,000" id="chartAmt">
                     <label for="chartWeek">검색일자</br>&emsp;(~1Week)</label>
                     <input type="date" name="date" id="chartWeek">
                 </div>

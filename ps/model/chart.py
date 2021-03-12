@@ -20,7 +20,7 @@ def getChart(args):
             data = conn.executeAll(sql)
 
             #ChartTotal
-            sql = """SELECT SUM(AMT) AS SUM,AVG(AMT) AS AVG,AVG(TRUNCATE((AMT / {amount}) * 100,1)) AS PERAVG FROM (
+            sql = """SELECT TRUNCATE(SUM(AMT),0) AS SUM,TRUNCATE(AVG(AMT),0) AS AVG,AVG(TRUNCATE((AMT / {amount}) * 100,1)) AS PERAVG FROM (
                 SELECT DATE_FORMAT(pt.PAY_DATE , "%%Y-%%m-%%d") AS PAY_DATE ,SUM(odt.ORDER_AMOUNT) AS AMT 
                 FROM PAY_TBL pt 
                 LEFT JOIN ORDER_DETAIL_TBL odt ON pt.ORDER_CD =odt.ORDER_CD 

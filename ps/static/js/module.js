@@ -162,21 +162,25 @@ String.prototype.lpad = function (padLen, padStr) {
 
 /**
  * 컴마 3자릿수로 표시
- * @param {} str 
+ * @param {} str
  */
-Object.prototype.addComma=function (str) {
+Object.prototype.addComma = function (args) {
+    let str=args.toString()
+    str=str.replace(/[^0-9]/g, ""); // 입력값이 숫자가 아니면 공백
+    str=str.replaceAll(",", ""); // ,값 공백처리
+    str=str.replace(/\B(?=(\d{3})+(?!\d))/g, ","); // 정규식을 이용해서 3자리 마다 , 추가
     var regexp = /\B(?=(\d{3})+(?!\d))/g;
-    return str.toString().replace(regexp, ',');
-}
+    return str.replace(regexp, ",");
+};
 
 /**
  * 컴마 제거
- * @param {} str 
+ * @param {} str
  */
-Object.prototype.removeComma=function (str) {
+Object.prototype.removeComma = function (str) {
     var regexp = /,/g;
-    return str.toString().replace(regexp, '');
-}
+    return str.toString().replace(regexp, "");
+};
 
 /**
  * NULL CHECK (if null return true )
@@ -199,7 +203,7 @@ function nullCheck(obj) {
         }
     } else if (typeof obj === "string") {
         //문자열공백체크(정규식)
-        if (obj.replace(/(\s*)/g, "")=="") {
+        if (obj.replace(/(\s*)/g, "") == "") {
             return true;
         } else {
             return false;
@@ -219,7 +223,7 @@ function nullCheck(obj) {
 function ajax(http_method, url, sendData, aync) {
     return new Promise((resolve, reject) => {
         try {
-            //프로미스내에서 resolve, reject를 만난 경우 즉시 종료됨 
+            //프로미스내에서 resolve, reject를 만난 경우 즉시 종료됨
             var xhr = new XMLHttpRequest(); // XMLHttpRequest객체 생성, 함수 내 지역변수로 선언 권장
             // onreadystatechange는 서버와의 통신이 끝났을 때 호출 됨
             xhr.onreadystatechange = function () {
@@ -245,16 +249,16 @@ function ajax(http_method, url, sendData, aync) {
             //try문에서 문법적 오류가 있을 경우 캐치. 그리고 reject
             reject(error);
         }
-    }).catch((result)=>{
-        debugger
-        throw new Error(JSON.parse(result).message)
+    }).catch((result) => {
+        debugger;
+        throw new Error(JSON.parse(result).message);
     });
 }
 
 //GetWeek (날짜의 주를 가져온다)
-Date.prototype.getWeek = function() {
-  var onejan = new Date(this.getFullYear(),0,1);
-  var today = new Date(this.getFullYear(),this.getMonth(),this.getDate());
-  var dayOfYear = ((today - onejan + 86400000)/86400000);
-  return Math.ceil(dayOfYear/7)
+Date.prototype.getWeek = function () {
+    var onejan = new Date(this.getFullYear(), 0, 1);
+    var today = new Date(this.getFullYear(), this.getMonth(), this.getDate());
+    var dayOfYear = (today - onejan + 86400000) / 86400000;
+    return Math.ceil(dayOfYear / 7);
 };

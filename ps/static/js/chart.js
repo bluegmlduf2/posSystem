@@ -118,39 +118,42 @@ function initChart(percentArr) {
 function initCharList(percentArr) {
     let tbodyEle = document.querySelector("#chartMiddle tbody");
     
-
     for (const key in percentArr) {
-        let value=percentArr[key]
-        debugger
-        let trEle = document.createElement("tr");
-        let tdDate=document.createElement("td");
-        let tdAmt=document.createElement("td");
-        let tdPer=document.createElement("td");
-        tdDate.innerText = value.payDate
-        tdAmt.innerText = value.amt
-        tdPer.innerText = value.percentage
-        trEle.appendChild(tdDate);
-        trEle.appendChild(tdAmt);
-        trEle.appendChild(document.createElement("td"));
-        trEle.appendChild(tdPer);
-        
-        tbodyEle.appendChild(trEle);
+        //method().call({a=1},c,d..) 
+        //method().call(this,args..) ..this를 객체형태로 전달함
+        if (Object.hasOwnProperty.call(percentArr, key)) {
+            const value=percentArr[key]
+            let trEle = document.createElement("tr");
+            let tdDate=document.createElement("td");
+            let tdAmt=document.createElement("td");
+            let tdPer=document.createElement("td");
+            tdDate.innerText = value.payDate
+            tdAmt.innerText = addComma(value.amt)+" 원"
+            tdPer.innerText = value.percentage+" %"
+            trEle.appendChild(tdDate);
+            trEle.appendChild(tdAmt);
+            trEle.appendChild(document.createElement("td"));
+            trEle.appendChild(tdPer);
+
+            tbodyEle.appendChild(trEle);
+        }
     }
 
 }
 
 function initChartTotal(totalArr) {
-    debugger
     document.querySelector("#totalSum").innerText=addComma(totalArr.SUM)+" 원"
     document.querySelector("#totalAvg").innerText=addComma(totalArr.AVG)+" 원"
     document.querySelector("#totalPerAvg").innerText=totalArr.PERAVG+" %"
 }
 
 function removeChartTotal() {
+    document.querySelector("#chartMiddle tbody").innerHTML=""
     document.querySelector("#totalSum").innerText=0
     document.querySelector("#totalAvg").innerText=0
     document.querySelector("#totalPerAvg").innerText=0
 }
+
 function removeChart() {
     if(nullCheck(keyFrameArr)){
         return
@@ -190,7 +193,7 @@ function initWeek() {
  */
 document.querySelector("#chartForm").addEventListener("submit", (e) => {
     e.preventDefault();
-    let amount = document.querySelector("#chartAmt").value;
+    let amount = document.querySelector("#chartAmt").value.toString().replaceAll(",","");
     let date = document.querySelector("#chartWeek").value;
     let isOk = true;
 
@@ -212,5 +215,13 @@ document.querySelector("#chartForm").addEventListener("submit", (e) => {
 
 document.querySelector("#btnReset").addEventListener("click",()=>{
     let curDate=module.getCurDateYMD().substring(0,10)
-    document.querySelector("#chartWeek").value='2021-03-03'
+    document.querySelector("#chartWeek").value=curDate
+})
+
+//keyup을 사용해야 새롭게 입력된 value를 이용할수있다
+document.querySelector("#chartAmt").addEventListener("keyup",(e)=>{
+    let inputAmt=e.target.value
+    if(e.keyCode >= 48 && e.keyCode <= 57){
+        e.target.value=addComma(inputAmt)
+    }
 })

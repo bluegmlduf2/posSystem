@@ -105,17 +105,33 @@
 
 #chartMiddle{
     flex: 3;
-    border: solid 2px skyblue;
-    margin-bottom: 2%;
-    position: relative;
+    border-width:2px 2px 0 2px;
+    border-style: solid;
+    border-color: skyblue;
+    border-collapse: collapse;
     overflow: auto;
 }
 #chartMiddle table{
-    overflow-y: auto;
     text-align: center;
     vertical-align: middle;
     cursor: pointer;
     width: 100%;/*정의필수*/
+}
+
+#chartMiddle thead tr {
+    font-size: large;
+    height: 45px;
+    background-color: #eee;
+}
+#chartMiddle thead th{
+    border-width: 0 1px 1px 0;
+    border-style: solid;
+    border-color: skyblue;
+}
+
+#chartMiddle tbody tr {
+    font-size: medium;
+    height: 35px;
 }
 
 #chartMiddle tbody tr:hover {
@@ -123,41 +139,37 @@
     /* letter-spacing: -1px; 꿈틀거리기 피함 */
 }
 
-#chartMiddle thead tr {
-    font-size: large;
-    height: 45px;
-}
-#chartMiddle tbody tr {
-    font-size: medium;
-    height: 35px;
-}
-#chartMiddle thead th{
-    border: 1.5px solid skyblue;
-}
 #chartMiddle tbody td{
     border: 1px solid skyblue;
 }
+
 #chartMiddle tbody td:nth-child(2){
     border-right: 0;
 }
+
 #chartMiddle tbody td:nth-child(3){
     border-left: 0;
 }
-#chartMiddle tfoot{
-    display: table;
+
+#chartTotal{
     width: 100%;
-    position: absolute;
-    bottom: 0px;
-    
-}
-#chartMiddle tfoot tr{
     font-size: medium;
     height: 45px;
+    text-align: left;
+    line-height: 45px;
+    background-color: #eee;
 }
-#chartMiddle tfoot td{
-    width: 15%;
-    border: 1.5px solid skyblue;
+#chartTotal ul{
+    display: flex;
+    height: 100%;
+}
+#chartTotal li{
+    flex: 1;
+    height: 100%;
+    border: 1px solid skyblue;
     font-weight: bold;
+    border-collapse: collapse;
+    padding-left: 3%;
 }
 
 /************************* BOTTOM  ******************************/
