@@ -1,7 +1,6 @@
 ## About Program 
 * Point of sale (POS) system is the spot where your customer makes the payment for goods or services that are offered by your company.
-  
-  in this project, only VanillaJS is used
+* in this project, only VanillaJS is used
 
 
 ### Client 
