@@ -523,7 +523,7 @@ document.querySelectorAll("#btnOrderPlus,#btnOrderMinus").forEach((e, i) => {
                         //삭제
                         let itemCnt = Number(elem.children[3].innerText);
                         if (itemCnt < 2) {
-                            alert("수량이 1개뿐입니다");
+                            alert("최저수량입니다");
                             return;
                         }
 
@@ -600,7 +600,7 @@ document.querySelector("#btnOrder").addEventListener('click',()=>{
         orderItems.push(itemInfo)
     });
 
-    //삭제할 데이터가 있을 시
+    //삭제할 데이터가 있을 시(기존주문수정시)
     if(deletedItems.length>0){
         deletedItems.forEach((e,i)=>{
             orderItems.push(e)

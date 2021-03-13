@@ -87,13 +87,15 @@ def insertOrder(args):
 
                 #주문상세등록
                 for e in orderItems:
-                    sql = '''INSERT INTO posDB.ORDER_DETAIL_TBL
-                    (ORDER_CD, ORDER_AMOUNT, ORDER_COUNT, MENU_DETAIL_CD, ORDER_DETAIL_TIME)
-                    VALUES({orderCd}, {orderAmount}, {orderCount}, {menuDetailCd},STR_TO_DATE('{orderDeatilTime}', '%%Y-%%m-%%d %%H:%%i:%%s'))'''.format(
-                        orderCd=orderCd_new, orderAmount=e["orderAmount"], orderCount=e["orderCount"], menuDetailCd=e["menuDetailCd"], orderDeatilTime=e["orderDeatilTime"])
-                    data = conn.execute(sql)
+                    #신규주문시 삭제내역이 있으면 등록하지않음
+                    if "orderId" not in e:
+                        sql = '''INSERT INTO posDB.ORDER_DETAIL_TBL
+                        (ORDER_CD, ORDER_AMOUNT, ORDER_COUNT, MENU_DETAIL_CD, ORDER_DETAIL_TIME)
+                        VALUES({orderCd}, {orderAmount}, {orderCount}, {menuDetailCd},STR_TO_DATE('{orderDeatilTime}', '%%Y-%%m-%%d %%H:%%i:%%s'))'''.format(
+                            orderCd=orderCd_new, orderAmount=e["orderAmount"], orderCount=e["orderCount"], menuDetailCd=e["menuDetailCd"], orderDeatilTime=e["orderDeatilTime"])
+                        data = conn.execute(sql)
 
-                reMsg = '신규 주문을 완료하였습니다'
+                    reMsg = '신규 주문을 완료하였습니다'
             else:
                 for e in orderItems:
                     #삭제정보체크
